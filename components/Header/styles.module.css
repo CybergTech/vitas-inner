@@ -22,6 +22,10 @@
   padding-bottom: 10vh;
 }
 
+.goBackLink {
+  cursor: pointer;
+}
+
 .logo {
   max-width: 120px;
 }

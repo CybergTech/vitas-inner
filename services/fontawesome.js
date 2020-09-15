@@ -5,7 +5,8 @@ import {
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
-  faBriefcaseMedical, faChevronDown, faSearch
+  faBriefcaseMedical, faChevronDown, faSearch, faCashRegister, faTruck,
+  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -13,5 +14,6 @@ library.add(
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
-  faBriefcaseMedical, faChevronDown, faSearch
+  faBriefcaseMedical, faChevronDown, faSearch, faCashRegister, faTruck,
+  faShieldAlt
 )

@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  padding: 4vh 12%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  width: 32%;
+  height: 55px;
+  background-color: #EEEEEE;
+  font-family: 'Overpass-Bold';
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.subtitles {
+  margin-left: 5%;
+}
+
+.title {
+  font-size: 14px;
+}
+.subtitle {
+  font-size: 10px;
+}

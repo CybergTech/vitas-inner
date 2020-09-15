@@ -38,7 +38,6 @@
   outline: none;
   margin: 0;
   padding: 0;
-  font-family: 'Overpass-SemiBold';
 
   scrollbar-width: thin;
   scrollbar-color: #232323 #d2d2d2;
@@ -80,6 +79,10 @@ a {
 
 ul {
   list-style: none;
+}
+
+input {
+  font-family: 'Overpass-SemiBold';
 }
 
 ::placeholder {

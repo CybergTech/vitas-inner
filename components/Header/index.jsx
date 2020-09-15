@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import Link from 'next/link'
 
 import Logo from '../Logo'
 import Nav from './Nav'
@@ -10,6 +9,10 @@ import SearchInput from './SearchInput'
 import styles from './styles.module.css'
 
 function Header ({ reduced }) {
+  function handlerGoBack () {
+    document.location.href = 'javascript:history.back()'
+  }
+
   return (
     <div className={styles.container}>
       {!reduced
@@ -29,9 +32,9 @@ function Header ({ reduced }) {
         </>
         : <>
           <div className={`${styles.row} ${styles.reduced}`}>
-            <Link href="javascript:history.back()">
-              <a><img src="/images/icons/back.svg" alt="Go back"/></a>
-            </Link>
+            <a onClick={handlerGoBack}>
+              <img className={styles.goBackLink} src="/images/icons/back.svg" alt="Go back"/>
+            </a>
 
             <div className={styles.logo}>
               <Logo />

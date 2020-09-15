@@ -5,6 +5,7 @@ import Head from 'next/head'
 import api from '../services/api'
 import TopHeader from '../components/TopHeader'
 import Header from '../components/Header'
+import Announcements from '../components/Announcements'
 
 import grid from '../styles/grid/main.module.css'
 
@@ -28,11 +29,11 @@ function Home ({ message }) {
       </Head>
 
       <div className={grid.topHeader}>
-        <TopHeader></TopHeader>
+        <TopHeader />
       </div>
 
       <header className={grid.header}>
-        <Header></Header>
+        <Header />
       </header>
 
       <div className={grid.promotionalCarousel}>
@@ -40,16 +41,46 @@ function Home ({ message }) {
       </div>
 
       <main className={grid.main}>
-        <h1>Vita&apos;s Materiais Médicos e Hospitalares - Home</h1>
+        <Announcements />
+
+        {/* <h1>Vita&apos;s Materiais Médicos e Hospitalares - Home</h1>
         <h4>Server Response - {message}</h4>
 
-        <img style={{ width: '100px' }} src="/images/detail-dots.svg" alt="Dots"/>
-
-        <h1>-</h1>
+        <img style={{ width: '100px' }} src="/images/detail-dots.svg" alt="Dots"/> */}
       </main>
 
       <footer className={grid.footer}>
-        Footer
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
+        <h4>a</h4>
       </footer>
     </div>
   )

@@ -6,6 +6,8 @@ import api from '../services/api'
 import TopHeader from '../components/TopHeader'
 import Header from '../components/Header'
 import Announcements from '../components/Announcements'
+import PromotionalCards from '../components/PromotionalCards'
+import WhatsAppButton from '../components/WhatsAppButton'
 
 import grid from '../styles/grid/main.module.css'
 
@@ -36,12 +38,13 @@ function Home ({ message }) {
         <Header />
       </header>
 
-      <div className={grid.promotionalCarousel}>
+      <section className={grid.promotionalCarousel}>
         <img style={{ width: '100%' }} src="/images/vitas-banner.jpg" alt="Banner"/>
-      </div>
+      </section>
 
       <main className={grid.main}>
         <Announcements />
+        <PromotionalCards />
 
         {/* <h1>Vita&apos;s Materiais Médicos e Hospitalares - Home</h1>
         <h4>Server Response - {message}</h4>
@@ -49,38 +52,30 @@ function Home ({ message }) {
         <img style={{ width: '100px' }} src="/images/detail-dots.svg" alt="Dots"/> */}
       </main>
 
+      <WhatsAppButton />
+
       <footer className={grid.footer}>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
-        <h4>a</h4>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </footer>
     </div>
   )

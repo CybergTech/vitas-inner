@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
 function Announcements () {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.item}>
         <div className={styles.icon}>
           <FontAwesomeIcon icon="cash-register" />
@@ -50,7 +50,7 @@ function Announcements () {
           </h5>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

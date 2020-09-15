@@ -19,7 +19,7 @@ function WhatsAppButton () {
         </div>
 
         <div className={styles.popUp}>
-          <h3>Contate-nos pelo WhatsApp!</h3>
+          <h3>Contate-nos pelo WhatsApp.</h3>
         </div>
       </a>
     </div>

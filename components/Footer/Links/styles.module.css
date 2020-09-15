@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  height: 350px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: 'Overpass-Bold';
+  color: #E2352D;
+  margin-bottom: 2rem;
+}
+
+.list {
+  font-family: 'Overpass-Regular';
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.addressItem {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}

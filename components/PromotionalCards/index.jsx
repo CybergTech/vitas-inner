@@ -10,24 +10,24 @@ function PromotionalCards () {
       <div className={styles.cardsContainer}>
         <div className={styles.item}>
           <img
-            src="/images/products/meia.svg"
-            alt="Meia 3/4"
+            src="/images/products/mascara.svg"
+            alt="50 máscaras descartáveis"
             style={{ width: '100%' }}
           />
         </div>
 
         <div className={styles.item}>
           <img
-            src="/images/products/meia.svg"
-            alt="Meia 3/4"
+            src="/images/products/mascara.svg"
+            alt="50 máscaras descartáveis"
             style={{ width: '100%' }}
           />
         </div>
 
         <div className={styles.item}>
           <img
-            src="/images/products/meia.svg"
-            alt="Meia 3/4"
+            src="/images/products/mascara.svg"
+            alt="50 máscaras descartáveis"
             style={{ width: '100%' }}
           />
         </div>

@@ -5,7 +5,7 @@
 .wrapper {
   grid-template-columns: [first] 12% repeat(12, minmax(auto, 1fr)) 12% [end];
   column-gap: 15px;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto 550px;
   grid-template-areas:
     "topheader topheader topheader topheader topheader topheader topheader topheader topheader topheader topheader topheader topheader topheader"
     "header header header header header header header header header header header header header header"

@@ -1,0 +1,71 @@
+.content {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  padding: 15px;
+  margin-bottom: 2rem;
+  border: 1px solid #EEEEEE;
+  background-color: #FFFFFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heartIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.productImage {
+  max-width: 65%;
+}
+
+.productInfo {
+  width: 100%;
+}
+
+.category {
+  color: #E2352D;
+  font-size: 10px;
+}
+
+.name {
+  font-size: 14px;
+  font-family: 'Overpass-Thin';
+  font-weight: bolder;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  margin-top: .8rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-family: 'Overpass-Black';
+  font-size: inherit;
+  color: #234125;
+}
+
+.purchaseButton {
+  width: 85px;
+  height: 24px;
+  border: none;
+  background-color: #E2352D;
+  color: #FFFFFF;
+  font-size: 12px;
+  line-height: 40px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

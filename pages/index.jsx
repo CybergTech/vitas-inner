@@ -8,8 +8,13 @@ import Header from '../components/Header'
 import Announcements from '../components/Announcements'
 import PromotionalCards from '../components/PromotionalCards'
 import WhatsAppButton from '../components/WhatsAppButton'
+import DetailDots from '../components/DetailDots'
+import BrandItem from '../components/BrandItem'
+import ProductItem from '../components/ProductItem'
+import Footer from '../components/Footer'
 
 import grid from '../styles/grid/main.module.css'
+import styles from '../styles/Home.module.css'
 
 export async function getStaticProps () {
   const message = await api.get('/api/')
@@ -46,6 +51,39 @@ function Home ({ message }) {
         <Announcements />
         <PromotionalCards />
 
+        <section className={styles.contentSection}>
+          <h2 className={styles.titleSection}>MARCAS</h2>
+          <DetailDots style={{ right: '97%', top: '-7px' }} />
+
+          <div className={styles.brandList}>
+            <BrandItem />
+            <BrandItem />
+            <BrandItem />
+            <BrandItem />
+          </div>
+        </section>
+
+        <section className={styles.contentSection}>
+          <h2 className={styles.titleSection}>MAIS VENDIDOS</h2>
+          <DetailDots style={{ left: '95.5%', top: '-26px' }} />
+          <DetailDots style={{ right: '95.5%', top: 'calc(100% + 600px)' }} />
+
+          <div className={styles.productList}>
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+          </div>
+        </section>
+
         {/* <h1>Vita&apos;s Materiais Médicos e Hospitalares - Home</h1>
         <h4>Server Response - {message}</h4>
 
@@ -55,27 +93,7 @@ function Home ({ message }) {
       <WhatsAppButton />
 
       <footer className={grid.footer}>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <Footer />
       </footer>
     </div>
   )

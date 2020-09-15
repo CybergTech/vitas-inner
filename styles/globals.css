@@ -5,6 +5,10 @@
 }
 
 @font-face {
+  src: url('../public/fonts/Overpass-Thin.ttf');
+  font-family: 'Overpass-Thin';
+}
+@font-face {
   src: url('../public/fonts/Overpass-Light.ttf');
   font-family: 'Overpass-Light';
 }
@@ -81,7 +85,10 @@ ul {
   list-style: none;
 }
 
-input {
+input,
+button,
+select,
+textarea {
   font-family: 'Overpass-SemiBold';
 }
 

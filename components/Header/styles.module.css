@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  padding: 3vh 12%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row:nth-child(1) {
+  margin-bottom: 1rem;
+}
+
+.reduced {
+  padding-top: 4vh;
+  padding-bottom: 10vh;
+}
+
+.logo {
+  max-width: 120px;
+}
+
+
+/* DESKTOP SCREEN SIZE */
+
+@media only screen and (max-width: 1999px) and (min-width: 1500px) {
+
+}

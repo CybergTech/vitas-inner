@@ -1,0 +1,109 @@
+:root {
+  --mobile-default-font-size: 12px;
+  --notebook-default-font-size: 16px;
+  --desktop-default-font-size: 18px;
+}
+
+@font-face {
+  src: url('../public/fonts/Overpass-Light.ttf');
+  font-family: 'Overpass-Light';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-Regular.ttf');
+  font-family: 'Overpass-Regular';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-SemiBold.ttf');
+  font-family: 'Overpass-SemiBold';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-Bold.ttf');
+  font-family: 'Overpass-Bold';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-ExtraBold.ttf');
+  font-family: 'Overpass-ExtraBold';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-Black.ttf');
+  font-family: 'Overpass-Black';
+}
+@font-face {
+  src: url('../public/fonts/Overpass-BoldItalic.ttf');
+  font-family: 'Overpass-BoldItalic';
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Overpass-SemiBold';
+
+  scrollbar-width: thin;
+  scrollbar-color: #232323 #d2d2d2;
+}
+
+* ::-webkit-scrollbar {
+  width: 7px;
+}
+
+* ::-webkit-scrollbar-track {
+  background: #d2d2d2;
+}
+
+* ::-webkit-scrollbar-thumb {
+  background-color: #232323;
+}
+
+
+html,
+body {
+  font-size: var(--notebook-default-font-size);
+  font-family: 'Overpass-SemiBold', serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: #333333;
+
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+.lightGray {
+  background-color: #EEEEEE;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+}
+
+ul {
+  list-style: none;
+}
+
+::placeholder {
+  color: #AAAAAA;
+}
+
+
+/* DESKTOP SCREEN SIZE */
+
+@media only screen and (max-width: 1999px) and (min-width: 1500px) {
+  html,
+  body {
+    font-size: var(--desktop-default-font-size);
+  }
+}
+
+
+/* IPAD AND TABLETS SCREEN SIZE */
+/* MID AND BIG SMARTPHONES SCREEN SIZE */
+/* SMALL SMARTPHONES (IPHONE 5) SCREEN SIZE */
+
+@media only screen and (max-width: 900px) {
+  html,
+  body {
+    font-size: var(--mobile-default-font-size);
+  }
+}

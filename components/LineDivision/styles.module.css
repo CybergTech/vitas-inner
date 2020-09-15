@@ -1,0 +1,6 @@
+.divisionLine {
+  height: 30px;
+  border-left: 0;
+  border-width: .1px;
+  border-color: #DDD;
+}

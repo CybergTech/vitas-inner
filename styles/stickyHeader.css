@@ -1,0 +1,53 @@
+.navContainer {
+  transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) all 300ms;
+}
+
+.navContainer.isSticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: .7rem 12%;
+  background-color: #FFFFFF;
+  animation: header-transition-from-top 300ms;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -o-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -ms-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  z-index: 999;
+}
+
+.isSticky .bigCategSearch,
+.navContainer .littleCategSearch,
+.navContainer .stickyItem{
+  display: none;
+}
+
+.isSticky .littleCategSearch,
+.isSticky .stickyItem  {
+  display: block;
+}
+
+.isSticky .nav {
+  flex-grow: 1;
+  padding-left: 3vw;
+}
+
+.littleCategSearch {
+  flex-grow: 1;
+  width: 1000px;
+  display: flex;
+}
+
+.stickyItem:nth-child(1n+2) {
+  margin-right: auto;
+}
+
+.headerLogo {
+  width: 110px;
+}
+
+@keyframes header-transition-from-top {
+  from { transform: translateY(-40%); }
+  to { transform: translateY(0); }
+}

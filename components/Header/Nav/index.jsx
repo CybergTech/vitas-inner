@@ -3,13 +3,23 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LineDivision from '../../LineDivision'
+import SearchInput from '../SearchInput'
 
 import styles from './styles.module.css'
 
 function Nav () {
   return (
-    <nav>
+    <nav className="nav">
       <ul className={styles.list}>
+        <li className={`${styles.listItem} stickyItem`}>
+          <Link href="/">
+            <a>CATEGORIAS</a>
+          </Link>
+        </li>
+        <li className={`${styles.listItem} stickyItem`}>
+          <SearchInput little />
+        </li>
+
         <li className={styles.listItem}>
           <Link href="/">
             <a>QUEM SOMOS</a>

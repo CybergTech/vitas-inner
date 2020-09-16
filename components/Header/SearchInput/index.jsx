@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -6,12 +7,14 @@ import LineDivision from '../../LineDivision'
 
 import styles from './styles.module.css'
 
-function Nav () {
+function SearchInput ({ little }) {
   const [search, setSearch] = useState('')
   const [inputRef, setInputFocus] = useFocus()
 
+  const lineStyle = little ? { height: '25px' } : {}
+
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${little ? styles.little : ''}`}>
       <input
         type="text"
         className={styles.input}
@@ -21,11 +24,18 @@ function Nav () {
         onChange={e => setSearch(e.target.value)}
       />
 
-      <LineDivision style={{ position: 'absolute', right: '8.7%' }} />
-
-      <FontAwesomeIcon icon="search" className={styles.icon} onClick={setInputFocus} />
+      {little
+        ? <div className={styles.lineIcon}>
+          <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
+          <FontAwesomeIcon icon="search" className={styles.icon} onClick={setInputFocus} />
+        </div>
+        : <>
+          <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
+          <FontAwesomeIcon icon="search" className={styles.icon} onClick={setInputFocus} />
+        </>
+      }
     </div>
   )
 }
 
-export default Nav
+export default SearchInput

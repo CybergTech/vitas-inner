@@ -60,6 +60,12 @@ function Links () {
             </span>
           </li>
         </ul>
+
+        <h4 className={styles.title}>EMAILS COMERCIAIS</h4>
+        <ul className={styles.list}>
+          <li className={styles.addressItem}>vendas@vitas.com.br</li>
+          <li className={styles.addressItem}>sac@vitas.com.br</li>
+        </ul>
       </div>
     </div>
   )

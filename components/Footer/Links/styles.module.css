@@ -7,9 +7,12 @@
 }
 
 .title {
-  font-family: 'Overpass-Bold';
   color: #E2352D;
-  margin-bottom: 2rem;
+  font-size: 14px;
+  margin-bottom: .9rem;
+}
+.title:nth-child(1n+3) {
+  margin-top: 1.2rem;
 }
 
 .list {
@@ -19,7 +22,7 @@
 }
 
 .addressItem {
-  width: 500px;
+  width: 525px;
   display: flex;
   justify-content: space-between;
 }

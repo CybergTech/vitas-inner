@@ -3,8 +3,8 @@ import React from 'react'
 
 import styles from './styles.module.css'
 
-function LineDivision (props) {
-  return <hr style={props.style} className={styles.divisionLine} />
+function LineDivision ({ style }) {
+  return <hr style={style} className={styles.divisionLine} />
 }
 
 export default LineDivision

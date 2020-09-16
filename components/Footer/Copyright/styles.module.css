@@ -3,6 +3,37 @@
   height: 150px;
 }
 
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row:nth-child(1n+2) {
+  font-family: 'Overpass-Regular';
+  font-size: 14px;
+}
+
+.paymentMethods {
+  display: flex;
+}
+
+.paymentItem {
+  font-size: 45px;
+  max-height: 37px;
+}
+.paymentItem:nth-child(1n+2) {
+  margin-left: 19px;
+}
+.paymentItem:last-child {
+  margin-left: 0;
+}
+
+.image {
+  max-height: 100%;
+}
+
 .logo {
-  width: 130px;
+  width: 110px;
 }

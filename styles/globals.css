@@ -44,7 +44,7 @@
   padding: 0;
 
   scrollbar-width: thin;
-  scrollbar-color: #232323 #d2d2d2;
+  scrollbar-color: #333333 #FFFFFF;
 }
 
 * ::-webkit-scrollbar {
@@ -52,11 +52,11 @@
 }
 
 * ::-webkit-scrollbar-track {
-  background: #d2d2d2;
+  background: #FFFFFF;
 }
 
 * ::-webkit-scrollbar-thumb {
-  background-color: #232323;
+  background-color: #333333;
 }
 
 

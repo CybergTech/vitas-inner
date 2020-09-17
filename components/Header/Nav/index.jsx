@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LineDivision from '../../LineDivision'
-import SearchInput from '../SearchInput'
+import Search from '../Search'
 
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ function Nav () {
           </Link>
         </li>
         <li className={`${styles.listItem} stickyItem`}>
-          <SearchInput little />
+          <Search little biggerModal={true} />
         </li>
 
         <li className={styles.listItem}>

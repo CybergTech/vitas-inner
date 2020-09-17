@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import Logo from '../Logo'
 import Nav from './Nav'
 import Categories from './Categories'
-import SearchInput from './SearchInput'
+import Search from './Search'
 
 import styles from './styles.module.css'
 
@@ -51,13 +51,18 @@ class Header extends Component {
 
             <div className={`${styles.row} bigCategSearch`}>
               <Categories />
-              <SearchInput />
+              <Search />
             </div>
           </>
           : <>
             <div className={`${styles.row} ${styles.reduced}`}>
               <a onClick={this.handlerGoBack}>
-                <img className={styles.goBackLink} src="/images/icons/back.svg" alt="Go back"/>
+                <img
+                  className={styles.goBackLink}
+                  src="/images/icons/back.svg"
+                  alt="Go back"
+                  title="Voltar"
+                />
               </a>
 
               <div className={styles.logo}>

@@ -4,26 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
-function ProductItem ({ product }) {
+function ProductItem ({ product, asList }) {
   return (
-    <div className={styles.content}>
-      <div className={styles.heartIcon}>
+    <div className={`${styles.content} ${asList ? styles.asList : ''}`}>
+      <div className={`${styles.heartIcon} ${asList ? styles.hide : ''}`}>
         <FontAwesomeIcon icon="heart" color="#E2352D" />
       </div>
 
       <img
-        className={styles.productImage}
+        className={`${styles.productImage} ${asList ? styles.asListImage : ''}`}
         src="/images/products/alicate.svg"
         alt="Alicate Espícula"
       />
 
-      <div className={styles.productInfo}>
+      <div className={`${styles.productInfo} ${asList ? styles.asListInfo : ''}`}>
         <h4 className={styles.category}>Alicates e Pinças</h4>
-        <h3 className={styles.name}>ALICATE DE CORTE ESPICULA</h3>
+        <h3 className={`${styles.name} ${asList ? styles.asListName : ''}`}>
+          ALICATE DE CORTE ESPICULA
+        </h3>
 
         <div className={styles.row}>
           <h4 className={styles.price}>R$ 69,90</h4>
-          <button type="button" className={styles.purchaseButton}>
+          <button type="button" className={`${styles.purchaseButton} ${asList ? styles.asListButton : ''}`}>
             Comprar
           </button>
         </div>

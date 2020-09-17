@@ -96,6 +96,12 @@ textarea {
   color: #AAAAAA;
 }
 
+.carouselButton.active {
+  transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) all 300ms;
+  width: 20px;
+  background-color: #E2352D;
+}
+
 
 /* DESKTOP SCREEN SIZE */
 

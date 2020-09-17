@@ -20,7 +20,6 @@ class Header extends Component {
 
       if (!this.props.reduced) {
         if (isSticky) {
-          console.log('Sticky')
           element.classList.add('isSticky')
         } else {
           element.classList.remove('isSticky')
@@ -31,7 +30,6 @@ class Header extends Component {
 
   componentWillUnmount () {
     window.removeEventListener('scroll', this)
-    console.log('Unmount')
   }
 
   handlerGoBack () {

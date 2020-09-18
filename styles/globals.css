@@ -57,6 +57,7 @@
 
 * ::-webkit-scrollbar-thumb {
   background-color: #333333;
+  border-radius: 30px;
 }
 
 
@@ -93,7 +94,7 @@ textarea {
 }
 
 ::placeholder {
-  color: #AAAAAA;
+  color: #999999;
 }
 
 .carouselButton.active {

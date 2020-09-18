@@ -7,6 +7,13 @@ import Footer from '../../components/Footer'
 
 import grid from '../../styles/grid/main.module.css'
 
+export async function getServerSideProps () {
+  await new Promise(resolve => {
+    setTimeout(resolve, 3000)
+  })
+  return { props: {} }
+}
+
 function Home () {
   return (
     <div className={grid.wrapper}>

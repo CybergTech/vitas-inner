@@ -5,7 +5,7 @@ import Head from 'next/head'
 import api from '../services/api'
 import TopHeader from '../components/TopHeader'
 import Header from '../components/Header'
-import Carousel from '../components/Carousel'
+import BannerCarousel from '../components/BannerCarousel'
 import Announcements from '../components/Announcements'
 import PromotionalCards from '../components/PromotionalCards'
 import WhatsAppButton from '../components/WhatsAppButton'
@@ -45,8 +45,7 @@ function Home ({ message }) {
       </header>
 
       <section className={grid.promotionalCarousel}>
-        <Carousel />
-        {/* <img style={{ width: '100%' }} src="/images/vitas-banner.jpg" alt="Banner"/> */}
+        <BannerCarousel />
       </section>
 
       <main className={grid.main}>

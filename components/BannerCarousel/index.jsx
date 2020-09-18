@@ -33,7 +33,7 @@ const Items = [
 ]
 const eachItemInterval = 6000
 
-class Carousel extends React.Component {
+class BannerCarousel extends React.Component {
   constructor (props) {
     super(props)
 
@@ -140,4 +140,4 @@ class Carousel extends React.Component {
   }
 }
 
-export default Carousel
+export default BannerCarousel

@@ -2,6 +2,7 @@
 import React from 'react'
 import Head from 'next/head'
 
+import TopHeader from '../../components/TopHeader'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
@@ -11,19 +12,23 @@ function Home () {
   return (
     <div className={grid.wrapper}>
       <Head>
-        <title>Entre na plataforma - Vita&apos;s Materiais Médicos e Hospitalares</title>
+        <title>Lista de Desejos - Vita&apos;s Materiais Médicos e Hospitalares</title>
       </Head>
 
-      <header className={`${grid.header} lightGray`}>
-        <Header reduced></Header>
+      <div className={grid.topHeader}>
+        <TopHeader />
+      </div>
+
+      <header className={grid.header}>
+        <Header></Header>
       </header>
 
       <main className={grid.main}>
-        Sign in
+        Bookmarks
       </main>
 
       <footer className={grid.footer}>
-        <Footer newsletter={false} maps={false} />
+        <Footer newsletter={false} />
       </footer>
     </div>
   )

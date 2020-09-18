@@ -33,7 +33,7 @@ function Home ({ message }) {
   return (
     <div className={grid.wrapper}>
       <Head>
-        <title>Vita&apos;s Materiais Médicos e Hospitalares - Home</title>
+        <title>Início - Vita&apos;s Materiais Médicos e Hospitalares</title>
       </Head>
 
       <div className={grid.topHeader}>

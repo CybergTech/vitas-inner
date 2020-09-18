@@ -43,7 +43,7 @@ function Nav () {
           </Link>
         </li>
         <li className={styles.listItem}>
-          <Link href="/">
+          <Link href="/account/bookmarks">
             <a>LISTA DE DESEJOS</a>
           </Link>
         </li>

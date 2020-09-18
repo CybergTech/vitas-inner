@@ -19,7 +19,7 @@ function Home () {
       </header>
 
       <main className={grid.main}>
-        Sign in
+        Sign up
       </main>
 
       <footer className={grid.footer}>

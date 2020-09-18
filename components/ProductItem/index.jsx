@@ -3,8 +3,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
+import MinusAndPlusButtons from './MinusAndPlusButtons'
 
-function ProductItem ({ product, asList }) {
+function ProductItem ({ product, asList, showAddToCardButtons }) {
   return (
     <div className={`${styles.content} ${asList ? styles.asList : ''}`}>
       <div className={`${styles.heartIcon} ${asList ? styles.hide : ''}`}>
@@ -24,7 +25,12 @@ function ProductItem ({ product, asList }) {
         </h3>
 
         <div className={styles.row}>
-          <h4 className={styles.price}>R$ 69,90</h4>
+          <h4 className={styles.price}>
+            R$ 69,90
+            <span className={styles.oldPrice}>R$ 71,20</span>
+          </h4>
+
+          {showAddToCardButtons && <MinusAndPlusButtons />}
           <button type="button" className={`${styles.purchaseButton} ${asList ? styles.asListButton : ''}`}>
             Comprar
           </button>

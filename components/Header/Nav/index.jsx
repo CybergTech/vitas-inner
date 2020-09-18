@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LineDivision from '../../LineDivision'
 import Search from '../Search'
+import CartModal from './CartModal'
 
 import styles from './styles.module.css'
 
 function Nav () {
+  const [showModal, setShowModal] = useState(false)
+
+  function handleShowModal () {
+    setShowModal(!showModal)
+  }
+
   return (
     <nav className="nav">
       <ul className={styles.list}>
@@ -45,12 +52,15 @@ function Nav () {
           <LineDivision />
         </li>
 
-        <li className={styles.listItem} title="Sua sacola de compras">
-          <Link href="/">
-            <a className={styles.cartItem}>
-              <FontAwesomeIcon icon="briefcase-medical" /> <div className={styles.circle}>2</div>
-            </a>
-          </Link>
+        <li className={`${styles.listItem} ${styles.cartContainer}`} title="Sua sacola de compras">
+          <h4
+            className={styles.cartItem}
+            onClick={handleShowModal}
+          >
+            <FontAwesomeIcon icon="briefcase-medical" /> <div className={styles.circle}>2</div>
+          </h4>
+
+          <CartModal showModal={showModal} />
         </li>
       </ul>
     </nav>

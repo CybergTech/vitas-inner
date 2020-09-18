@@ -86,6 +86,14 @@
   color: #234125;
 }
 
+.oldPrice {
+  margin-left: .3rem;
+  font-family: 'Overpass-BoldItalic';
+  font-size: 12px;
+  text-decoration: line-through;
+  color: #333333;
+}
+
 .purchaseButton {
   width: 85px;
   height: 24px;

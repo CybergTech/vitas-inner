@@ -5,11 +5,13 @@
 }
 
 .listItem {
+  position: relative;
   margin-left: 1rem;
 }
 
 .cartItem {
   display: flex;
+  cursor: pointer;
 }
 
 .circle {

@@ -118,7 +118,7 @@ class BannerCarousel extends React.Component {
             }}>
               {
                 this.state.allItems.map(
-                  item => <Item key={item.index} data={item} />
+                  item => <Item key={item.index} banner={item} />
                 )
               }
             </div>

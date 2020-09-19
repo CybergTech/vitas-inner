@@ -10,7 +10,7 @@ import Announcements from '../components/Announcements'
 import PromotionalCards from '../components/PromotionalCards'
 import WhatsAppButton from '../components/WhatsAppButton'
 import DetailDots from '../components/DetailDots'
-import BrandItem from '../components/BrandItem'
+import BrandsCarousel from '../components/BrandsCarousel'
 import ProductItem from '../components/ProductItem'
 import Footer from '../components/Footer'
 
@@ -57,10 +57,7 @@ function Home ({ message }) {
           <DetailDots style={{ right: '97%', top: '-7px' }} />
 
           <div className={styles.brandList}>
-            <BrandItem />
-            <BrandItem />
-            <BrandItem />
-            <BrandItem />
+            <BrandsCarousel />
           </div>
         </section>
 

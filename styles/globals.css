@@ -97,6 +97,21 @@ textarea {
   color: #999999;
 }
 
+button,
+input[type=image] {
+  transition: cubic-bezier(0.755, 0.05, 0.855, 0.06) opacity 150ms;
+}
+button:hover,
+input[type=image]:hover,
+button:active,
+input[type=image]:active {
+  opacity: .89;
+}
+button:active,
+input[type=image]:active {
+  transform: scale(0.98);
+}
+
 
 /* DESKTOP SCREEN SIZE */
 

@@ -1,7 +1,8 @@
 .content {
   position: relative;
-  width: 250px;
-  height: 250px;
+  flex: 1;
+  min-width: 250px;
+  height: 100%;
   padding: 15px;
   border: 1px solid #EEEEEE;
   background-color: #FFFFFF;
@@ -9,6 +10,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.content:nth-child(1n+2) {
+  margin-left: 5%;
 }
 
 .brandLogo {
@@ -19,5 +23,11 @@
   position: absolute;
   top: 15px;
   right: 15px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
+}
+
+.heartIcon img {
+  width: 100%;
 }

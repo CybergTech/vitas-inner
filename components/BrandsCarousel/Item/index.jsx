@@ -1,23 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
-function BrandItem ({ brand }) {
+function Item ({ brand }) {
   return (
-    <div className={styles.content}>
+    <div className={styles.content} title={`${brand.name} | ${brand.slogan}`}>
       <div className={styles.heartIcon}>
-        <FontAwesomeIcon icon="heart" color="#E2352D" />
+        <img src="/images/icons/empty-heart.svg" alt="Heart icon" />
       </div>
 
       <img
         className={styles.brandLogo}
-        src="/images/brands/mercur.svg"
+        src={`/images/brands/${brand.src}`}
         alt="Mercur"
       />
     </div>
   )
 }
 
-export default BrandItem
+export default Item

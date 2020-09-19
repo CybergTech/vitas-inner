@@ -100,9 +100,9 @@ class BannerCarousel extends React.Component {
   activeButton (index) {
     document.querySelectorAll('.carouselButton').forEach((e, i) => {
       if (i === index) {
-        return e.classList.add('active')
+        return e.classList.add(styles.active)
       }
-      return e.classList.remove('active')
+      return e.classList.remove(styles.active)
     })
   }
 

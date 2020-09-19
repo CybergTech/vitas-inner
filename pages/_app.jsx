@@ -10,7 +10,7 @@ import '../styles/nprogress.css'
 import '../styles/stickyHeader.css'
 
 Router.events.on('routeChangeStart', url => {
-  console.log(`Loading: ${url}`)
+  // console.log(`Loading: ${url}`)
   NProgress.start()
 })
 

@@ -5,7 +5,7 @@ import Head from 'next/head'
 import api from '../services/api'
 import TopHeader from '../components/TopHeader'
 import Header from '../components/Header'
-import BannerCarousel from '../components/BannerCarousel'
+import BannersCarousel from '../components/BannersCarousel'
 import Announcements from '../components/Announcements'
 import PromotionalCards from '../components/PromotionalCards'
 import WhatsAppButton from '../components/WhatsAppButton'
@@ -45,7 +45,7 @@ function Home ({ message }) {
       </header>
 
       <section className={grid.promotionalCarousel}>
-        <BannerCarousel />
+        <BannersCarousel />
       </section>
 
       <main className={grid.main}>

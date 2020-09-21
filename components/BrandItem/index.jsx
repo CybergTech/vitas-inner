@@ -3,7 +3,7 @@ import React from 'react'
 
 import styles from './styles.module.css'
 
-function Item ({ brand }) {
+function BrandItem ({ brand }) {
   return (
     <div className={styles.content} title={`${brand.name} | ${brand.slogan}`}>
       <div className={styles.heartIcon}>
@@ -19,4 +19,4 @@ function Item ({ brand }) {
   )
 }
 
-export default Item
+export default BrandItem

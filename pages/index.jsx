@@ -15,7 +15,7 @@ import ProductItem from '../components/ProductItem'
 import Footer from '../components/Footer'
 
 import grid from '../styles/grid/main.module.css'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/main.module.css'
 
 export async function getStaticProps () {
   const message = await api.get('/api/')

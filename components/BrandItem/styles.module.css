@@ -2,7 +2,8 @@
   position: relative;
   flex: 1;
   min-width: 250px;
-  height: 100%;
+  max-width: 250px;
+  height: 250px;
   padding: 15px;
   border: 1px solid #EEEEEE;
   background-color: #FFFFFF;

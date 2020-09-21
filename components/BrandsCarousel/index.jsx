@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Item from './Item'
+import Item from '../BrandItem'
 
 import styles from './styles.module.css'
 

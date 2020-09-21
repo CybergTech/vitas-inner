@@ -54,7 +54,7 @@ function Home ({ message }) {
 
         <section className={styles.contentSection}>
           <h2 className={styles.titleSection}>MARCAS</h2>
-          <DetailDots style={{ right: '97%', top: '-7px' }} />
+          <DetailDots style={{ right: '97%', top: '83px' }} />
 
           <div className={styles.brandList}>
             <BrandsCarousel />
@@ -63,8 +63,8 @@ function Home ({ message }) {
 
         <section className={styles.contentSection}>
           <h2 className={styles.titleSection}>MAIS VENDIDOS</h2>
-          <DetailDots style={{ left: '95.5%', top: '-26px' }} />
-          <DetailDots style={{ right: '95.5%', top: 'calc(100% + 600px)' }} />
+          <DetailDots style={{ left: '95.5%', top: '70px' }} />
+          <DetailDots style={{ right: '95.5%', bottom: '40px' }} />
 
           <div className={styles.productList}>
             <ProductItem />

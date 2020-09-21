@@ -12,8 +12,6 @@
   animation: header-transition-from-top 300ms;
   box-shadow: 0px 1px 8px rgba(30,30,30,.25);
   -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
-  -o-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
-  -ms-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
   -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
 
   z-index: 900;

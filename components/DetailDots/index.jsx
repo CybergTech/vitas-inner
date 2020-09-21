@@ -5,11 +5,13 @@ import styles from './styles.module.css'
 
 function DetailDots ({ style }) {
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={style}
+    >
       <img
         src="/images/detail-dots.svg"
         alt="Detail Dots"
-        style={style}
         className={styles.detailsDots}
       />
     </div>

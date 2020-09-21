@@ -1,9 +1,8 @@
 .container {
-  position: relative;
+  position: absolute;
   z-index: -1;
 }
 
 .detailsDots {
-  position: absolute;
   width: 120px;
 }

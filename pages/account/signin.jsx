@@ -1,20 +1,26 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import Header from '../../components/Header'
+import DetailDots from '../../components/DetailDots'
 import Footer from '../../components/Footer'
 
-import grid from '../../styles/grid/main.module.css'
+import grid from '../../styles/grid/clean.module.css'
+import mainStyles from '../../styles/main.module.css'
+import styles from '../../styles/Signin.module.css'
 
-export async function getServerSideProps () {
-  await new Promise(resolve => {
-    setTimeout(resolve, 3000)
-  })
-  return { props: {} }
-}
+function Signin () {
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
-function Home () {
+  function handleFormSubmit (e) {
+    e.preventDefault()
+    console.log('Submit')
+  }
+
   return (
     <div className={grid.wrapper}>
       <Head>
@@ -26,7 +32,73 @@ function Home () {
       </header>
 
       <main className={grid.main}>
-        Sign in
+        <div className={mainStyles.signContainer}>
+          <div className={styles.content}>
+            <DetailDots style={{ right: '83%', bottom: '-30px' }} />
+
+            <div className={styles.wrapper}>
+              <h2 className={styles.title}>
+                Olá! Informe seu email e senha para continuar
+              </h2>
+
+              <form
+                className={styles.form}
+                onSubmit={e => handleFormSubmit(e)}
+              >
+                <input
+                  type="email"
+                  className={styles.input}
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+
+                <input
+                  type="password"
+                  className={styles.input}
+                  placeholder="Senha"
+                  name="password"
+                  value={senha}
+                  onChange={e => setSenha(e.target.value)}
+                />
+
+                <button
+                  type="submit"
+                  className={styles.button}
+                >
+                  Continuar
+                </button>
+              </form>
+
+              <div className={mainStyles.divisionOr}>
+                <hr className={mainStyles.lineThrough} />
+                <h4 className={mainStyles.text}>OU</h4>
+              </div>
+
+              <div className={styles.otherOptions}>
+                <div className={styles.socialMediaOptions}></div>
+                <div className={styles.links}>
+                  <Link href="/account/forgot">
+                    <a
+                      className={styles.link}
+                    >
+                      Esqueci minha senha <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                    </a>
+                  </Link>
+
+                  <Link href="/account/signup">
+                    <a
+                      className={styles.link}
+                    >
+                      Ainda não possuo uma conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer className={grid.footer}>
@@ -36,4 +108,4 @@ function Home () {
   )
 }
 
-export default Home
+export default Signin

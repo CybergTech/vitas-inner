@@ -91,21 +91,28 @@
 }
 
 .finishButton {
+  position: relative;
   width: 42%;
   height: 34px;
-  background-color: #E2352D;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.finishButton > button {
   border: none;
   background-color: #E2352D;
   color: #FFFFFF;
   font-size: 12px;
   text-transform: uppercase;
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.finishButton a {
+  width: 100%;
+  height: 100%;
+  color: #FFFFFF;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

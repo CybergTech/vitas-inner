@@ -98,13 +98,15 @@ textarea {
 }
 
 button,
-input[type=image] {
+input[type=image],
+a {
   transition: cubic-bezier(0.755, 0.05, 0.855, 0.06) opacity 150ms;
 }
 button:hover,
 input[type=image]:hover,
 button:active,
-input[type=image]:active {
+input[type=image]:active,
+a:hover {
   opacity: .89;
 }
 button:active,

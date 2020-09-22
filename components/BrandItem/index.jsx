@@ -3,9 +3,13 @@ import React from 'react'
 
 import styles from './styles.module.css'
 
-function BrandItem ({ brand }) {
+function BrandItem ({ brand, style }) {
   return (
-    <div className={styles.content} title={`${brand.name} | ${brand.slogan}`}>
+    <div
+      className={styles.content}
+      title={`${brand.name} | ${brand.slogan}`}
+      style={style}
+    >
       <div className={styles.heartIcon}>
         <img src="/images/icons/empty-heart.svg" alt="Heart icon" />
       </div>

@@ -44,13 +44,14 @@ function Modal ({ showModal }) {
             R$ 113,40
           </div>
 
-          <Link href="#!">
-            <a className={styles.finishButton}>
-              <button type="button">
-                Finalizar a Compra
-              </button>
-            </a>
-          </Link>
+          <button
+            type="button"
+            className={styles.finishButton}
+          >
+            <Link href="#!">
+              <a>Finalizar a Compra</a>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

@@ -62,6 +62,7 @@ const Items = [
     url: '#!'
   }
 ]
+
 const eachItemInterval = 4000
 
 class BrandsCarousel extends React.Component {
@@ -69,6 +70,7 @@ class BrandsCarousel extends React.Component {
     super(props)
 
     this.state = {
+      oneFourth: 0,
       allItems: Items,
       currentItem: Items[0],
       autoSliderInterval: null
@@ -76,6 +78,7 @@ class BrandsCarousel extends React.Component {
   }
 
   componentDidMount () {
+    this.getWidthToEachCard()
     this.autoSlider()
 
     this.container = document.querySelector('.brandsCarouselContainer')
@@ -93,6 +96,34 @@ class BrandsCarousel extends React.Component {
     this.container.removeEventListener('mouseenter', this)
     this.container.removeEventListener('mouseleave', this)
     clearInterval(this.autoSliderInterval)
+  }
+
+  getWidthToEachCard () {
+    const containerWidth = document.querySelector('.brandsCarouselContainer').offsetWidth
+    const windowWidth = window.innerWidth
+
+    if (windowWidth >= 1300) {
+      // There will be 4 cards
+      const withMargin = containerWidth / 4
+
+      this.setState({
+        oneFourth: withMargin
+      })
+    } else if (windowWidth >= 750) {
+      // There will be 3 cards
+      const withMargin = containerWidth / 3
+
+      this.setState({
+        oneFourth: withMargin
+      })
+    } else {
+      // There will be 2 card
+      const withMargin = containerWidth / 2
+
+      this.setState({
+        oneFourth: withMargin
+      })
+    }
   }
 
   autoSlider () {
@@ -129,17 +160,30 @@ class BrandsCarousel extends React.Component {
 
   render () {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} style={{ height: `${this.state.oneFourth}px` }}>
         <div className={`${styles.itemsContainer} brandsCarouselContainer`}>
-          <div className={styles.imagesContainer}>
+          <div
+            className={styles.imagesContainer}
+            style={{ width: `${this.state.oneFourth}px` }}
+          >
             <div className={styles.imagesWrapper} style={{
               transform: `translateX(
-                -${this.state.currentItem.index * 105}%
+                -${this.state.currentItem.index * 100}%
               )`
             }}>
               {
                 this.state.allItems.map(
-                  item => <Item key={item.index} brand={item} />
+                  item => (
+                    <Item
+                      key={item.index}
+                      brand={item}
+                      style={{
+                        minWidth: `${this.state.oneFourth}px`,
+                        maxWidth: `${this.state.oneFourth}px`,
+                        height: `${this.state.oneFourth}px`
+                      }}
+                    />
+                  )
                 )
               }
             </div>

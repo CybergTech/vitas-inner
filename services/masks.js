@@ -1,3 +1,8 @@
+export const withoutNumber = value => {
+  return value
+    .replace(/\d/g, '')
+}
+
 export const cpfMask = value => {
   return value
     .replace(/\D/g, '')

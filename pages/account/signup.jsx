@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { cpfMask, dateMask, phoneMask } from '../../services/masks'
+import { cpfMask, dateMask, phoneMask, withoutNumber } from '../../services/masks'
 import Header from '../../components/Header'
 import DetailDots from '../../components/DetailDots'
 import Footer from '../../components/Footer'
@@ -66,7 +66,7 @@ function Signup () {
                       placeholder="Nome"
                       name="firstname"
                       value={firstName}
-                      onChange={e => setFirstName(e.target.value)}
+                      onChange={e => setFirstName(withoutNumber(e.target.value))}
                     />
                   </div>
 
@@ -77,7 +77,7 @@ function Signup () {
                       placeholder="Sobrenome"
                       name="lastname"
                       value={lastName}
-                      onChange={e => setLastName(e.target.value)}
+                      onChange={e => setLastName(withoutNumber(e.target.value))}
                     />
                   </div>
                 </div>

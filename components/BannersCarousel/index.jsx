@@ -12,7 +12,7 @@ const Items = [
   },
   {
     index: 1,
-    src: 'asiatico.svg',
+    src: 'vitas-banner.jpg',
     url: '#!'
   },
   {
@@ -22,7 +22,7 @@ const Items = [
   },
   {
     index: 3,
-    src: 'asiatico.svg',
+    src: 'vitas-banner.jpg',
     url: '#!'
   },
   {

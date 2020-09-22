@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 import company from '../../../services/companyInfo'
 
@@ -26,7 +27,11 @@ function Links () {
         <ul className={styles.list}>
           <li><a href="#!">Meu Perfil</a></li>
           <li><a href="#!">Histórico de Compras</a></li>
-          <li><a href="#!">Lista de Desejos</a></li>
+          <li>
+            <Link href="/account/bookmarks">
+              <a>Lista de Desejos</a>
+            </Link>
+          </li>
         </ul>
       </div>
 
@@ -63,8 +68,17 @@ function Links () {
 
         <h4 className={styles.title}>EMAILS COMERCIAIS</h4>
         <ul className={styles.list}>
-          <li className={styles.addressItem}>vendas@vitas.com.br</li>
-          <li className={styles.addressItem}>sac@vitas.com.br</li>
+          <li className={styles.addressItem}>
+            <a href="mailto:vendas@vitas.com.br">
+              vendas@vitas.com.br
+            </a>
+          </li>
+
+          <li className={styles.addressItem}>
+            <a href="mailto:sac@vitas.com.br">
+              sac@vitas.com.br
+            </a>
+          </li>
         </ul>
       </div>
     </div>

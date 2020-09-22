@@ -52,7 +52,7 @@ function Home () {
 
         <div className={styles.contentSection}>
           <h2 className={styles.titleSection}>PRODUTOS</h2>
-          <DetailDots style={{ right: '92.5%', top: '-10px' }} />
+          <DetailDots style={{ right: '92.5%', top: '70px' }} />
 
           <div className={styles.productList}>
             <ProductItem />
@@ -65,10 +65,17 @@ function Home () {
 
         <div className={styles.contentSection}>
           <h2 className={styles.titleSection}>MARCAS</h2>
-          <DetailDots style={{ right: '92.5%', top: '-10px' }} />
+          <DetailDots style={{ right: '92.5%', top: '70px' }} />
 
           <div className={styles.productList}>
-            <BrandItem brand={Item} />
+            <div className={styles.productWrapper}>
+              <BrandItem
+                brand={Item}
+                style={{
+                  width: '250px', height: '250px'
+                }}
+              />
+            </div>
           </div>
         </div>
       </main>

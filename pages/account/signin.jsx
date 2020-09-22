@@ -9,8 +9,7 @@ import DetailDots from '../../components/DetailDots'
 import Footer from '../../components/Footer'
 
 import grid from '../../styles/grid/clean.module.css'
-import mainStyles from '../../styles/main.module.css'
-import styles from '../../styles/Signin.module.css'
+import styles from '../../styles/Sign.module.css'
 
 function Signin () {
   const [email, setEmail] = useState('')
@@ -32,11 +31,11 @@ function Signin () {
       </header>
 
       <main className={grid.main}>
-        <div className={mainStyles.signContainer}>
-          <div className={styles.content}>
+        <div className={styles.signContainer}>
+          <div className={styles.signinContent}>
             <DetailDots style={{ right: '83%', bottom: '-30px' }} />
 
-            <div className={styles.wrapper}>
+            <div className={styles.signinWrapper}>
               <h2 className={styles.title}>
                 Olá! Informe seu email e senha para continuar
               </h2>
@@ -71,9 +70,9 @@ function Signin () {
                 </button>
               </form>
 
-              <div className={mainStyles.divisionOr}>
-                <hr className={mainStyles.lineThrough} />
-                <h4 className={mainStyles.text}>OU</h4>
+              <div className={styles.divisionOr}>
+                <hr className={styles.lineThrough} />
+                <h4 className={styles.text}>OU</h4>
               </div>
 
               <div className={styles.otherOptions}>

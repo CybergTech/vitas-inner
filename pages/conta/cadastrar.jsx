@@ -223,7 +223,7 @@ function Signup () {
               <div className={styles.otherOptions}>
                 <div className={styles.socialMediaOptions}></div>
                 <div className={styles.links}>
-                  <Link href="/account/signin">
+                  <Link href="/conta/entrar">
                     <a
                       className={styles.link}
                     >

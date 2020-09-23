@@ -8,7 +8,6 @@ import Header from '../components/Header'
 import BannersCarousel from '../components/BannersCarousel'
 import Announcements from '../components/Announcements'
 import PromotionalCards from '../components/PromotionalCards'
-import WhatsAppButton from '../components/WhatsAppButton'
 import DetailDots from '../components/DetailDots'
 import BrandsCarousel from '../components/BrandsCarousel'
 import ProductItem from '../components/ProductItem'
@@ -87,8 +86,6 @@ function Home ({ message }) {
 
         <img style={{ width: '100px' }} src="/images/detail-dots.svg" alt="Dots"/> */}
       </main>
-
-      <WhatsAppButton />
 
       <footer className={grid.footer}>
         <Footer />

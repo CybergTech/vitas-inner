@@ -6,7 +6,7 @@ import {
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
-  faShieldAlt, faHeart
+  faShieldAlt, faHeart, faShareAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -15,5 +15,5 @@ library.add(
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
-  faShieldAlt, faHeart
+  faShieldAlt, faHeart, faShareAlt
 )

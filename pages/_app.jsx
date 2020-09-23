@@ -5,6 +5,8 @@ import NProgress from 'nprogress'
 
 import '../services/fontawesome'
 
+import WhatsAppButton from '../components/WhatsAppButton'
+
 import '../styles/globals.css'
 import '../styles/nprogress.css'
 import '../styles/stickyHeader.css'
@@ -17,6 +19,13 @@ Router.events.on('routeChangeStart', url => {
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
-export default function App ({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function App ({ Component, pageProps }) {
+  return (
+    <>
+      <WhatsAppButton />
+      <Component {...pageProps} />
+    </>
+  )
 }
+
+export default App

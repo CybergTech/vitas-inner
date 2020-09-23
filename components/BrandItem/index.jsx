@@ -11,7 +11,11 @@ function BrandItem ({ brand, style }) {
       style={style}
     >
       <div className={styles.heartIcon}>
-        <img src="/images/icons/empty-heart.svg" alt="Heart icon" />
+        <input
+          type="image"
+          src="/images/icons/empty-heart.svg"
+          title="Adicionar à Lista de Desejos"
+        />
       </div>
 
       <img

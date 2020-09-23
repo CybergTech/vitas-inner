@@ -78,7 +78,7 @@ function Signin () {
               <div className={styles.otherOptions}>
                 <div className={styles.socialMediaOptions}></div>
                 <div className={styles.links}>
-                  <Link href="/account/forgot">
+                  <Link href="/conta/esqueceu-senha">
                     <a
                       className={styles.link}
                     >
@@ -86,7 +86,7 @@ function Signin () {
                     </a>
                   </Link>
 
-                  <Link href="/account/signup">
+                  <Link href="/conta/cadastrar">
                     <a
                       className={styles.link}
                     >

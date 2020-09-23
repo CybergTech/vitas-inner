@@ -38,12 +38,12 @@ function Nav () {
           </Link>
         </li>
         <li className={styles.listItem}>
-          <Link href="/account/signin">
+          <Link href="/conta/entrar">
             <a>ENTRAR</a>
           </Link>
         </li>
         <li className={styles.listItem}>
-          <Link href="/account/bookmarks">
+          <Link href="/conta/lista-de-desejos">
             <a>LISTA DE DESEJOS</a>
           </Link>
         </li>

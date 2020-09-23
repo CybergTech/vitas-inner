@@ -28,7 +28,7 @@ function Links () {
           <li><a href="#!">Meu Perfil</a></li>
           <li><a href="#!">Histórico de Compras</a></li>
           <li>
-            <Link href="/account/bookmarks">
+            <Link href="/conta/lista-de-desejos">
               <a>Lista de Desejos</a>
             </Link>
           </li>

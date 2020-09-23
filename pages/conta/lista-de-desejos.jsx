@@ -20,7 +20,7 @@ const paths = [
   },
   {
     name: 'Lista de Desejos',
-    href: '/account/bookmarks'
+    href: '/conta/lista-de-desejos'
   }
 ]
 

@@ -62,8 +62,9 @@
 
 .name {
   font-size: 14px;
-  font-family: 'Overpass-Thin';
-  font-weight: bolder;
+  font-family: 'Overpass-Regular';
+  font-weight: normal;
+  text-transform: uppercase;
 }
 
 .asListName {

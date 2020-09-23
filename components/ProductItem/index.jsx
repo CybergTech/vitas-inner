@@ -22,7 +22,7 @@ function ProductItem ({ product, asList, showAddToCardButtons }) {
       <div className={`${styles.productInfo} ${asList ? styles.asListInfo : ''}`}>
         <h4 className={styles.category}>Alicates e Pinças</h4>
         <h3 className={`${styles.name} ${asList ? styles.asListName : ''}`}>
-          ALICATE DE CORTE ESPICULA
+          Alicate de Corte Espícula
         </h3>
 
         <div className={styles.row}>

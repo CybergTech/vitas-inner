@@ -10,6 +10,7 @@ import Header from '../../components/Header'
 import Path from '../../components/Path'
 import DetailDots from '../../components/DetailDots'
 import MinusAndPlusButtons from '../../components/ProductItem/MinusAndPlusButtons'
+import Table from '../../components/Table'
 import Footer from '../../components/Footer'
 
 import grid from '../../styles/grid/nobanners.module.css'
@@ -82,9 +83,10 @@ function Product ({ product }) {
       <main className={grid.main}>
         <Path paths={paths} />
 
-        <div className={mainStyles.contentSection}>
-          <DetailDots style={{ right: '96.5%', top: '130px' }} />
-          <div className={styles.container}>
+        <section className={mainStyles.contentSection}>
+          <DetailDots style={{ right: '99.5%', top: '130px' }} />
+
+          <div className={styles.mainContainer}>
             <div className={styles.picturesContainer}>
               <ul className={styles.list}>
                 {allImages.map((image, index) => (
@@ -244,8 +246,29 @@ function Product ({ product }) {
                 </button>
               </div>
             </div>
+
+            <DetailDots style={{ left: '104%', bottom: '-20px' }} />
           </div>
-        </div>
+        </section>
+
+        <section className={mainStyles.contentSection}>
+          <div className={`${styles.mainContainer} ${styles.columnFlex}`}>
+            <h2 className={mainStyles.titleSection}>
+              Características Principais
+            </h2>
+
+            <Table>
+              <tbody>
+                {product.data.principalFeatures.map(feature => (
+                  <tr key={feature.title}>
+                    <th>{feature.title}</th>
+                    <td>{feature.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </section>
       </main>
 
       <footer className={grid.footer}>

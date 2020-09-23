@@ -1,4 +1,4 @@
-.container {
+.mainContainer {
   position: relative;
   width: 90%;
   margin: 0 auto;
@@ -6,6 +6,10 @@
 
   display: flex;
   justify-content: space-between;
+}
+
+.columnFlex {
+  flex-direction: column;
 }
 
 .picturesContainer {
@@ -221,6 +225,12 @@
   color: #FFFFFF;
   font-size: 14px;
   cursor: pointer;
+}
+
+
+
+.principalFeaturesContainer {
+  width: 100%;
 }
 
 

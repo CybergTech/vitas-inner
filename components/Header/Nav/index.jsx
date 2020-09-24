@@ -52,11 +52,13 @@ function Nav () {
           <LineDivision />
         </li>
 
-        <li className={`${styles.listItem} ${styles.cartContainer}`} title="Sua sacola de compras">
-          <h4
-            className={styles.cartItem}
-            onClick={handleShowModal}
-          >
+        <li
+          className={`${styles.listItem} ${styles.cartContainer}`}
+          title="Sua sacola de compras"
+          onMouseEnter={handleShowModal}
+          onMouseLeave={handleShowModal}
+        >
+          <h4 className={styles.cartItem}>
             <FontAwesomeIcon icon="briefcase-medical" /> <div className={styles.circle}>2</div>
           </h4>
 

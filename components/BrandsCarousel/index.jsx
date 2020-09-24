@@ -101,29 +101,22 @@ class BrandsCarousel extends React.Component {
   getWidthToEachCard () {
     const containerWidth = document.querySelector('.brandsCarouselContainer').offsetWidth
     const windowWidth = window.innerWidth
+    var withMargin = 0
 
     if (windowWidth >= 1300) {
       // There will be 4 cards
-      const withMargin = containerWidth / 4
-
-      this.setState({
-        oneFourth: withMargin
-      })
+      withMargin = containerWidth / 4
     } else if (windowWidth >= 750) {
       // There will be 3 cards
-      const withMargin = containerWidth / 3
-
-      this.setState({
-        oneFourth: withMargin
-      })
+      withMargin = containerWidth / 3
     } else {
       // There will be 2 card
-      const withMargin = containerWidth / 2
-
-      this.setState({
-        oneFourth: withMargin
-      })
+      withMargin = containerWidth / 2
     }
+
+    this.setState({
+      oneFourth: (withMargin - 10)
+    })
   }
 
   autoSlider () {

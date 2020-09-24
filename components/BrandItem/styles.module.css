@@ -10,6 +10,13 @@
   align-items: center;
 }
 
+.content {
+  margin-left: 10px;
+}
+.content:first-child {
+  margin-left: 0;
+}
+
 .brandLogo {
   max-width: 75%;
 }

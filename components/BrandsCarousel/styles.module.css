@@ -27,7 +27,7 @@
 }
 
 .imagesWrapper {
-  width: 100%;
+  width: calc(100% + 10px);
   height: 100%;
   position: absolute;
   transition: transform 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
@@ -40,7 +40,7 @@
 .menuContainer {
   position: absolute;
   bottom: 0;
-  left: 100%;
+  left: calc(100% - 10px);
 
   display: flex;
   flex-direction: column;

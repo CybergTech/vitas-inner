@@ -28,12 +28,12 @@ function Nav () {
         </li>
 
         <li className={styles.listItem}>
-          <Link href="/">
+          <Link href="/sobre/quem-somos">
             <a>QUEM SOMOS</a>
           </Link>
         </li>
         <li className={styles.listItem}>
-          <Link href="/">
+          <Link href="/suporte/fale-conosco">
             <a>FALE CONOSCO</a>
           </Link>
         </li>

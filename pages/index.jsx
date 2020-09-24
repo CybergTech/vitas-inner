@@ -32,7 +32,8 @@ function Home ({ message }) {
   return (
     <div className={grid.wrapper}>
       <Head>
-        <title>Início - Vita&apos;s Materiais Médicos e Hospitalares</title>
+        <title>Início - Vita{"'"}s Materiais Médicos e Hospitalares</title>
+        <meta name="description" content="Vita's, O seu bem estar em primeiro lugar. Há mais de 30 anos no mercado de materiais médicos e hospitalares." />
       </Head>
 
       <div className={grid.topHeader}>

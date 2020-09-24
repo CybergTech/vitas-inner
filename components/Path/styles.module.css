@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.item:last-child {
+  font-family: 'Overpass-SemiBold';
+}
+
 .icon {
   position: relative;
   top: -1px;

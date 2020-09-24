@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 import Link from 'next/link'
 
 import TopHeader from '../components/TopHeader'
 import Header from '../components/Header'
-import DetailDots from '../components/DetailDots'
+// import DetailDots from '../components/DetailDots'
 import Footer from '../components/Footer'
 
 import grid from '../styles/grid/nobanners.module.css'
 import mainStyles from '../styles/main.module.css'
 import styles from '../styles/404.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Home () {
   return (
@@ -31,7 +31,7 @@ function Home () {
       <main className={grid.main}>
         <section className={mainStyles.contentSection}>
           <div className={styles.container}>
-            <DetailDots style={{ right: '95%', bottom: '-27px' }} />
+            {/* <DetailDots style={{ right: '95%', bottom: '-27px' }} /> */}
 
             <div className={styles.subtitles}>
               <h2 className={styles.title}>

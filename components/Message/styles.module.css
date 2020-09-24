@@ -1,0 +1,163 @@
+.container {
+  width: 100%;
+  height: 78px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  cursor: pointer;
+
+  opacity: 1;
+  transform: translate(0px);
+  animation: slideIn 400ms;
+  transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container:nth-child(1n+2) {
+  margin-top: 1.3rem;
+}
+
+.container:hover {
+  box-shadow: 0px 1px 6px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 6px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 6px rgba(30,30,30,.25);
+}
+
+.slideOut {
+  animation: slideOut 400ms;
+  transform: translate(calc(100% + 20px));
+  opacity: 0;
+}
+
+.infoContent {
+  width: 100%;
+  min-height: 95%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconContainer {
+  min-width: 20%;
+  height: 100%;
+  background-color: #f5f5f5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 24px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.1));
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.1));
+}
+
+.icon.success {
+  color: #3C9A45;
+}
+.icon.error {
+  color: #E2352D;
+}
+
+.body {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: 'Overpass-Bold';
+  font-weight: normal;
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 8px;
+  font-size: 12px;
+  transition: 150ms color ease-in-out;
+  cursor: pointer;
+}
+
+.close.success {
+  color: #3C9A45aa;
+}
+.close.success:hover {
+  color: #3C9A45;
+}
+
+.close.error {
+  color: #E2352Daa;
+}
+
+.text {
+  flex-grow: 1;
+  color: #444;
+  text-align: center;
+  font-family: 'Overpass-Bold';
+  font-weight: normal;
+  font-size: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressContainer {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+}
+.progressContainer.success {
+  background-color: #3C9A4577;
+}
+.progressContainer.error {
+  background-color: #E2352D77;
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+}
+.progressBar.success {
+  background-color: #3C9A45;
+}
+.progressBar.error {
+  background-color: #E2352D;
+}
+
+
+
+@keyframes slideIn {
+  0% {
+    opacity: .2;
+    transform: translate(calc(100% + 20px));
+  }
+  50% {
+    transform: translate(-15%);
+  }
+  75% {
+    transform: translate(10%);
+  }
+}
+
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translate(0%);
+  }
+  30% {
+    transform: translate(-20%);
+  }
+}

@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import Header from '../../components/Header'
 import DetailDots from '../../components/DetailDots'
+import Message from '../../components/Message'
 import Footer from '../../components/Footer'
 
 import grid from '../../styles/grid/clean.module.css'
@@ -14,10 +15,17 @@ import styles from '../../styles/Sign.module.css'
 function Signin () {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [messages, setMessages] = useState([])
 
   function handleFormSubmit (e) {
     e.preventDefault()
     console.log('Submit')
+
+    setMessages([...messages, <Message
+      key={Math.floor(Math.random() * 1000)}
+      type="success"
+      text="Produto adicionado à lista de desejos com sucesso!"
+    />])
   }
 
   return (
@@ -97,6 +105,10 @@ function Signin () {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="messagesContainer">
+          {messages}
         </div>
       </main>
 

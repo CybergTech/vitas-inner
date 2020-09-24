@@ -114,6 +114,20 @@ input[type=image]:active {
   transform: scale(0.98);
 }
 
+.messagesContainer {
+  position: fixed;
+  top: 20vh;
+  right: 0;
+  width: 310px;
+  padding-right: 20px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
 
 /* DESKTOP SCREEN SIZE */
 

@@ -11,8 +11,8 @@ import styles from './styles.module.css'
 function Nav () {
   const [showModal, setShowModal] = useState(false)
 
-  function handleShowModal () {
-    setShowModal(!showModal)
+  function handleShowModal (show = true) {
+    setShowModal(show)
   }
 
   return (
@@ -53,16 +53,25 @@ function Nav () {
         </li>
 
         <li
-          className={`${styles.listItem} ${styles.cartContainer}`}
+          className={`${styles.listItem} ${styles.cartContainer} ${showModal && styles.zIndex}`}
           title="Sua sacola de compras"
-          onMouseEnter={handleShowModal}
-          onMouseLeave={handleShowModal}
         >
-          <h4 className={styles.cartItem}>
-            <FontAwesomeIcon icon="briefcase-medical" /> <div className={styles.circle}>2</div>
-          </h4>
+          <div
+            className={`${styles.cartBackground} ${showModal ? styles.show : styles.hide}`}
+            onClick={() => handleShowModal(false)}
+          ></div>
 
-          <CartModal showModal={showModal} />
+          <div
+            className={`${styles.cartItem} ${showModal && styles.zIndex}`}
+            onMouseEnter={() => handleShowModal()}
+            onMouseLeave={() => handleShowModal(false)}
+          >
+            <h4 className={styles.cartTitle}>
+              <FontAwesomeIcon icon="briefcase-medical" /> <div className={styles.circle}>2</div>
+            </h4>
+
+            <CartModal showModal={showModal} />
+          </div>
         </li>
       </ul>
     </nav>

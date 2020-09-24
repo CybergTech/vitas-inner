@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: 100%;
+  top: calc(100% - 1px);
   right: 0;
   width: 30vw;
   height: 75vh;
@@ -8,8 +8,6 @@
   background-color: #FFF;
   opacity: 1;
   animation: fadeIn 200ms;
-  z-index: 999;
-  border: 1px solid #EEEEEE;
 
   display: flex;
   flex-direction: column;

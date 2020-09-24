@@ -22,6 +22,8 @@ function SearchInput ({ little, biggerModal }) {
   const lineStyle = little ? { height: '25px' } : {}
 
   function handleSearch (e) {
+    setSearch(e)
+
     if (e.length > 0) {
       setSwitchIcon(loadingIcon)
       setShowClearSearchIcon(true)
@@ -39,43 +41,46 @@ function SearchInput ({ little, biggerModal }) {
   }
 
   return (
-    <div className={`${styles.container} ${little ? styles.little : ''}`}>
-      <input
-        type="text"
-        className={styles.input}
-        placeholder="Pesquise aqui..."
-        value={search}
-        ref={inputRef}
-        onChange={e => {
-          setSearch(e.target.value)
-          handleSearch(e.target.value)
-        }}
-      />
+    <>
+      <div
+        className={`${styles.searchBackground} ${showClearSearchIcon ? styles.show : styles.hide}`}
+        onClick={() => handleClearSearch()}
+      ></div>
+      <div className={`${styles.container} ${little ? styles.little : ''}`}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="Pesquise aqui..."
+          value={search}
+          ref={inputRef}
+          onChange={e => handleSearch(e.target.value)}
+        />
 
-      <FontAwesomeIcon
-        icon="times"
-        className={`
-          ${styles.icon}
-          ${styles.clearIcon}
-          ${little ? styles.littleClearIcon : ''}
-          ${showClearSearchIcon ? styles.show : styles.hide}
-        `}
-        onClick={handleClearSearch}
-      />
+        <FontAwesomeIcon
+          icon="times"
+          className={`
+            ${styles.icon}
+            ${styles.clearIcon}
+            ${little ? styles.littleClearIcon : ''}
+            ${showClearSearchIcon ? styles.show : styles.hide}
+          `}
+          onClick={handleClearSearch}
+        />
 
-      {little
-        ? <div className={styles.lineIcon}>
-          <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
-          {switchIcon}
-        </div>
-        : <>
-          <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
-          {switchIcon}
-        </>
-      }
+        {little
+          ? <div className={styles.lineIcon}>
+            <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
+            {switchIcon}
+          </div>
+          : <>
+            <LineDivision style={{ position: 'absolute', right: '8.7%', ...lineStyle }} />
+            {switchIcon}
+          </>
+        }
 
-      <Modal showModal={showModal} bigger={!!biggerModal} />
-    </div>
+        <Modal showModal={showModal} bigger={!!biggerModal} />
+      </div>
+    </>
   )
 }
 

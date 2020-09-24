@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 
@@ -21,8 +21,34 @@ function Product () {
   const allImages = product.photos
   const [currentImage, setCurrentImage] = useState(product.photos[0])
   const [isHoveringShareIcon, setIsHoveringShareIcon] = useState(false)
+  const [isHoveringImage, setIsHoveringImage] = useState(false)
 
   const [question, setQuestion] = useState('')
+
+  useEffect(() => {
+    // Zoom Viewer
+    const image = document.querySelector('.imageToZoom img')
+    const zoomViewer = document.querySelector('.zoomViewer')
+
+    image.addEventListener('mousemove', function (e) {
+      setIsHoveringImage(true)
+      const width = e.target.offsetWidth
+      const height = e.target.offsetHeight
+      const mouseX = e.offsetX
+      const mouseY = e.offsetY
+
+      console.log(mouseY + ' : ' + mouseX)
+
+      const bgPosX = (mouseX / width * 100)
+      const bgPosY = (mouseY / height * 100)
+
+      zoomViewer.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`
+    })
+
+    image.addEventListener('mouseleave', function (e) {
+      setIsHoveringImage(false)
+    })
+  }, [])
 
   function handleFormSubmit (e) {
     e.preventDefault()
@@ -94,31 +120,29 @@ function Product () {
                 ))}
               </ul>
 
-              <div className={styles.imagesView}>
-                <div className={styles.imagesWrapper} style={{
-                  transform: `translateX(
-                    -${currentImage.index * 100}%
-                  )`
-                }}>
-                  {
-                    allImages.map((image, index) => (
-                      <div
-                        key={index}
-                        className={styles.imagesItem}
-                        title={image.title}
-                      >
-                        <img
-                          src={`/images/products/${image.src}`}
-                          alt={image.title}
-                        />
-                      </div>
-                    ))
-                  }
+              <div className={styles.imageWrap}>
+                <div
+                  className={`${styles.image} imageToZoom`}
+                  title={currentImage.title}
+                >
+                  <img
+                    src={`/images/products/${currentImage.src}`}
+                    alt={currentImage.title}
+                  />
                 </div>
               </div>
             </div>
 
             <div className={styles.infoContainer}>
+              <div
+                className={`${styles.zoomContainer} ${isHoveringImage ? styles.zoomShow : styles.zoomHide}`}
+              >
+                <div
+                  className={`${styles.zoomViewer} zoomViewer`}
+                  style={{ backgroundImage: `url('/images/products/${currentImage.src}')` }}
+                ></div>
+              </div>
+
               <div className={styles.actionsContent}>
                 <div className={`${styles.actionItem} ${styles.heartIcon}`}>
                   <input
@@ -261,7 +285,7 @@ function Product () {
                 className={styles.highlightImage}
               />
 
-              <h4 className={styles.subtitle}>
+              <h4 className={styles.specialSubtitle}>
                 Conforto e Tecnologia para o Dia a Dia
               </h4>
 
@@ -278,7 +302,7 @@ function Product () {
                 A linha Select Comfort possui versões na Meia 3/4, Meia 7/8 e Meia Calça todas elas com a qualidade e Compressão Sigvaris Garantida. É a melhor meia da linha, possui 06 meses de Garantia de compressão e é a mais indicada para tratamentos diversos como: Pós Escleroterapia, Trombose, Varizes, Sensação de peso na pernas e também para Gestantes e Viagens de Longa Duração.
               </p>
 
-              <h4 className={styles.subtitle}>
+              <h4 className={styles.specialSubtitle}>
                 Tabela de Especificações
               </h4>
 
@@ -293,7 +317,7 @@ function Product () {
                 </tbody>
               </Table>
 
-              <h4 className={styles.subtitle}>
+              <h4 className={styles.specialSubtitle}>
                 Por que comprar a Sigvaris Select Comfort ?
               </h4>
 
@@ -324,7 +348,7 @@ function Product () {
                 </li>
               </ul>
 
-              <h4 className={styles.subtitle}>
+              <h4 className={styles.specialSubtitle}>
                 Como Vestir
               </h4>
 

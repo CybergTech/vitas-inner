@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 
@@ -38,8 +38,32 @@ function Product ({ product }) {
   const allImages = product.data.photos
   const [currentImage, setCurrentImage] = useState(product.data.photos[0])
   const [isHoveringShareIcon, setIsHoveringShareIcon] = useState(false)
+  const [isHoveringImage, setIsHoveringImage] = useState(false)
 
   const [question, setQuestion] = useState('')
+
+  useEffect(() => {
+    // Zoom Viewer
+    const image = document.querySelector('.imageToZoom img')
+    const zoomViewer = document.querySelector('.zoomViewer')
+
+    image.addEventListener('mousemove', function (e) {
+      setIsHoveringImage(true)
+      const width = e.target.offsetWidth
+      const height = e.target.offsetHeight
+      const mouseX = e.offsetX
+      const mouseY = e.offsetY
+
+      const bgPosX = (mouseX / width * 100)
+      const bgPosY = (mouseY / height * 100)
+
+      zoomViewer.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`
+    })
+
+    image.addEventListener('mouseleave', function (e) {
+      setIsHoveringImage(false)
+    })
+  }, [])
 
   function handleFormSubmit (e) {
     e.preventDefault()
@@ -111,31 +135,29 @@ function Product ({ product }) {
                 ))}
               </ul>
 
-              <div className={styles.imagesView}>
-                <div className={styles.imagesWrapper} style={{
-                  transform: `translateX(
-                    -${currentImage.index * 100}%
-                  )`
-                }}>
-                  {
-                    allImages.map((image, index) => (
-                      <div
-                        key={index}
-                        className={styles.imagesItem}
-                        title={image.title}
-                      >
-                        <img
-                          src={`/images/products/${image.src}`}
-                          alt={image.title}
-                        />
-                      </div>
-                    ))
-                  }
+              <div className={styles.imageWrap}>
+                <div
+                  className={`${styles.image} imageToZoom`}
+                  title={currentImage.title}
+                >
+                  <img
+                    src={`/images/products/${currentImage.src}`}
+                    alt={currentImage.title}
+                  />
                 </div>
               </div>
             </div>
 
             <div className={styles.infoContainer}>
+              <div
+                className={`${styles.zoomContainer} ${isHoveringImage ? styles.zoomShow : styles.zoomHide}`}
+              >
+                <div
+                  className={`${styles.zoomViewer} zoomViewer`}
+                  style={{ backgroundImage: `url('/images/products/${currentImage.src}')` }}
+                ></div>
+              </div>
+
               <div className={styles.actionsContent}>
                 <div className={`${styles.actionItem} ${styles.heartIcon}`}>
                   <input

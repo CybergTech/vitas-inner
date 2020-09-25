@@ -10,7 +10,7 @@
   opacity: 1;
   transform: translate(0px);
   animation: slideIn 400ms;
-  transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: all 150ms ease-out;
 
   display: flex;
   flex-direction: column;
@@ -98,6 +98,9 @@
 
 .close.error {
   color: #E2352Daa;
+}
+.close.error:hover {
+  color: #E2352D;
 }
 
 .text {

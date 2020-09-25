@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './styles.module.css'
 
 // Seconds to unrender the message element
-const secondsToEach = 4
+const secondsToEach = 4.5
 
 class Message extends Component {
   constructor (props) {
@@ -24,7 +24,7 @@ class Message extends Component {
   }
 
   componentWillUnmount () {
-    this.handleClearInterval()
+    clearInterval(this.unrenderInterval)
   }
 
   handleInterval () {

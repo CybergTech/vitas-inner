@@ -19,12 +19,11 @@ function Signin () {
 
   function handleFormSubmit (e) {
     e.preventDefault()
-    console.log('Submit')
 
     setMessages([...messages, <Message
       key={Math.floor(Math.random() * 1000)}
-      type="success"
-      text="Produto adicionado à lista de desejos com sucesso!"
+      type="error"
+      text="Há campos sem preencher!"
     />])
   }
 

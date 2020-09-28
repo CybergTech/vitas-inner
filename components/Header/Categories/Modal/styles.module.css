@@ -1,0 +1,108 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.2);
+  z-index: 999;
+}
+
+.container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background-color: #FFF;
+  opacity: 1;
+  animation: fadeIn 200ms;
+  border: 1px solid #EEEEEE;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 999;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
+.bigger {
+  width: calc(100% + 200%);
+  padding: 1.5vw 2.7vw;
+}
+
+.categories {
+  padding: 3vh 1.5vw;
+  z-index: 100;
+}
+
+.list {
+  width: auto;
+  font-family: 'Overpass-Bold';
+}
+
+.secondRoot,
+.thirdRoot,
+.fourthRoot {
+  position: relative;
+  font-family: 'Overpass-SemiBold';
+  font-size: 85%;
+  padding: 1vh 0;
+  padding-left: 1vw;
+  padding-bottom: .5rem;
+}
+
+.thirdRoot {
+  font-family: 'Overpass-Regular';
+}
+
+.secondRoot .listItem,
+.thirdRoot .listItem,
+.fourthRoot .listItem {
+  padding-bottom: .5rem;
+}
+
+/* .secondRoot::before,
+.thirdRoot::before,
+.fourthRoot::before {
+  content: '';
+  position: absolute;
+  right: 97%;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-left: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+} */
+
+.listItem {
+  padding-bottom: 1.2rem;
+}
+
+.listItem ul {
+  animation: fadeIn 300ms;
+}
+
+.specialProduct {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.specialProduct img,
+.specialProduct a {
+  height: 100%;
+}
+
+
+@keyframes fadeIn {
+  0% {opacity: 0.2;}
+}

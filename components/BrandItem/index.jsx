@@ -1,9 +1,26 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
+// import ReactDOM from 'react-dom'
+
+import Message from '../Message'
 
 import styles from './styles.module.css'
 
 function BrandItem ({ brand, style }) {
+  const [message, setMessage] = useState([])
+
+  // useEffect(() => {
+  //   ReactDOM.render(message, document.getElementsByClassName('messagesContainer')[0])
+  // }, [message])
+
+  function favorite () {
+    setMessage([...message, <Message
+      key="1"
+      type="success"
+      text="Marca favoritada com sucesso!"
+    />])
+  }
+
   return (
     <div
       className={styles.content}
@@ -15,6 +32,7 @@ function BrandItem ({ brand, style }) {
           type="image"
           src="/images/icons/empty-heart.svg"
           title="Adicionar à Lista de Desejos"
+          onClick={e => favorite(e)}
         />
       </div>
 

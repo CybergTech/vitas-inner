@@ -22,8 +22,8 @@ Router.events.on('routeChangeError', () => NProgress.done())
 function App ({ Component, pageProps }) {
   return (
     <>
-      <WhatsAppButton />
       <Component {...pageProps} />
+      <WhatsAppButton />
     </>
   )
 }

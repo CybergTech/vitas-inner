@@ -100,7 +100,9 @@ textarea {
 button,
 input[type=image],
 a {
-  transition: cubic-bezier(0.755, 0.05, 0.855, 0.06) opacity 150ms;
+  transition: opacity ease-in-out 150ms,
+    color ease-in-out 150ms,
+    background-color ease-in-out 150ms;
 }
 button:hover,
 input[type=image]:hover,
@@ -114,17 +116,28 @@ input[type=image]:active {
   transform: scale(0.98);
 }
 
+button:disabled,
+button:disabled:hover {
+  position: relative;
+  cursor: not-allowed;
+  opacity: 1;
+  background-color: #c92f27;
+  color: #fff9;
+}
+
+
 .messagesContainer {
   position: fixed;
-  top: 20vh;
+  bottom: 4%;
   right: 0;
   width: 310px;
+  height: 80vh;
   padding-right: 20px;
   z-index: 9999;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 
@@ -148,4 +161,8 @@ input[type=image]:active {
   body {
     font-size: var(--mobile-default-font-size);
   }
+}
+
+@keyframes fadeIn {
+  0% {opacity: .2;}
 }

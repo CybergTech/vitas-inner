@@ -60,7 +60,8 @@
   margin: 10px 0;
   font-size: 14px;
 }
-.subtitle a {
+
+.signLink {
   color: #E2352D;
 }
 
@@ -96,11 +97,29 @@
 }
 
 .normalColumn {
+  position: relative;
   width: 49%;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .wideColumn {
+  position: relative;
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.helpBlock {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 3px 0 0px 3px;
+  color: #E2352D;
+  font-size: 12px;
 }
 
 .input {

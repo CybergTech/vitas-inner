@@ -118,7 +118,8 @@
 
 .progressContainer {
   position: relative;
-  flex-grow: 1;
+  min-height: 5%;
+  max-height: 5%;
   width: 100%;
 }
 .progressContainer.success {
@@ -149,8 +150,8 @@
   50% {
     transform: translate(-15%);
   }
-  75% {
-    transform: translate(10%);
+  80% {
+    transform: translate(5%);
   }
 }
 

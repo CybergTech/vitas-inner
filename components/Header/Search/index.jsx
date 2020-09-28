@@ -28,6 +28,8 @@ function SearchInput ({ little, biggerModal }) {
       setSwitchIcon(loadingIcon)
       setShowClearSearchIcon(true)
       setShowModal(true)
+
+      document.querySelector('html').style.overflowY = 'hidden'
     } else {
       handleClearSearch()
     }
@@ -38,6 +40,8 @@ function SearchInput ({ little, biggerModal }) {
     setShowClearSearchIcon(false)
     setShowModal(false)
     setSearch('')
+
+    document.querySelector('html').style.overflowY = 'auto'
   }
 
   return (

@@ -1,13 +1,3 @@
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.2);
-  z-index: 999;
-}
-
 .container {
   position: absolute;
   top: 100%;
@@ -17,9 +7,7 @@
   background-color: #FFF;
   opacity: 1;
   animation: fadeIn 200ms;
-  border: 1px solid #EEEEEE;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 999;
 
   display: flex;
@@ -46,49 +34,27 @@
 
 .list {
   width: auto;
-  font-family: 'Overpass-Bold';
+  height: 100%;
+  font-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.secondRoot,
-.thirdRoot,
-.fourthRoot {
-  position: relative;
-  font-family: 'Overpass-SemiBold';
-  font-size: 85%;
-  padding: 1vh 0;
-  padding-left: 1vw;
-  padding-bottom: .5rem;
+.listItem,
+.listItem a {
+  display: flex;
+  align-items: center;
 }
 
-.thirdRoot {
-  font-family: 'Overpass-Regular';
+.icon {
+  font-size: 6px;
+  margin-left: 8px;
 }
 
-.secondRoot .listItem,
-.thirdRoot .listItem,
-.fourthRoot .listItem {
-  padding-bottom: .5rem;
-}
-
-/* .secondRoot::before,
-.thirdRoot::before,
-.fourthRoot::before {
-  content: '';
-  position: absolute;
-  right: 97%;
-  top: 7px;
-  width: 6px;
-  height: 6px;
-  border-left: 1px solid #999999;
-  border-bottom: 1px solid #999999;
-} */
-
-.listItem {
-  padding-bottom: 1.2rem;
-}
-
-.listItem ul {
-  animation: fadeIn 300ms;
+.listItem a:hover .icon {
+  animation: iconSlide 800ms infinite;
 }
 
 .specialProduct {
@@ -105,4 +71,8 @@
 
 @keyframes fadeIn {
   0% {opacity: 0.2;}
+}
+
+@keyframes iconSlide {
+  50% {transform: translate(3px);}
 }

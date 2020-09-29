@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import useFocus from '../../../hooks/useFocus'
@@ -21,6 +21,10 @@ function SearchInput ({ little, biggerModal }) {
 
   const lineStyle = little ? { height: '25px' } : {}
 
+  useEffect(() => {
+    document.querySelector('html').style.overflowY = showModal ? 'hidden' : 'auto'
+  }, [showModal])
+
   function handleSearch (e) {
     setSearch(e)
 
@@ -28,8 +32,6 @@ function SearchInput ({ little, biggerModal }) {
       setSwitchIcon(loadingIcon)
       setShowClearSearchIcon(true)
       setShowModal(true)
-
-      document.querySelector('html').style.overflowY = 'hidden'
     } else {
       handleClearSearch()
     }
@@ -40,8 +42,6 @@ function SearchInput ({ little, biggerModal }) {
     setShowClearSearchIcon(false)
     setShowModal(false)
     setSearch('')
-
-    document.querySelector('html').style.overflowY = 'auto'
   }
 
   return (

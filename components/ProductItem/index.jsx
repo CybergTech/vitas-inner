@@ -9,6 +9,13 @@ import styles from './styles.module.css'
 function ProductItem ({ product, asList, showAddToCardButtons }) {
   return (
     <div className={`${styles.content} ${asList ? styles.asList : ''}`}>
+      <div
+        className={`${styles.sex} ${asList ? styles.hide : ''}`}
+        title="Produto feminino"
+      >
+        <FontAwesomeIcon icon="female" />
+      </div>
+
       <div className={`${styles.heartIcon} ${asList ? styles.hide : ''}`}>
         <FontAwesomeIcon icon="heart" color="#E2352D" />
       </div>

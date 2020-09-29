@@ -1,7 +1,7 @@
 .container {
   position: relative;
   margin: 2rem auto;
-  background-color: #FFFFFF;
+  /* background-color: #FFFFFF; */
   /* border: 1px solid #EEEEEE; */
 
   display: flex;
@@ -32,6 +32,7 @@
   margin: 0 auto;
   line-height: 30px;
   font-family: 'Overpass-Regular';
+  text-align: justify;
 }
 .paragraph:nth-child(1n+2) {
   margin-top: 1.3rem;

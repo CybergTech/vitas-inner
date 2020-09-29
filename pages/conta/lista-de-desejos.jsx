@@ -32,7 +32,7 @@ const Item = {
   url: '#!'
 }
 
-function Home () {
+function Bookmarks () {
   return (
     <div className={grid.wrapper}>
       <Head>
@@ -87,4 +87,4 @@ function Home () {
   )
 }
 
-export default Home
+export default Bookmarks

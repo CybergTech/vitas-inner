@@ -25,6 +25,13 @@
   margin-bottom: .2rem;
 }
 
+.sex {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: #DDDDDD;
+}
+
 .heartIcon {
   position: absolute;
   top: 15px;

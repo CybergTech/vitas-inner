@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import Link from 'next/link'
-import SlideToggle from 'react-slide-toggle'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
@@ -17,92 +17,63 @@ function Modal ({ showModal, bigger }) {
       >
         <div className={styles.categories}>
           <ul className={styles.list}>
-            <SlideToggle collapsed>
-              {({ toggle, setCollapsibleElement }) => (
-                <li
-                  className={styles.listItem}
-                  onMouseEnter={toggle}
-                  onMouseLeave={toggle}
-                >
-                  <Link href="#!">
-                    <a>
-                      APARELHOS MÉDICOS
-                    </a>
-                  </Link>
-
-                  <ul
-                    className={`${styles.list} ${styles.secondRoot}`}
-                    ref={setCollapsibleElement}
-                  >
-                    <SlideToggle collapsed>
-                      {({ toggle, setCollapsibleElement }) => (
-                        <li
-                          className={styles.listItem}
-                          onMouseEnter={toggle}
-                          onMouseLeave={toggle}
-                        >
-                          <Link href="#!">
-                            <a onClick={toggle}>
-                              ACESSÓRIOS PARA DIABÉTICOS
-                            </a>
-                          </Link>
-
-                          <ul
-                            className={`${styles.list} ${styles.thirdRoot}`}
-                            ref={setCollapsibleElement}
-                          >
-                            <li className={styles.listItem}>
-                              <Link href="#!">
-                                <a>
-                                  AGULHA PARA CANETA DE INSULINA
-                                </a>
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                      )}
-                    </SlideToggle>
-
-                    <li className={styles.listItem}>
-                      <Link href="#!">
-                        <a>
-                          APARELHOS DE PRESSÃO
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-              )}
-            </SlideToggle>
-
             <li className={styles.listItem}>
-              <Link href="#!">
+              <Link href="/categoria/meias-de-compressao">
                 <a>
-                  CONFORTO E BEM ESTAR
+                  APARELHOS MÉDICOS <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
                 </a>
               </Link>
             </li>
 
             <li className={styles.listItem}>
-              <Link href="#!">
+              <Link href="/categoria/meias-de-compressao">
                 <a>
-                  MATERIAL PARA RESGATE
+                  CONFORTO E BEM ESTAR <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
                 </a>
               </Link>
             </li>
 
             <li className={styles.listItem}>
-              <Link href="#!">
+              <Link href="/categoria/meias-de-compressao">
                 <a>
-                  MEIAS DE COMPRESSÃO
+                  MATERIAL PARA RESGATE <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
                 </a>
               </Link>
             </li>
 
             <li className={styles.listItem}>
-              <Link href="#!">
+              <Link href="/categoria/meias-de-compressao">
                 <a>
-                  ORTOPEDIA E REABILITAÇÃO
+                  MEIAS DE COMPRESSÃO <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                </a>
+              </Link>
+            </li>
+
+            <li className={styles.listItem}>
+              <Link href="/categoria/meias-de-compressao">
+                <a>
+                  ORTOPEDIA E REABILITAÇÃO <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                </a>
+              </Link>
+            </li>
+            <li className={styles.listItem}>
+              <Link href="/categoria/meias-de-compressao">
+                <a>
+                  DESCARTÁVEIS <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                </a>
+              </Link>
+            </li>
+            <li className={styles.listItem}>
+              <Link href="/categoria/meias-de-compressao">
+                <a>
+                  ACESSIBILIDADE E LOCOMOÇÃO <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                </a>
+              </Link>
+            </li>
+            <li className={styles.listItem}>
+              <Link href="/categoria/meias-de-compressao">
+                <a>
+                  CIRÚRGICO INSTRUMENTAL <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
                 </a>
               </Link>
             </li>

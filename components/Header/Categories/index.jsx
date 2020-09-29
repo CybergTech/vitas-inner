@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from './Modal'
@@ -9,9 +9,12 @@ import styles from './styles.module.css'
 function Nav ({ little }) {
   const [showModal, setShowModal] = useState(false)
 
+  useEffect(() => {
+    document.querySelector('html').style.overflowY = showModal ? 'hidden' : 'auto'
+  }, [showModal])
+
   function handleShowModal (show = true) {
     setShowModal(show)
-    document.querySelector('html').style.overflowY = show ? 'hidden' : 'auto'
   }
 
   return (

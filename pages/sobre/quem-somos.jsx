@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
-// import Link from 'next/link'
 
 import TopHeader from '../../components/TopHeader'
 import Header from '../../components/Header'
 import Path from '../../components/Path'
-// import DetailDots from '../components/DetailDots'
+import DetailDots from '../../components/DetailDots'
 import Footer from '../../components/Footer'
 
 import grid from '../../styles/grid/nobanners.module.css'
@@ -44,6 +42,8 @@ function Home () {
         <Path paths={paths} />
 
         <article className={`${styles.container} ${mainStyles.contentSection}`}>
+          <DetailDots style={{ right: '95%', top: '83px' }} />
+          <DetailDots style={{ left: '95%', bottom: '0' }} />
           <h3 className={styles.title}>
             QUEM SOMOS
           </h3>

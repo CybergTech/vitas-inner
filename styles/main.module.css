@@ -5,10 +5,19 @@
   padding: 5vh 0;
 }
 
+.sectionFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .titleSection {
   font-size: 18px;
   color: #E2352D;
   margin-bottom: 5vh;
+}
+
+.mgB2 {
+  margin-bottom: 2vh;
 }
 
 .brandList {

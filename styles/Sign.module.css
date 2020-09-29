@@ -330,3 +330,13 @@
   font-size: 6px;
   margin-left: 10px;
 }
+
+.link:hover .icon {
+  animation: iconSlide 800ms infinite;
+}
+
+
+
+@keyframes iconSlide {
+  50% {transform: translate(3px);}
+}

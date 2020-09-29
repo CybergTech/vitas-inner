@@ -8,7 +8,7 @@ function Logo () {
     <Link href="/">
       <a>
         <img
-          src="/images/new-logo.png"
+          src="/images/logo.png"
           alt="Vita's - Bem Estar"
           className={styles.logoImage}
         />

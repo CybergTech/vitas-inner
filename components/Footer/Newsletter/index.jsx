@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import Input from '../../Input'
+
 import styles from './styles.module.css'
 
 function Newsletter () {
@@ -36,34 +38,31 @@ function Newsletter () {
           onSubmit={e => handleFormSubmit(e)}
         >
           <div className={styles.fieldGroup}>
-            <input
-              type="text"
-              placeholder="Nome*"
-              className={styles.input}
+            <Input
               name="name"
               value={name}
+              placeholder="Nome*"
+              icon="user-alt"
               onChange={e => setName(e.target.value)}
             />
           </div>
 
           <div className={styles.fieldGroup}>
-            <input
-              type="text"
-              placeholder="Email*"
-              className={styles.input}
+            <Input
               name="email"
               value={email}
+              placeholder="Email*"
+              icon="envelope"
               onChange={e => setEmail(e.target.value)}
             />
           </div>
 
           <div className={styles.fieldGroup}>
-            <input
-              type="text"
-              placeholder="Telefone*"
-              className={styles.input}
+            <Input
               name="phone"
               value={phone}
+              placeholder="Telefone*"
+              icon="phone-alt"
               onChange={e => setPhone(e.target.value)}
             />
           </div>

@@ -1,3 +1,8 @@
+@font-face {
+  src: url('../public/fonts/Roboto-Medium.ttf');
+  font-family: 'Roboto-Medium';
+}
+
 .signContainer {
   width: 76%;
   margin: 0 auto;
@@ -122,22 +127,6 @@
   font-size: 12px;
 }
 
-.input {
-  width: 100%;
-  height: 45px;
-  padding: 0 1.5vw;
-  border: 1px solid #EEEEEE;
-  background-color: #FFFFFF;
-  color: #333333;
-  transition: all 200ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
-
-  font-size: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .checkboxContainer {
   width: fit-content;
   display: flex;
@@ -223,37 +212,6 @@
   font-family: 'Overpass-Regular';
 }
 
-/* For Ripple Effect
-.checkbox-label .checkbox-custom::before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  width: 0px;
-  height: 0px;
-  border: 2px solid #E2352D99;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-}
-
-.checkbox-label input:checked ~ .checkbox-custom::before {
-  left: -3px;
-  top: -3px;
-  width: 24px;
-  height: 24px;
-  -webkit-transform: scale(3);
-  -ms-transform: scale(3);
-  transform: scale(3);
-  opacity: 0;
-  z-index: 100;
-  transition: all 200ms ease-out;
-  -webkit-transition: all 200ms ease-out;
-  -moz-transition: all 200ms ease-out;
-  -ms-transition: all 200ms ease-out;
-  -o-transition: all 200ms ease-out;
-} */
-
 .button {
   width: 100%;
   height: 40px;
@@ -303,12 +261,53 @@
   width: 100%;
 }
 
+
+
+
 .socialMediaOptions {
   width: 100%;
   height: 35px;
   margin-bottom: 25px;
-  background-color: #EEEEEE;
+
+  display: flex;
+  justify-content: space-between;
 }
+
+.googleButton {
+  position: relative;
+  width: 100%;
+  height: 45px;
+  border-radius: 2px;
+  background-color: #4285f4;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.googleLogo {
+  height: 100%;
+  width: 20%;
+  border: 1px solid #4285f4;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.googleText {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Roboto-Medium';
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+
+
 
 .links {
   width: 100%;

@@ -12,6 +12,8 @@
   margin-top: .3rem;
   color: #999999;
   line-height: 26px;
+  font-family: 'Overpass-Regular';
+  font-weight: normal;
 }
 
 .categoryDescription::after {
@@ -22,6 +24,29 @@
   margin: 0 auto;
   margin-top: .3rem;
   border-bottom: 1px solid #EEEEEE;
+}
+
+.specialArea {
+  width: 100%;
+  padding: 5vh 5%;
+  border: 1px solid #EEEEEE;
+  margin-bottom: 2.5rem;
+}
+
+.paragraph {
+  line-height: 26px;
+  font-family: 'Overpass-Regular';
+}
+
+.button {
+  height: 45px;
+  padding: 0 2rem;
+  margin-top: 1rem;
+  border: none;
+  background-color: #E2352D;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .background {

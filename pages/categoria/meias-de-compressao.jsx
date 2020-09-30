@@ -71,6 +71,16 @@ function Category () {
             </h4>
           </div>
 
+          <div className={styles.specialArea}>
+            <h4 className={mainStyles.titleSection}>SAIBA QUAL MEIA ESCOLHER</h4>
+
+            <p className={styles.paragraph}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+            </p>
+
+            <button className={styles.button}>Ver mais</button>
+          </div>
+
           <div className={mainStyles.sectionFlex}>
             <div
               className={`${styles.background} ${showBack ? styles.show : styles.hide}`}

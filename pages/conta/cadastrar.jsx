@@ -9,6 +9,7 @@ import { exists, validDate, validEmail, validPassword, equals } from '../../serv
 
 import Header from '../../components/Header'
 import DetailDots from '../../components/DetailDots'
+import Input from '../../components/Input'
 import Message from '../../components/Message'
 import Footer from '../../components/Footer'
 
@@ -305,12 +306,11 @@ class Signup extends Component {
                 >
                   <div className={styles.group}>
                     <div className={styles.normalColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Nome"
+                      <Input
                         name="firstname"
                         value={this.state.firstName}
+                        placeholder="Nome"
+                        icon="user-alt"
                         onChange={e => this.changeFirstName(e.target.value)}
                       />
 
@@ -320,12 +320,11 @@ class Signup extends Component {
                     </div>
 
                     <div className={styles.normalColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Sobrenome"
+                      <Input
                         name="lastname"
                         value={this.state.lastName}
+                        placeholder="Sobrenome"
+                        icon="user-alt"
                         onChange={e => this.changeLastName(e.target.value)}
                       />
 
@@ -337,12 +336,11 @@ class Signup extends Component {
 
                   <div className={styles.group}>
                     <div className={styles.normalColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="CPF"
+                      <Input
                         name="cpf"
                         value={this.state.cpf}
+                        placeholder="CPF"
+                        icon="id-card"
                         onChange={e => this.changeCpf(e.target.value)}
                       />
 
@@ -352,12 +350,11 @@ class Signup extends Component {
                     </div>
 
                     <div className={styles.normalColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Data de Nascimento - Ex: 04/03/2002"
+                      <Input
                         name="birthday"
                         value={this.state.birthday}
+                        placeholder="Data de Nascimento - Ex: 04/03/2002"
+                        icon="calendar-day"
                         onChange={e => this.changeBirthday(e.target.value)}
                       />
 
@@ -369,12 +366,11 @@ class Signup extends Component {
 
                   <div className={styles.group}>
                     <div className={styles.wideColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Email"
+                      <Input
                         name="email"
                         value={this.state.email}
+                        placeholder="Email"
+                        icon="envelope"
                         onChange={e => this.changeEmail(e.target.value)}
                       />
 
@@ -386,12 +382,12 @@ class Signup extends Component {
 
                   <div className={styles.group}>
                     <div className={styles.normalColumn}>
-                      <input
-                        type="password"
-                        className={styles.input}
-                        placeholder="Senha"
+                      <Input
                         name="password"
                         value={this.state.password}
+                        placeholder="Senha"
+                        icon="lock"
+                        type="password"
                         onChange={e => this.changePassword(e.target.value)}
                       />
 
@@ -401,12 +397,12 @@ class Signup extends Component {
                     </div>
 
                     <div className={styles.normalColumn}>
-                      <input
-                        type="password"
-                        className={styles.input}
-                        placeholder="Confirme a senha"
-                        name="password"
+                      <Input
+                        name="confirmPassword"
                         value={this.state.confirmPassword}
+                        placeholder="Confirme a senha"
+                        icon="lock"
+                        type="password"
                         onChange={e => this.changeConfirmPassword(e.target.value)}
                       />
 
@@ -443,12 +439,11 @@ class Signup extends Component {
 
                   <div className={`${styles.group} ${this.state.whatsapp ? styles.show : styles.hide}`}>
                     <div className={styles.normalColumn}>
-                      <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Telefone - Ex: (41) 99999-9999"
-                        name="whatsapp_phone"
+                      <Input
+                        name="whatsappPhone"
                         value={this.state.whatsappPhone}
+                        placeholder="Telefone - Ex: (41) 99999-9999"
+                        icon="phone-alt"
                         onChange={e => this.changeWhatsappPhone(e.target.value)}
                       />
 

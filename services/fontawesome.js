@@ -4,16 +4,18 @@ import {
   faPhoneAlt, faEnvelope, faMapMarkerAlt, faCopyright,
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
-  faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
+  faPencilRuler, faHandsHelping, faEye, faEyeSlash, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
-  faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale
+  faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,
+  faMale, faLock, faUserAlt, faIdCard, faCalendarDay
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   fab, faPhoneAlt, faEnvelope, faMapMarkerAlt, faCopyright,
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
   faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
-  faPencilRuler, faHandsHelping, faEye, faAngleDown, faAngleLeft, faAngleRight,
+  faPencilRuler, faHandsHelping, faEye, faEyeSlash, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
-  faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale
+  faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,
+  faMale, faLock, faUserAlt, faIdCard, faCalendarDay
 )

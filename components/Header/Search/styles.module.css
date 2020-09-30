@@ -44,6 +44,7 @@
   border: 1px solid #EEEEEE;
   background-color: #FFFFFF;
   color: #333333;
+  transition: all 200ms ease-in-out;
 
   font-size: 14px;
 
@@ -51,6 +52,9 @@
   align-items: center;
   justify-content: space-between;
 }
+/* .input:focus {
+  border-color: #E2352D;
+} */
 
 .icon {
   position: absolute;

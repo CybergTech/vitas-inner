@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import useFocus from '../../hooks/useFocus'
+
 import styles from './styles.module.css'
 
 function Input ({ name, value, placeholder, icon, ...rest }) {
+  const [inputRef, setInputFocus] = useFocus()
+
   const [passwordView, setPasswordView] = useState(false)
   const [eyeIcon, setEyeIcon] = useState('eye')
 
@@ -33,6 +37,7 @@ function Input ({ name, value, placeholder, icon, ...rest }) {
         value={value}
         placeholder={placeholder}
         className={`${styles.input} ${extraClasses}`}
+        ref={inputRef}
         {...rest}
       />
 
@@ -44,7 +49,10 @@ function Input ({ name, value, placeholder, icon, ...rest }) {
         ? <FontAwesomeIcon
           icon={eyeIcon}
           className={`${styles.eyeIcon} ${eyeIcon === 'eye-slash' && styles.opacity}`}
-          onClick={() => setPasswordView(!passwordView)}
+          onClick={() => {
+            setPasswordView(!passwordView)
+            setInputFocus()
+          }}
         />
         : ''
       }

@@ -48,7 +48,7 @@ function Modal ({ showModal }) {
             type="button"
             className={styles.finishButton}
           >
-            <Link href="#!">
+            <Link href="/sacola">
               <a>Finalizar a Compra</a>
             </Link>
           </button>

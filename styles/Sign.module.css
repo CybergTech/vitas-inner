@@ -15,7 +15,7 @@
 .signinContent {
   position: relative;
   width: 35%;
-  height: 500px;
+  height: 550px;
   margin-bottom: 100px;
   z-index: 5;
 }
@@ -73,7 +73,7 @@
 .form {
   position: relative;
   width: 100%;
-  height: 40%;
+  height: 32%;
 
   display: flex;
   flex-direction: column;
@@ -99,6 +99,17 @@
 .hide {
   display: none;
   opacity: 0;
+}
+
+.littleColumn {
+  position: relative;
+  width: 38%;
+
+  display: flex;
+  flex-direction: column;
+}
+.littleColumn + .littleColumn {
+  margin-left: 1rem;
 }
 
 .normalColumn {
@@ -270,15 +281,21 @@
   margin-bottom: 25px;
 
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.socialMediaOptions.signinOptions {
+  height: auto;
+}
+.socialMediaOptions button + button {
+  margin-top: 1rem;
 }
 
-.googleButton {
+.googleButton,
+.facebookButton {
   position: relative;
   width: 100%;
   height: 45px;
   border-radius: 2px;
-  background-color: #4285f4;
   border: none;
   cursor: pointer;
 
@@ -286,18 +303,31 @@
   justify-content: space-between;
   align-items: center;
 }
-.googleLogo {
+.googleButton {
+  background-color: #4285f4;
+}
+.facebookButton {
+  background-color: #3B5998;
+}
+
+.googleLogo,
+.facebookLogo {
   height: 100%;
   width: 20%;
-  border: 1px solid #4285f4;
   border-radius: 2px;
-  background-color: #FFFFFF;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.googleText {
+
+.googleLogo {
+  background-color: #FFFFFF;
+  border: 1px solid #4285f4;
+}
+
+.googleText,
+.facebookText {
   flex-grow: 1;
   text-align: center;
   font-size: 14px;

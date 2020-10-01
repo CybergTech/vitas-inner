@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import { signIn, useSession } from 'next-auth/client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cpfMask, dateMask, phoneMask, withoutNumber } from '../../services/masks'
 import { exists, validDate, validEmail, validPassword, equals } from '../../services/validation'
@@ -16,154 +18,130 @@ import Footer from '../../components/Footer'
 import grid from '../../styles/grid/clean.module.css'
 import styles from '../../styles/Sign.module.css'
 
-class Signup extends Component {
-  constructor (props) {
-    super(props)
+function Signup () {
+  const [session, loading] = useSession()
 
-    this.state = {
-      key: 1,
-      buttonText: 'Continuar',
+  const [key, setKey] = useState(1)
+  const [buttonText, setButtonText] = useState('Continuar')
 
-      firstName: '',
-      helpFirstName: '',
+  const [firstName, setFirstName] = useState('')
+  const [helpFirstName, setHelpFirstName] = useState('')
 
-      lastName: '',
-      helpLastName: '',
+  const [lastName, setLastName] = useState('')
+  const [helpLastName, setHelpLastName] = useState('')
 
-      cpf: '',
-      helpCpf: '',
+  const [cpf, setCpf] = useState('')
+  const [helpCpf, setHelpCpf] = useState('')
 
-      birthday: '',
-      helpBirthday: '',
+  const [birthday, setBirthday] = useState('')
+  const [helpBirthday, setHelpBirthday] = useState('')
 
-      email: '',
-      helpEmail: '',
+  const [email, setEmail] = useState('')
+  const [helpEmail, setHelpEmail] = useState('')
 
-      password: '',
-      helpPassword: '',
+  const [password, setPassword] = useState('')
+  const [helpPassword, setHelpPassword] = useState('')
 
-      confirmPassword: '',
-      helpConfirmPassword: '',
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [helpConfirmPassword, setHelpConfirmPassword] = useState('')
 
-      whatsapp: false,
+  const [whatsapp, setWhatsapp] = useState(false)
 
-      whatsappPhone: '',
-      helpWhatsappPhone: '',
+  const [whatsappPhone, setWhatsappPhone] = useState('')
+  const [helpWhatsappPhone, setHelpWhatsappPhone] = useState('')
 
-      agreement: false,
-      helpAgreement: '',
+  const [agreement, setAgreement] = useState(false)
+  const [helpAgreement, setHelpAgreement] = useState('')
 
-      messages: []
+  const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    if (!loading && session) {
+      Router.push('/')
     }
-  }
+  }, [loading])
 
-  changeButtonText (loading = true) {
+  function changeButtonText (loading = true) {
     if (loading) {
-      this.setState({
-        buttonText: <FontAwesomeIcon icon="spinner" pulse />
-      })
+      setButtonText(<FontAwesomeIcon icon="spinner" pulse />)
     } else {
-      this.setState({
-        buttonText: 'Continuar'
-      })
+      setButtonText('Continuar')
     }
   }
 
-  changeFirstName (value) {
-    this.setState({
-      firstName: withoutNumber(value),
-      helpFirstName: ''
-    })
+  function changeFirstName (value) {
+    setFirstName(withoutNumber(value))
+    setHelpFirstName('')
   }
 
-  changeLastName (value) {
-    this.setState({
-      lastName: withoutNumber(value),
-      helpLastName: ''
-    })
+  function changeLastName (value) {
+    setLastName(withoutNumber(value))
+    setHelpLastName('')
   }
 
-  changeCpf (value) {
-    this.setState({
-      cpf: cpfMask(value),
-      helpCpf: ''
-    })
+  function changeCpf (value) {
+    setCpf(cpfMask(value))
+    setHelpCpf('')
   }
 
-  changeBirthday (value) {
-    this.setState({
-      birthday: dateMask(value),
-      helpBirthday: ''
-    })
+  function changeBirthday (value) {
+    setBirthday(dateMask(value))
+    setHelpBirthday('')
   }
 
-  changeEmail (value) {
-    this.setState({
-      email: value,
-      helpEmail: ''
-    })
+  function changeEmail (value) {
+    setEmail(value)
+    setHelpEmail('')
   }
 
-  changePassword (value) {
-    this.setState({
-      password: value,
-      helpPassword: ''
-    })
+  function changePassword (value) {
+    setPassword(value)
+    setHelpPassword('')
   }
 
-  changeConfirmPassword (value) {
-    this.setState({
-      confirmPassword: value,
-      helpConfirmPassword: ''
-    })
+  function changeConfirmPassword (value) {
+    setConfirmPassword(value)
+    setHelpConfirmPassword('')
   }
 
-  changeWhatsapp (value) {
-    this.setState({
-      whatsapp: value,
-      helpWhatsappPhone: ''
-    })
+  function changeWhatsapp (value) {
+    setWhatsapp(value)
+    setHelpWhatsappPhone('')
   }
 
-  changeWhatsappPhone (value) {
-    this.setState({
-      whatsappPhone: phoneMask(value),
-      helpWhatsappPhone: ''
-    })
+  function changeWhatsappPhone (value) {
+    setWhatsappPhone(phoneMask(value))
+    setHelpWhatsappPhone('')
   }
 
-  changeAgreement (value) {
-    this.setState({
-      agreement: value,
-      helpAgreement: ''
-    })
+  function changeAgreement (value) {
+    setAgreement(value)
+    setHelpAgreement('')
   }
 
-  clearAllHelps () {
-    this.setState({
-      helpFirstName: '',
-      helpLastName: '',
-      helpCpf: '',
-      helpBirthday: '',
-      helpEmail: '',
-      helpPassword: '',
-      helpConfirmPassword: '',
-      helpWhatsappPhone: '',
-      helpAgreement: ''
-    })
+  function clearAllHelps () {
+    setHelpFirstName('')
+    setHelpLastName('')
+    setHelpCpf('')
+    setHelpBirthday('')
+    setHelpEmail('')
+    setHelpPassword('')
+    setHelpConfirmPassword('')
+    setHelpWhatsappPhone('')
+    setHelpAgreement('')
   }
 
-  checkIfThereIsAnError () {
+  function checkIfThereIsAnError () {
     if (
-      exists(this.state.helpFirstName) ||
-      exists(this.state.helpLastName) ||
-      exists(this.state.helpCpf) ||
-      exists(this.state.helpBirthday) ||
-      exists(this.state.helpEmail) ||
-      exists(this.state.helpPassword) ||
-      exists(this.state.helpConfirmPassword) ||
-      exists(this.state.helpWhatsappPhone) ||
-      exists(this.state.helpAgreement)
+      exists(helpFirstName) ||
+      exists(helpLastName) ||
+      exists(helpCpf) ||
+      exists(helpBirthday) ||
+      exists(helpEmail) ||
+      exists(helpPassword) ||
+      exists(helpConfirmPassword) ||
+      exists(helpWhatsappPhone) ||
+      exists(helpAgreement)
     ) {
       return true
     }
@@ -171,370 +149,367 @@ class Signup extends Component {
     return false
   }
 
-  handleFormSubmit (e) {
+  function handleFormSubmit (e) {
     e.preventDefault()
-    this.changeButtonText()
-    this.clearAllHelps()
+    changeButtonText()
+    clearAllHelps()
 
-    if (!exists(this.state.firstName)) {
-      this.setState({
-        helpFirstName: 'O nome é obrigatório'
-      })
+    if (!exists(firstName)) {
+      setHelpFirstName('O nome é obrigatório')
     }
 
-    if (!exists(this.state.lastName)) {
-      this.setState({
-        helpLastName: 'O sobrenome é obrigatório'
-      })
+    if (!exists(lastName)) {
+      setHelpLastName('O sobrenome é obrigatório')
     }
 
-    if (!exists(this.state.cpf)) {
-      this.setState({
-        helpCpf: 'O CPF é obrigatório'
-      })
+    if (!exists(cpf)) {
+      setHelpCpf('O CPF é obrigatório')
     }
 
-    if (!exists(this.state.birthday)) {
-      this.setState({
-        helpBirthday: 'A data de nascimento é obrigatória'
-      })
-    } else if (!validDate(this.state.birthday, true)) {
-      this.setState({
-        helpBirthday: 'A data de nascimento digitada é inválida'
-      })
+    if (!exists(birthday)) {
+      setHelpBirthday('A data de nascimento é obrigatória')
+    } else if (!validDate(birthday, true)) {
+      setHelpBirthday('A data de nascimento digitada é inválida')
     }
 
-    if (!exists(this.state.email)) {
-      this.setState({
-        helpEmail: 'O email é obrigatório'
-      })
-    } else if (!validEmail(this.state.email, true)) {
-      this.setState({
-        helpEmail: 'O email digitado é inválido'
-      })
+    if (!exists(email)) {
+      setHelpEmail('O email é obrigatório')
+    } else if (!validEmail(email, true)) {
+      setHelpEmail('O email digitado é inválido')
     }
 
-    if (!exists(this.state.password)) {
-      this.setState({
-        helpPassword: 'A senha é obrigatória'
-      })
-    } else if (!validPassword(this.state.password)) {
-      this.setState({
-        helpPassword: 'A senha precisa ao menos conter 6 caracteres'
-      })
+    if (!exists(password)) {
+      setHelpPassword('A senha é obrigatória')
+    } else if (!validPassword(password)) {
+      setHelpPassword('A senha precisa ao menos conter 6 caracteres')
     }
 
-    if (!exists(this.state.confirmPassword)) {
-      this.setState({
-        helpConfirmPassword: 'A confirmação da senha é obrigatória'
-      })
-    } else if (!equals(this.state.password, this.state.confirmPassword)) {
-      this.setState({
-        helpConfirmPassword: 'As senhas não coincidem'
-      })
+    if (!exists(confirmPassword)) {
+      setHelpConfirmPassword('A confirmação da senha é obrigatória')
+    } else if (!equals(password, confirmPassword)) {
+      setHelpConfirmPassword('As senhas não coincidem')
     }
 
-    if (!exists(this.state.agreement)) {
-      this.setState({
-        helpAgreement: 'Só falta você concordar com os Termos e Políticas!'
-      })
+    if (!exists(agreement)) {
+      setHelpAgreement('Só falta você concordar com os Termos e Políticas!')
     }
 
-    if (this.state.whatsapp && !exists(this.state.whatsappPhone)) {
-      this.setState({
-        helpWhatsappPhone: 'O número do seu WhatsApp está sendo obrigatório'
-      })
+    if (whatsapp && !exists(whatsappPhone)) {
+      setHelpWhatsappPhone('O número do seu WhatsApp está sendo obrigatório')
     }
 
     setTimeout(() => {
-      if (this.checkIfThereIsAnError()) {
-        this.setState(state => ({
-          messages: [...state.messages, <Message
-            key={state.key}
-            type="error"
-            text="Ocorreu algum erro!"
-          />]
-        }))
+      if (checkIfThereIsAnError()) {
+        setMessages([...messages, <Message
+          key={key}
+          type="error"
+          text="Ocorreu algum erro!"
+        />])
       } else {
-        this.setState(state => ({
-          messages: [...state.messages, <Message
-            key={state.key}
-            type="success"
-            text="Tudo foi checado com sucesso!"
-          />]
-        }))
+        setMessages([...messages, <Message
+          key={key}
+          type="success"
+          text="Tudo foi checado com sucesso!"
+        />])
       }
 
-      this.changeButtonText(false)
+      changeButtonText(false)
     }, 500)
 
-    this.setState(state => ({ key: state.key + 1 }))
+    setKey(key + 1)
   }
 
-  render () {
-    return (
-      <div className={grid.wrapper}>
-        <Head>
-          <title>Cadastre-se na plataforma - Vita&apos;s Materiais Médicos e Hospitalares</title>
-        </Head>
+  return (
+    <div className={grid.wrapper}>
+      <Head>
+        <title>Cadastre-se na plataforma - Vita&apos;s Materiais Médicos e Hospitalares</title>
+      </Head>
 
-        <header className={`${grid.header} lightGray`}>
-          <Header reduced></Header>
-        </header>
+      <header className={`${grid.header} lightGray`}>
+        <Header reduced></Header>
+      </header>
 
-        <main className={grid.main}>
-          <div className={styles.signContainer}>
-            <div className={styles.signupContent}>
-              <DetailDots style={{ right: '91.5%', bottom: '-30px' }} />
+      <main className={grid.main}>
+        <div className={styles.signContainer}>
+          <div className={styles.signupContent}>
+            <DetailDots style={{ right: '91.5%', bottom: '-30px' }} />
 
-              <div className={styles.signupWrapper}>
-                <h2 className={styles.title}>
-                  Vamos lá! Realize o cadastro rápido para adquirir o que<br/>
-                  você precisa
-                </h2>
-                <h4 className={styles.subtitle}>
-                  Você representa uma empresa? Faça parte da&nbsp;
-                  <a
-                    className={styles.signLink}
-                    href="https://empresas.vitas.com.br"
-                  >Vita’s para empresas</a>
-                </h4>
+            <div className={styles.signupWrapper}>
+              <h2 className={styles.title}>
+                Vamos lá! Realize o cadastro rápido para adquirir o que<br/>
+                você precisa
+              </h2>
+              <h4 className={styles.subtitle}>
+                Você representa uma empresa? Faça parte da&nbsp;
+                <a
+                  className={styles.signLink}
+                  href="https://empresas.vitas.com.br"
+                >Vita’s para empresas</a>
+              </h4>
 
-                <form
-                  className={`${styles.form} ${styles.signupForm}`}
-                  onSubmit={e => this.handleFormSubmit(e)}
-                >
-                  <div className={styles.group}>
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="firstname"
-                        value={this.state.firstName}
-                        placeholder="Nome"
-                        icon="user-alt"
-                        onChange={e => this.changeFirstName(e.target.value)}
-                      />
+              <form
+                className={`${styles.form} ${styles.signupForm}`}
+                onSubmit={e => handleFormSubmit(e)}
+              >
+                <div className={styles.group}>
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="firstname"
+                      value={firstName}
+                      placeholder="Nome"
+                      icon="user-alt"
+                      onChange={e => changeFirstName(e.target.value)}
+                    />
 
-                      <div className={styles.helpBlock}>
-                        {this.state.helpFirstName}
-                      </div>
-                    </div>
-
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="lastname"
-                        value={this.state.lastName}
-                        placeholder="Sobrenome"
-                        icon="user-alt"
-                        onChange={e => this.changeLastName(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpLastName}
-                      </div>
+                    <div className={styles.helpBlock}>
+                      {helpFirstName}
                     </div>
                   </div>
 
-                  <div className={styles.group}>
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="cpf"
-                        value={this.state.cpf}
-                        placeholder="CPF"
-                        icon="id-card"
-                        onChange={e => this.changeCpf(e.target.value)}
-                      />
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="lastname"
+                      value={lastName}
+                      placeholder="Sobrenome"
+                      icon="user-alt"
+                      onChange={e => changeLastName(e.target.value)}
+                    />
 
-                      <div className={styles.helpBlock}>
-                        {this.state.helpCpf}
-                      </div>
-                    </div>
-
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="birthday"
-                        value={this.state.birthday}
-                        placeholder="Data de Nascimento - Ex: 04/03/2002"
-                        icon="calendar-day"
-                        onChange={e => this.changeBirthday(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpBirthday}
-                      </div>
+                    <div className={styles.helpBlock}>
+                      {helpLastName}
                     </div>
                   </div>
-
-                  <div className={styles.group}>
-                    <div className={styles.wideColumn}>
-                      <Input
-                        name="email"
-                        value={this.state.email}
-                        placeholder="Email"
-                        icon="envelope"
-                        onChange={e => this.changeEmail(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpEmail}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.group}>
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="password"
-                        value={this.state.password}
-                        placeholder="Senha"
-                        icon="lock"
-                        type="password"
-                        onChange={e => this.changePassword(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpPassword}
-                      </div>
-                    </div>
-
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="confirmPassword"
-                        value={this.state.confirmPassword}
-                        placeholder="Confirme a senha"
-                        icon="lock"
-                        type="password"
-                        onChange={e => this.changeConfirmPassword(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpConfirmPassword}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.group}>
-                    <div className={styles.wideColumn}>
-                      <div className={styles.checkboxContainer}>
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="whatsapp"
-                            id="whatsappCheckbox"
-                            className={styles.checkbox}
-                            checked={this.state.whatsapp}
-                            onChange={() => this.changeWhatsapp(!this.state.whatsapp)}
-                          />
-                          <span className={styles.checkboxCustom}></span>
-                        </label>
-
-                        <label
-                          htmlFor="whatsappCheckbox"
-                          className={styles.label}
-                        >
-                          &nbsp;&nbsp;&nbsp;Quero receber notificações e atendimento pelo WhatsApp
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={`${styles.group} ${this.state.whatsapp ? styles.show : styles.hide}`}>
-                    <div className={styles.normalColumn}>
-                      <Input
-                        name="whatsappPhone"
-                        value={this.state.whatsappPhone}
-                        placeholder="Telefone - Ex: (41) 99999-9999"
-                        icon="phone-alt"
-                        onChange={e => this.changeWhatsappPhone(e.target.value)}
-                      />
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpWhatsappPhone}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.group}>
-                    <div className={styles.wideColumn}>
-                      <div className={styles.checkboxContainer}>
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="agreement"
-                            id="agreementCheckbox"
-                            className={styles.checkbox}
-                            checked={this.state.agreement}
-                            onChange={() => this.changeAgreement(!this.state.agreement)}
-                          />
-                          <span className={styles.checkboxCustom}></span>
-                        </label>
-
-                        <label
-                          htmlFor="agreementCheckbox"
-                          className={styles.label}
-                        >
-                          &nbsp;&nbsp;&nbsp;Ao criar uma conta, eu concordo com as
-                          <Link href="/sobre/politicas-de-provacidade">
-                            <a className={styles.signLink}>
-                              {' '}Políticas de Privacidade{' '}
-                            </a>
-                          </Link>
-                          e<br />
-                          &nbsp;&nbsp;&nbsp;
-                          <Link href="/sobre/termos-e-condicoes">
-                            <a className={styles.signLink}>
-                              {' '}Termos & Condições da Vita’s
-                            </a>
-                          </Link>.
-                        </label>
-
-                      </div>
-
-                      <div className={styles.helpBlock}>
-                        {this.state.helpAgreement}
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className={styles.button}
-                  >
-                    {this.state.buttonText}
-                  </button>
-                </form>
-
-                <div className={styles.divisionOr}>
-                  <hr className={styles.lineThrough} />
-                  <h4 className={styles.text}>OU</h4>
                 </div>
 
-                <div className={styles.otherOptions}>
-                  <div className={styles.socialMediaOptions}></div>
-                  <div className={styles.links}>
-                    <Link href="/conta/entrar">
-                      <a
-                        className={styles.link}
-                      >
-                        Já possuo uma conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
-                      </a>
-                    </Link>
+                <div className={styles.group}>
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="cpf"
+                      value={cpf}
+                      placeholder="CPF"
+                      icon="id-card"
+                      onChange={e => changeCpf(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpCpf}
+                    </div>
                   </div>
+
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="birthday"
+                      value={birthday}
+                      placeholder="Data de Nascimento - Ex: 04/03/2002"
+                      icon="calendar-day"
+                      onChange={e => changeBirthday(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpBirthday}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.group}>
+                  <div className={styles.wideColumn}>
+                    <Input
+                      name="email"
+                      value={email}
+                      placeholder="Email"
+                      icon="envelope"
+                      onChange={e => changeEmail(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpEmail}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.group}>
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="password"
+                      value={password}
+                      placeholder="Senha"
+                      icon="lock"
+                      type="password"
+                      onChange={e => changePassword(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpPassword}
+                    </div>
+                  </div>
+
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      placeholder="Confirme a senha"
+                      icon="lock"
+                      type="password"
+                      onChange={e => changeConfirmPassword(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpConfirmPassword}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.group}>
+                  <div className={styles.wideColumn}>
+                    <div className={styles.checkboxContainer}>
+                      <label className={styles.checkboxLabel}>
+                        <input
+                          type="checkbox"
+                          name="whatsapp"
+                          id="whatsappCheckbox"
+                          className={styles.checkbox}
+                          checked={whatsapp}
+                          onChange={() => changeWhatsapp(!whatsapp)}
+                        />
+                        <span className={styles.checkboxCustom}></span>
+                      </label>
+
+                      <label
+                        htmlFor="whatsappCheckbox"
+                        className={styles.label}
+                      >
+                        &nbsp;&nbsp;&nbsp;Quero receber notificações e atendimento pelo WhatsApp
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`${styles.group} ${whatsapp ? styles.show : styles.hide}`}>
+                  <div className={styles.normalColumn}>
+                    <Input
+                      name="whatsappPhone"
+                      value={whatsappPhone}
+                      placeholder="Telefone - Ex: (41) 99999-9999"
+                      icon="phone-alt"
+                      onChange={e => changeWhatsappPhone(e.target.value)}
+                    />
+
+                    <div className={styles.helpBlock}>
+                      {helpWhatsappPhone}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.group}>
+                  <div className={styles.wideColumn}>
+                    <div className={styles.checkboxContainer}>
+                      <label className={styles.checkboxLabel}>
+                        <input
+                          type="checkbox"
+                          name="agreement"
+                          id="agreementCheckbox"
+                          className={styles.checkbox}
+                          checked={agreement}
+                          onChange={() => changeAgreement(!agreement)}
+                        />
+                        <span className={styles.checkboxCustom}></span>
+                      </label>
+
+                      <label
+                        htmlFor="agreementCheckbox"
+                        className={styles.label}
+                      >
+                        &nbsp;&nbsp;&nbsp;Ao criar uma conta, eu concordo com as
+                        <Link href="/sobre/politicas-de-provacidade">
+                          <a className={styles.signLink}>
+                            {' '}Políticas de Privacidade{' '}
+                          </a>
+                        </Link>
+                        e<br />
+                        &nbsp;&nbsp;&nbsp;
+                        <Link href="/sobre/termos-e-condicoes">
+                          <a className={styles.signLink}>
+                            {' '}Termos & Condições da Vita’s
+                          </a>
+                        </Link>.
+                      </label>
+
+                    </div>
+
+                    <div className={styles.helpBlock}>
+                      {helpAgreement}
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className={styles.button}
+                >
+                  {buttonText}
+                </button>
+              </form>
+
+              <div className={styles.divisionOr}>
+                <hr className={styles.lineThrough} />
+                <h4 className={styles.text}>OU</h4>
+              </div>
+
+              <div className={styles.otherOptions}>
+                <div className={styles.socialMediaOptions}>
+                  <div className={styles.littleColumn}>
+                    <button
+                      type="button"
+                      className={styles.googleButton}
+                      onClick={() => signIn('google')}
+                    >
+                      <div className={styles.googleLogo}>
+                        <img src="/images/google.svg" alt="google" />
+                      </div>
+
+                      <h4 className={styles.googleText}>Fazer login com o Google</h4>
+                    </button>
+                  </div>
+
+                  <div className={styles.littleColumn}>
+                    <button
+                      type="button"
+                      className={styles.facebookButton}
+                      onClick={() => signIn('facebook')}
+                    >
+                      <div className={styles.facebookLogo}>
+                        <img src="/images/facebook.svg" alt="facebook" />
+                      </div>
+
+                      <h4 className={styles.facebookText}>Continuar com o Facebook</h4>
+                    </button>
+                  </div>
+                </div>
+
+                <div className={styles.links}>
+                  <Link href="/conta/entrar">
+                    <a
+                      className={styles.link}
+                    >
+                      Já possuo uma conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="messagesContainer">
-            {this.state.messages}
-          </div>
-        </main>
+        <div className="messagesContainer">
+          {messages}
+        </div>
+      </main>
 
-        <footer className={grid.footer}>
-          <Footer newsletter={false} maps={false} />
-        </footer>
-      </div>
-    )
-  }
+      <footer className={grid.footer}>
+        <Footer newsletter={false} maps={false} />
+      </footer>
+    </div>
+  )
 }
 
 export default Signup

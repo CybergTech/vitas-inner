@@ -21,17 +21,17 @@ import styles from '../../styles/Sign.module.css'
 function Signin () {
   const [session, loading] = useSession()
 
-  useEffect(() => {
-    if (!loading && session) {
-      Router.push('/')
-    }
-  }, [loading])
-
   const [key, setKey] = useState(1)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [disabled, setDisabled] = useState(true)
   const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    if (!loading && session) {
+      Router.push('/')
+    }
+  }, [loading])
 
   function changeEmail (e) {
     setEmail(e)
@@ -145,7 +145,7 @@ function Signin () {
               </div>
 
               <div className={styles.otherOptions}>
-                <div className={styles.socialMediaOptions}>
+                <div className={`${styles.socialMediaOptions} ${styles.signinOptions}`}>
                   <button
                     type="button"
                     className={styles.googleButton}
@@ -157,9 +157,19 @@ function Signin () {
 
                     <h4 className={styles.googleText}>Fazer login com o Google</h4>
                   </button>
-                </div>
 
-                {/* <div className="g-signin2" data-onsuccess="onSignIn"></div> */}
+                  <button
+                    type="button"
+                    className={styles.facebookButton}
+                    onClick={() => signIn('facebook')}
+                  >
+                    <div className={styles.facebookLogo}>
+                      <img src="/images/facebook.svg" alt="facebook" />
+                    </div>
+
+                    <h4 className={styles.facebookText}>Continuar com o Facebook</h4>
+                  </button>
+                </div>
 
                 <div className={styles.links}>
                   <Link href="/conta/esqueceu-senha">

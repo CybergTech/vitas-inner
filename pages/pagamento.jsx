@@ -6,17 +6,17 @@ import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { exists, validEmail } from '../../services/validation'
+import { exists, validEmail } from '../services/validation'
 
-import Header from '../../components/Header'
-import DetailDots from '../../components/DetailDots'
-import Input from '../../components/Input'
-import Message from '../../components/Message'
-import Footer from '../../components/Footer'
-import Loading from '../../components/Loading'
+import Header from '../components/Header'
+import DetailDots from '../components/DetailDots'
+import Input from '../components/Input'
+import Message from '../components/Message'
+import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
-import grid from '../../styles/grid/clean.module.css'
-import styles from '../../styles/Sign.module.css'
+import grid from '../styles/grid/clean.module.css'
+import styles from '../styles/Sign.module.css'
 
 function Signin () {
   const [session, loading] = useSession()
@@ -92,11 +92,11 @@ function Signin () {
   return (
     <div className={grid.wrapper}>
       <Head>
-        <title>Entre na plataforma - Vita&apos;s Materiais Médicos e Hospitalares</title>
+        <title>Pagamento - Sacola - Vita&apos;s Materiais Médicos e Hospitalares</title>
       </Head>
 
       <header className={`${grid.header} lightGray`}>
-        <Header reduced></Header>
+        <Header id={true} address={true} payment={false}></Header>
       </header>
 
       <main className={grid.main}>

@@ -1,19 +1,16 @@
 import React from 'react'
-import Link from 'next/link'
 
 import styles from './styles.module.css'
 
 function Logo () {
   return (
-    <Link href="/">
-      <a>
-        <img
-          src="/images/logo.png"
-          alt="Vita's - Bem Estar"
-          className={styles.logoImage}
-        />
-      </a>
-    </Link>
+    <a href="http://localhost:3000">
+      <img
+        src="/images/logo.png"
+        alt="Vita's - Bem Estar"
+        className={styles.logoImage}
+      />
+    </a>
   )
 }
 

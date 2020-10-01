@@ -2,75 +2,31 @@
 import React, { Component } from 'react'
 
 import Logo from '../Logo'
-import Nav from './Nav'
-import Categories from './Categories'
-import Search from './Search'
+import ProgressTracker from './ProgressTracker'
 
 import styles from './styles.module.css'
 
 class Header extends Component {
-  componentDidMount () {
-    window.addEventListener('scroll', () => {
-      const element = document.querySelector('.navContainer')
-
-      const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-
-      const isSticky = (scrollY + 1) >= windowHeight
-
-      if (!this.props.reduced) {
-        if (isSticky) {
-          element.classList.add('isSticky')
-        } else {
-          element.classList.remove('isSticky')
-        }
-      }
-    })
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('scroll', this)
-  }
-
-  handlerGoBack () {
-    document.location.href = 'javascript:history.back()'
-  }
-
   render () {
+    const id = this.props.id !== undefined ? this.props.id : ''
+    const address = this.props.address !== undefined ? this.props.address : ''
+    const payment = this.props.payment !== undefined ? this.props.payment : ''
+    const checkout = this.props.checkout !== undefined ? this.props.checkout : ''
+
     return (
-      <div className={`${styles.container} navContainer`}>
-        {!this.props.reduced
-          ? <>
-            <div className={styles.row}>
-              <div className={`${styles.logo} headerLogo`}>
-                <Logo />
-              </div>
+      <div className={styles.container}>
+        <div className={styles.row}>
+          <ProgressTracker
+            id={id}
+            address={address}
+            payment={payment}
+            checkout={checkout}
+          />
 
-              <Nav />
-            </div>
-
-            <div className={`${styles.row} bigCategSearch`}>
-              <Categories />
-              <Search />
-            </div>
-          </>
-          : <>
-            <div className={`${styles.row} ${styles.reduced}`}>
-              <a onClick={this.handlerGoBack}>
-                <img
-                  className={styles.goBackLink}
-                  src="/images/icons/back.svg"
-                  alt="Go back"
-                  title="Voltar"
-                />
-              </a>
-
-              <div className={styles.logo}>
-                <Logo />
-              </div>
-            </div>
-          </>
-        }
+          <div className={styles.logo}>
+            <Logo />
+          </div>
+        </div>
       </div>
     )
   }

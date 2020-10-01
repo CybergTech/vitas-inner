@@ -10,24 +10,13 @@
 
 .row {
   position: relative;
-
   width: 100%;
+  padding-top: 4vh;
+  padding-bottom: 15vh;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.row:nth-child(2) {
-  margin-top: .5rem;
-}
-
-.reduced {
-  padding-top: 4vh;
-  padding-bottom: 10vh;
-}
-
-.goBackLink {
-  cursor: pointer;
 }
 
 .logo {

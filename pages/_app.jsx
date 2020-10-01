@@ -10,7 +10,6 @@ import WhatsAppButton from '../components/WhatsAppButton'
 
 import '../styles/globals.css'
 import '../styles/nprogress.css'
-import '../styles/stickyHeader.css'
 
 Router.events.on('routeChangeStart', url => {
   // console.log(`Loading: ${url}`)

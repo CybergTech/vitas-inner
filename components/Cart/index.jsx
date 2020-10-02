@@ -13,6 +13,7 @@ function Cart () {
         <div className={styles.productsWrapper}>
           <ProductItem asList showAddToCardButtons />
           <ProductItem asList showAddToCardButtons />
+          <ProductItem asList showAddToCardButtons />
         </div>
       </div>
 

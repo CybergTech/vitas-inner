@@ -1,5 +1,5 @@
 .container {
-  width: 76%;
+  width: 70%;
   margin: 0 auto;
   margin-top: -90px;
 
@@ -9,8 +9,9 @@
 
 .focusedArea {
   position: relative;
-  min-width: 60%;
-  max-width: 60%;
+  min-width: 55%;
+  max-width: 55%;
+  height: fit-content;
   padding: 30px;
   margin-bottom: 80px;
 
@@ -56,6 +57,9 @@
 .group {
   position: relative;
   width: 100%;
+}
+.group + .group {
+  margin-top: 1.3rem;
 }
 
 .group input[type=radio] {
@@ -176,6 +180,73 @@
   color: #FFFFFF;
   font-size: 14px;
   cursor: pointer;
+}
+
+.modalClose {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  transition: ease-in-out all 180ms;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalClose:hover {
+  color: #E2352D;
+}
+
+.modalTitle {
+  font-size: 18px;
+  color: #E2352D;
+  margin-bottom: 1rem;
+}
+.modalMain {
+  display: flex;
+  flex-direction: column;
+}
+.modalSubtitle {
+  margin-bottom: .5rem;
+}
+
+.modalFooter {
+  margin-top: 1.5rem;
+  position: relative;
+  max-width: 100%;
+}
+
+.modalPS {
+  width: 100%;
+  font-size: 12px;
+  font-family: 'Overpass-Regular';
+}
+
+.modalButtons {
+  width: 100%;
+  height: 45px;
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalCancelButton,
+.modalConfirmButton {
+  width: 48%;
+  height: 100%;
+  border: none;
+  background-color: #E2352D;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modalCancelButton {
+  background-color: #999999;
 }
 
 

@@ -1,5 +1,7 @@
 .container {
   flex: 1;
+  position: relative;
+  height: 570px;
   padding: 30px;
   margin-left: 2%;
   margin-bottom: 80px;

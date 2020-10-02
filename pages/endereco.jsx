@@ -3,16 +3,13 @@ import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { signIn, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { exists, validEmail } from '../services/validation'
 
 import Header from '../components/Header'
 import DetailDots from '../components/DetailDots'
 import Cart from '../components/Cart'
-import Input from '../components/Input'
-import Message from '../components/Message'
+import Modal from '../components/Modal'
 import Footer from '../components/Footer'
 import Loading from '../components/Loading'
 
@@ -24,11 +21,7 @@ function Address () {
 
   const [checked, setChecked] = useState(false)
 
-  const [key, setKey] = useState(1)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [disabled, setDisabled] = useState(true)
-  const [messages, setMessages] = useState([])
+  const [modal, setModal] = useState('')
 
   useEffect(() => {
     if (!loading && session) {
@@ -36,60 +29,61 @@ function Address () {
     }
   }, [loading])
 
-  function changeEmail (e) {
-    setEmail(e)
-    if (e.length > 0 && password.length > 0) {
-      setDisabled(false)
-    } else {
-      setDisabled(true)
-    }
-  }
-
-  function changePassword (e) {
-    setPassword(e)
-    if (e.length > 0 && email.length > 0) {
-      setDisabled(false)
-    } else {
-      setDisabled(true)
-    }
+  function handleHideModal () {
+    setModal('')
   }
 
   function handleFormSubmit (e) {
     e.preventDefault()
+    setModal(
+      <Modal handleHideModal={handleHideModal}>
+        <header>
+          <span
+            className={styles.modalClose}
+            onClick={() => handleHideModal()}
+          >
+            <FontAwesomeIcon icon="times" />
+          </span>
+          <h3 className={styles.modalTitle}>Você confirma essa informação?</h3>
+        </header>
 
-    if (!exists(email) && !exists(password)) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Por favor, preencha o campo de email e senha!"
-      />])
-    } else if (!exists(this.state.email)) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Por favor, preencha o campo de email!"
-      />])
-    } else if (!validEmail(this.state.email)) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Por favor, preencha um email válido!"
-      />])
-    } else if (!exists(this.state.password)) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Por favor, preencha o campo de senha!"
-      />])
-    } else {
-      setMessages([...messages, <Message
-        key={key}
-        type="success"
-        text="Todos os dados foram preenchidos!"
-      />])
-    }
+        <main className={styles.modalMain}>
+          <h5 className={styles.modalSubtitle}>Você irá retirar a compra em:</h5>
+          <button type="button" className={styles.formItem}>
+            <div className={`${styles.formItemSelected} ${styles.isSelected}`}>
+              <FontAwesomeIcon icon="warehouse" className={styles.selectedIcon} />
+            </div>
 
-    setKey(key + 1)
+            <div className={styles.formItemContent}>
+              <h5 className={styles.text}>
+                <span className={styles.contentTitle}>Loja Vita&apos;s Centro</span>
+                Lourenço Pinto, 47<br/>
+                Centro - Curitiba, Paraná - CEP 12309-984
+              </h5>
+            </div>
+          </button>
+        </main>
+
+        <footer className={styles.modalFooter}>
+          <p className={styles.modalPS}>* Quando for buscar sua compra, não se esqueça de levar o comprovante da mesma que será gerado ao realizar o pagamento.</p>
+
+          <div className={styles.modalButtons}>
+            <button
+              className={styles.modalCancelButton}
+              onClick={() => handleHideModal()}
+            >
+              Cancelar
+            </button>
+            <button
+              className={styles.modalConfirmButton}
+              onClick={() => Router.push('/pagamento')}
+            >
+              Continuar
+            </button>
+          </div>
+        </footer>
+      </Modal>
+    )
   }
 
   return (
@@ -116,7 +110,7 @@ function Address () {
                 className={styles.form}
                 onSubmit={e => handleFormSubmit(e)}
               >
-                <h4 className={styles.subtitle}>Entrega</h4>
+                <h4 className={styles.subtitle}>Endereço</h4>
 
                 <div className={styles.group}>
                   <input
@@ -153,6 +147,22 @@ function Address () {
                   </button>
                 </div>
 
+                <div className={styles.group}>
+                  <input type="radio" value="1" id="delivery" />
+
+                  <button type="button" className={styles.formItem}>
+                    <div className={styles.formItemSelected}></div>
+
+                    <div className={styles.formItemContent}>
+                      <h5 className={styles.text}>
+                        <span className={styles.contentTitle}>Vó Tereza</span>
+                        Pompeu Lemonin, 187<br/>
+                        Centro - Curitiba, Paraná - CEP 12309-984
+                      </h5>
+                    </div>
+                  </button>
+                </div>
+
                 <div className={styles.links}>
                   <Link href="/">
                     <a className={styles.link}>
@@ -160,7 +170,10 @@ function Address () {
                     </a>
                   </Link>
 
-                  <button type="button" className={styles.button}>
+                  <button
+                    type="submit"
+                    className={styles.button}
+                  >
                     Confirmar escolha
                   </button>
                 </div>
@@ -170,10 +183,6 @@ function Address () {
 
           <Cart />
         </div>
-
-        <div className="messagesContainer">
-          {messages}
-        </div>
       </main>
 
       <footer className={grid.footer}>
@@ -181,6 +190,7 @@ function Address () {
       </footer>
 
       {loading && <Loading />}
+      {modal}
     </div>
   )
 }

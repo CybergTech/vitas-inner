@@ -137,6 +137,13 @@ function Signin () {
                 >
                   Continuar
                 </button>
+
+                <a
+                  className={`${styles.link} ${styles.create}`}
+                  href="http://localhost:3000/conta/cadastrar"
+                >
+                  Criar conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                </a>
               </form>
 
               <div className={styles.divisionOr}>
@@ -177,14 +184,6 @@ function Signin () {
                       className={styles.link}
                     >
                       Esqueci minha senha <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
-                    </a>
-                  </Link>
-
-                  <Link href="/conta/cadastrar">
-                    <a
-                      className={styles.link}
-                    >
-                      Ainda não possuo uma conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
                     </a>
                   </Link>
                 </div>

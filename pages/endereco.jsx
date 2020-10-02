@@ -10,16 +10,19 @@ import { exists, validEmail } from '../services/validation'
 
 import Header from '../components/Header'
 import DetailDots from '../components/DetailDots'
+import Cart from '../components/Cart'
 import Input from '../components/Input'
 import Message from '../components/Message'
 import Footer from '../components/Footer'
 import Loading from '../components/Loading'
 
 import grid from '../styles/grid/clean.module.css'
-import styles from '../styles/Sign.module.css'
+import styles from '../styles/basket.module.css'
 
-function Signin () {
+function Address () {
   const [session, loading] = useSession()
+
+  const [checked, setChecked] = useState(false)
 
   const [key, setKey] = useState(1)
   const [email, setEmail] = useState('')
@@ -100,97 +103,72 @@ function Signin () {
       </header>
 
       <main className={grid.main}>
-        <div className={styles.signContainer}>
-          <div className={styles.signinContent}>
-            <DetailDots style={{ right: '83%', bottom: '-30px' }} />
+        <div className={styles.container}>
+          <div className={styles.focusedArea}>
+            <DetailDots style={{ right: '90%', bottom: '-30px' }} />
 
-            <div className={styles.signinWrapper}>
+            <div className={styles.wrapper}>
               <h2 className={styles.title}>
-                Olá! Informe seu email e senha para continuar
+                Ok, agora você precisa escolher como vai<br />querer receber sua compra
               </h2>
 
               <form
                 className={styles.form}
                 onSubmit={e => handleFormSubmit(e)}
               >
-                <Input
-                  name="email"
-                  value={email}
-                  placeholder="Email"
-                  icon="envelope"
-                  onChange={e => changeEmail(e.target.value)}
-                />
+                <h4 className={styles.subtitle}>Entrega</h4>
 
-                <Input
-                  name="password"
-                  value={password}
-                  placeholder="Senha"
-                  type="password"
-                  icon="lock"
-                  onChange={e => changePassword(e.target.value)}
-                />
-
-                <button
-                  type="submit"
-                  className={styles.button}
-                  disabled={disabled}
-                >
-                  Continuar
-                </button>
-              </form>
-
-              <div className={styles.divisionOr}>
-                <hr className={styles.lineThrough} />
-                <h4 className={styles.text}>OU</h4>
-              </div>
-
-              <div className={styles.otherOptions}>
-                <div className={`${styles.socialMediaOptions} ${styles.signinOptions}`}>
-                  <button
-                    type="button"
-                    className={styles.googleButton}
-                    onClick={() => signIn('google')}
-                  >
-                    <div className={styles.googleLogo}>
-                      <img src="/images/google.svg" alt="google" />
-                    </div>
-
-                    <h4 className={styles.googleText}>Fazer login com o Google</h4>
-                  </button>
+                <div className={styles.group}>
+                  <input
+                    type="radio"
+                    value="1"
+                    id="delivery"
+                    checked={checked}
+                    onChange={e => setChecked(e.target.value)}
+                  />
 
                   <button
                     type="button"
-                    className={styles.facebookButton}
-                    onClick={() => signIn('facebook')}
+                    onClick={() => setChecked(!checked)}
+                    className={styles.formItem}
                   >
-                    <div className={styles.facebookLogo}>
-                      <img src="/images/facebook.svg" alt="facebook" />
+                    <div
+                      className={`${styles.formItemSelected} ${checked && styles.isSelected}`}
+                    >
+                      {checked &&
+                        <FontAwesomeIcon
+                          icon="check-circle"
+                          className={styles.selectedIcon}
+                        />
+                      }
                     </div>
 
-                    <h4 className={styles.facebookText}>Continuar com o Facebook</h4>
+                    <div className={styles.formItemContent}>
+                      <h5 className={styles.text}>
+                        <span className={styles.contentTitle}>Minha Casa</span>
+                        Marechal Deodoro da Fonseca, 94<br/>
+                        Loja - Curitiba, Paraná - CEP 12345-874
+                      </h5>
+                    </div>
                   </button>
                 </div>
 
                 <div className={styles.links}>
-                  <Link href="/conta/esqueceu-senha">
-                    <a
-                      className={styles.link}
-                    >
-                      Esqueci minha senha <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                  <Link href="/">
+                    <a className={styles.link}>
+                      Adicionar endereço <FontAwesomeIcon icon="chevron-right" className={styles.icon} />
                     </a>
                   </Link>
 
-                  <Link href="/conta/cadastrar">
-                    <a
-                      className={styles.link}
-                    >
-                      Ainda não possuo uma conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
-                    </a>
-                  </Link>
+                  <button type="button" className={styles.button}>
+                    Confirmar escolha
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
+
+          <Cart />
         </div>
 
         <div className="messagesContainer">
@@ -207,4 +185,4 @@ function Signin () {
   )
 }
 
-export default Signin
+export default Address

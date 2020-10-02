@@ -1,0 +1,190 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: -90px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.focusedArea {
+  position: relative;
+  min-width: 60%;
+  max-width: 60%;
+  padding: 30px;
+  margin-bottom: 80px;
+
+  background-color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 22px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.signLink {
+  color: #E2352D;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.group {
+  position: relative;
+  width: 100%;
+}
+
+.group input[type=radio] {
+  display: none;
+}
+
+
+.formItem {
+  width: 100%;
+  padding: 25px;
+  background-color: #EEEEEE;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all ease-in-out 250ms;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formItemSelected {
+  min-width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 40px;
+  border: 1px solid #999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formItemSelected.isSelected {
+  border-color: transparent;
+}
+
+.selectedIcon {
+  font-size: 25px;
+  color: #234125;
+  animation: fadeIn 250ms;
+}
+
+.formItemContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.formItemContent .text {
+  flex: 1;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: normal;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.text .contentTitle {
+  color: #E2352D;
+  margin-bottom: 5px;
+}
+
+.group input[type=radio]:checked + .formItem {
+  border-color: #234125;
+}
+
+.show {
+  display: flex;
+  opacity: 1;
+}
+.hide {
+  display: none;
+  opacity: 0;
+}
+
+
+.links {
+  width: 100%;
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.link.create {
+  font-size: 16px;
+  justify-content: center;
+  color: #E2352D;
+}
+
+.link:nth-child(1n+2) {
+  margin-top: 5px;
+}
+
+.link .icon {
+  font-size: 6px;
+  margin-left: 10px;
+}
+
+.link:hover .icon {
+  animation: iconSlide 800ms infinite;
+}
+
+
+.button {
+  width: 45%;
+  height: 40px;
+  margin-top: 1rem;
+  border: none;
+  background-color: #E2352D;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
+@keyframes iconSlide {
+  50% {transform: translate(3px);}
+}
+
+@keyframes fadeIn {
+  0% {opacity: .2;}
+}
+

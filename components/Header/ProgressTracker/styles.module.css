@@ -18,11 +18,14 @@
 
 .listItem {
   flex: 1;
-  text-align: center;
-  padding-bottom: 4vh;
+  height: 12vh;
   border-bottom: 3px solid #E2352D11;
   color: #33333344;
   transition: all 400ms ease-in-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .listItem a {
@@ -44,7 +47,7 @@
   border-color: #E2352D88;
 }
 
-.listItem.isComplete .icon{
+.listItem.isComplete .icon {
   color: #E2352D;
 }
 .listItem.isActive .icon {

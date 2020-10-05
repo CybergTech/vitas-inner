@@ -163,6 +163,22 @@ function Address () {
                   </button>
                 </div>
 
+                <div className={styles.group}>
+                  <input type="radio" value="1" id="delivery" />
+
+                  <button type="button" className={styles.formItem}>
+                    <div className={styles.formItemSelected}></div>
+
+                    <div className={styles.formItemContent}>
+                      <h5 className={styles.text}>
+                        <span className={styles.contentTitle}>Vó Tereza</span>
+                        Pompeu Lemonin, 187<br/>
+                        Centro - Curitiba, Paraná - CEP 12309-984
+                      </h5>
+                    </div>
+                  </button>
+                </div>
+
                 <div className={styles.links}>
                   <Link href="/">
                     <a className={styles.link}>

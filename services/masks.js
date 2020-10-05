@@ -3,6 +3,24 @@ export const withoutNumber = value => {
     .replace(/\d/g, '')
 }
 
+export const cvvMask = value => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{3})\d+?$/, '$1')
+}
+
+export const monthMask = value => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})\d+?$/, '$1')
+}
+
+export const yearMask = value => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{4})\d+?$/, '$1')
+}
+
 export const cpfMask = value => {
   return value
     .replace(/\D/g, '')

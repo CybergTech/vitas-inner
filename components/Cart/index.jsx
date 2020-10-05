@@ -1,12 +1,48 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import ProductItem from '../ProductItem'
+import LineDivision from '../LineDivision'
 
 import styles from './styles.module.css'
 
-function Cart () {
+function Cart ({ withAddress }) {
   return (
-    <aside className={styles.container}>
+    <aside className={`${styles.container} ${withAddress && styles.withAddress}`}>
+      {withAddress &&
+        <>
+          <div className={styles.addressContainer}>
+            <h4 className={styles.subtitle}>ENDEREÇO</h4>
+
+            <div className={styles.addressContent}>
+              <h5 className={styles.addressType}>Você irá retirar a compra em:</h5>
+
+              <button type="button" className={styles.item}>
+                <div className={`${styles.itemSelected} ${styles.isSelected}`}>
+                  <FontAwesomeIcon icon="warehouse" className={styles.selectedIcon} />
+                </div>
+
+                <div className={styles.itemContent}>
+                  <h5 className={styles.text}>
+                    <span className={styles.contentTitle}>Loja Vita&apos;s Centro</span>
+                    Lourenço Pinto, 47<br/>
+                    Centro - Curitiba, Paraná - CEP 12309-984
+                  </h5>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <LineDivision style={{
+            margin: '1.8rem 0',
+            width: '40%',
+            height: '0',
+            borderColor: '#EEEEEE55'
+          }} />
+        </>
+      }
+
       <div className={styles.productsContainer}>
         <h4 className={styles.subtitle}>MINHA SACOLA DE COMPRAS</h4>
 

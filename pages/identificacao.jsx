@@ -142,7 +142,7 @@ function Signin () {
                   className={`${styles.link} ${styles.create}`}
                   href="http://localhost:3000/conta/cadastrar"
                 >
-                  Criar conta <FontAwesomeIcon className={styles.icon} icon="chevron-right" />
+                  Criar conta
                 </a>
               </form>
 

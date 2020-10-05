@@ -6,6 +6,9 @@
   display: flex;
   justify-content: space-between;
 }
+.container.checkout {
+  justify-content: center;
+}
 
 .focusedArea {
   position: relative;
@@ -33,12 +36,104 @@
 .title {
   font-size: 22px;
   line-height: 30px;
-  margin-bottom: 30px;
 }
 
 .subtitle {
   font-size: 14px;
+  margin-top: 30px;
   margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+}
+
+.container.checkout .subtitle {
+  margin-top: 10px;
+}
+
+.subtitle .icon {
+  color: #E2352D;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.shippingDetails {
+  margin: 1rem 0;
+}
+
+.shippingDetails .subtitle {
+  color: #E2352D;
+}
+
+.shippingDetailsList {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.shippingDetailsListItem {
+  font-weight: normal;
+  font-family: 'Overpass-Regular';
+}
+
+.shippingDetailsListItem > span {
+  font-family: 'Overpass-SemiBold';
+  margin-right: 5px;
+}
+
+.shippingDetailsListItem > span.pointer {
+  cursor: pointer;
+}
+
+.shippingDetailsListItem > span .icon {
+  font-size: 8px;
+  transition: transform ease 300ms;
+}
+
+.shippingDetailsListItem + .shippingDetailsListItem {
+  margin-top: 1rem;
+}
+
+.shippingDetailsListItem .shippingDetailsList {
+  margin: 10px 0;
+  margin-left: 20px;
+  font-size: 14px;
+}
+.shippingDetailsListItem
+.shippingDetailsList
+.shippingDetailsListItem + .shippingDetailsListItem {
+  margin-top: .3rem;
+}
+
+.chosenMethod {
+  position: relative;
+  margin-top: .5rem;
+  width: 190px;
+  height: 80px;
+}
+
+.chosenAddress {
+  position: relative;
+  width: 100%;
+  padding: .8rem;
+  margin-left: 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+.chosenAddress .icon {
+  color: #234125;
+}
+
+.address {
+  margin-left: 20px;
+  font-size: 14px;
+}
+.address span {
+  color: #E2352D;
 }
 
 .signLink {
@@ -57,9 +152,7 @@
 .group {
   position: relative;
   width: 100%;
-}
-.group + .group {
-  margin-top: 1.3rem;
+  margin-bottom: 1.3rem;
 }
 
 .group input[type=radio] {
@@ -97,7 +190,7 @@
 
 .selectedIcon {
   font-size: 25px;
-  color: #234125;
+  color: #3C9A45;
   animation: fadeIn 250ms;
 }
 
@@ -126,7 +219,7 @@
 }
 
 .group input[type=radio]:checked + .formItem {
-  border-color: #234125;
+  border-color: #3C9A45;
 }
 
 .show {
@@ -141,7 +234,7 @@
 
 .links {
   width: 100%;
-  margin-top: 2.4rem;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
 }
@@ -258,4 +351,3 @@
 @keyframes fadeIn {
   0% {opacity: .2;}
 }
-

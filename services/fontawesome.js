@@ -3,7 +3,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import {
   faPhoneAlt, faEnvelope, faMapMarkerAlt, faCopyright,
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
-  faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
+  faCheckCircle, faCheck, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faEyeSlash, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
   faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,
@@ -13,7 +13,7 @@ import {
 library.add(
   fab, faPhoneAlt, faEnvelope, faMapMarkerAlt, faCopyright,
   faBars, faCircleNotch, faSpinner, faExclamationCircle,
-  faCheckCircle, faAngleDoubleDown, faTimes, faFileCode,
+  faCheckCircle, faCheck, faAngleDoubleDown, faTimes, faFileCode,
   faPencilRuler, faHandsHelping, faEye, faEyeSlash, faAngleDown, faAngleLeft, faAngleRight,
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
   faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,

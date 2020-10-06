@@ -22,6 +22,12 @@ function ProgressTracker ({ id, address, payment, checkout }) {
               Identificação
             </a>
           </Link>
+
+          <div className={styles.detail}>
+            {id === true &&
+              <FontAwesomeIcon icon="check" className={styles.icon} />
+            }
+          </div>
         </li>
 
         <li
@@ -37,6 +43,12 @@ function ProgressTracker ({ id, address, payment, checkout }) {
               Endereço
             </a>
           </Link>
+
+          <div className={styles.detail}>
+            {address === true &&
+              <FontAwesomeIcon icon="check" className={styles.icon} />
+            }
+          </div>
         </li>
 
         <li
@@ -52,6 +64,12 @@ function ProgressTracker ({ id, address, payment, checkout }) {
               Pagamento
             </a>
           </Link>
+
+          <div className={styles.detail}>
+            {payment === true &&
+              <FontAwesomeIcon icon="check" className={styles.icon} />
+            }
+          </div>
         </li>
 
         <li

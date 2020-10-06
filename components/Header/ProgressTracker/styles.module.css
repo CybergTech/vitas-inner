@@ -18,14 +18,23 @@
 
 .listItem {
   flex: 1;
+  position: relative;
   height: 12vh;
   border-bottom: 3px solid #E2352D11;
   color: #33333344;
-  transition: all 400ms ease-in-out;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.listItem:first-child {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.listItem:last-child {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .listItem a {
@@ -38,12 +47,18 @@
 }
 
 .listItem.isComplete,
-.listItem.isActive {
+.listItem.isActive,
+.listItem.isComplete .detail {
   color: #333333;
   border-color: #E2352D;
 }
 
 .listItem.isActive {
+  animation: fadeIn 1200ms;
+}
+
+.listItem.isActive,
+.listItem.isActive .detail {
   border-color: #E2352D88;
 }
 
@@ -52,4 +67,31 @@
 }
 .listItem.isActive .icon {
   color: #E2352D88;
+}
+
+
+.listItem .detail {
+  position: absolute;
+  top: calc(100% - 8.5px);
+  left: calc(100% - 8.5px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #EEEEEE;
+  border: 1px solid #E2352D11;
+  z-index: 200;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.listItem .detail .icon {
+  margin-right: 0;
+  font-size: 10px;
+}
+
+
+
+@keyframes fadeIn {
+  0% {opacity: .1;}
 }

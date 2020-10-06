@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
 
-function custom404 () {
+function Handler () {
   useEffect(() => {
     Router.push('/identificacao')
   }, [])
@@ -10,4 +10,4 @@ function custom404 () {
   return (<></>)
 }
 
-export default custom404
+export default Handler

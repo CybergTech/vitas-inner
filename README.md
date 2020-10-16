@@ -2,10 +2,11 @@
 
 #### Colors:
 
-- Red -> #E2352D
-- Green -> #234125
-- Dark Gray -> #333333
-- Light Gray -> #EEEEEE
+- Fluorescent Green -> #22FF7A
+- Dark Gray -> #161A1D
+- Middle Gray -> #383B3E
+- Light Gray -> #EFEEEE
+- White -> #FFFFFF
 
 #### Scripts to run the app:
 

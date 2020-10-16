@@ -42,23 +42,30 @@
   outline: none;
   margin: 0;
   padding: 0;
-  /* border-radius: 3px; */
 
   scrollbar-width: thin;
-  scrollbar-color: #333333 #FFFFFF;
+  scrollbar-color: #22FF7AAA #FFFFFF;
 }
 
 * ::-webkit-scrollbar {
   width: 7px;
 }
-
 * ::-webkit-scrollbar-track {
   background: #FFFFFF;
 }
-
 * ::-webkit-scrollbar-thumb {
-  background-color: #333333;
+  background-color: #22FF7AAA;
   border-radius: 30px;
+}
+
+
+* ::selection {
+  background: #22FF7AAA;
+  color: #FFF;
+}
+* ::-moz-selection {
+  background: #22FF7AAA;
+  color: #FFF;
 }
 
 
@@ -68,19 +75,16 @@ body {
   font-family: 'Overpass-SemiBold', serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  color: #333333;
+  color: #161A1D;
 
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-.lightGray {
-  background-color: #EEEEEE;
-}
-
 a {
   text-decoration: none;
-  color: #333333;
+  color: #161A1D;
+  width: fit-content;
 }
 
 ul {

@@ -1,28 +1,121 @@
 .container {
-  width: 100%;
-  padding: 3vh 12%;
   position: relative;
-  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #161A1D;
 
   display: flex;
   flex-direction: column;
 }
 
+.divisionLine {
+  position: absolute;
+  left: 16%;
+  top: 0;
+  height: 100%;
+  width: 0;
+  border: 1px solid #383B3E;
+  border-left: none;
+  z-index: 1033;
+}
+
+.nav {
+  position: relative;
+  width: 100%;
+  min-height: 80px;
+  border-bottom: 1px solid #383B3E;
+  font-size: 14px;
+
+  display: flex;
+}
+
 .row {
   position: relative;
   width: 100%;
-  padding-top: 4vh;
-  padding-bottom: 15vh;
+  height: 100%;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logoContainer {
+  min-width: 16%;
+  max-width: 16%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .logo {
-  max-width: 120px;
+  width: 110px;
 }
 
+.list {
+  flex: 1;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list a {
+  color: #FFFFFF;
+}
+.list li + li {
+  margin-left: 25px;
+}
+
+.sellerLink {
+  color: #22FF7A;
+}
+
+.registerLinkContainer {
+  min-width: 16%;
+  max-width: 16%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerLink {
+  width: 110px;
+  height: 35px;
+  border-radius: 2px;
+  background-color: #22FF7A;
+  color: #161A1D;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  flex: 1;
+  width: 100%;
+  color: #FFFFFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info h2 {
+  font-size: 36px;
+  margin-bottom: .5rem;
+}
+.info h2 span {
+  color: #22FF7A;
+}
+
+.info h4 {
+  font-size: 18px;
+}
 
 /* DESKTOP SCREEN SIZE */
 

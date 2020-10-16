@@ -1,35 +1,11 @@
-.row {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.iframe {
-  width: 100%;
-  height: 300px;
-  border: none;
-  background-color: transparent;
-  overflow: hidden;
-}
-/* .iframe:nth-child(1n+2) {
-  border-left: 3px solid #E2352D;
-} */
-
 .container {
   position: relative;
   width: 100%;
-  height: 550px;
-  padding: 6vh 12%;
-  background-color: #EEEEEE;
+  height: fit-content;
+  padding: 6vh 8%;
+  background-color: #FFFFFF;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-
-/* DESKTOP SCREEN SIZE */
-
-@media only screen and (max-width: 1999px) and (min-width: 1500px) {
-
 }

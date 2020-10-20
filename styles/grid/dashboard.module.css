@@ -1,0 +1,45 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  display: grid;
+  background-color: #222527;
+}
+
+.wrapper {
+  grid-template-columns: [first] auto repeat(12, minmax(auto, 1fr));
+  /* column-gap: 15px; */
+  grid-template-rows: 90px 1fr;
+  grid-template-areas:
+    "aside header header header header header header header header header header header header"
+    "aside main main main main main main main main main main main main"
+  ;
+  transition: all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.aside {
+  grid-area: aside;
+  position: relative;
+  min-width: 180px;
+  width: 250px;
+  transition: width 600ms;
+}
+.wrapper.hideMenu .aside {
+  min-width: fit-content;
+  width: 120px;
+}
+/* .wrapper.hideMenu .aside:hover {
+  position: fixed; // WAS COMMENTED
+  min-width: 20vw;
+  z-index: 900;
+} */
+
+.header {
+  grid-area: header;
+  position: relative;
+}
+
+.main {
+  grid-area: main;
+  position: relative;
+}

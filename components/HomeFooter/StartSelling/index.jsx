@@ -15,11 +15,13 @@ function StartSelling () {
       <div className={styles.content}>
         <h2>Anuncie agora mesmo e veja suas vendas aumentarem!</h2>
 
-        <Link href="/">
-          <a>
-            Começar a vender
-          </a>
-        </Link>
+        <button>
+          <Link href="/">
+            <a>
+              Começar a vender
+            </a>
+          </Link>
+        </button>
       </div>
     </div>
   )

@@ -1,67 +1,75 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-
-import Logo from '../Logo'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
-function Header () {
+function Header ({ minimizedMenu, setMinimizedMenu }) {
+  const [checked, setChecked] = useState(false)
+
   return (
     <div className={styles.container}>
-      <hr className={styles.divisionLine} />
+      <div className={styles.column}>
+        <button
+          className={styles.hideMenuButton}
+          title={`${!minimizedMenu ? 'Esconder' : 'Mostrar'} o menu`}
+          onClick={() => setMinimizedMenu(!minimizedMenu)}
+        >
+          <FontAwesomeIcon icon={`${!minimizedMenu ? 'outdent' : 'indent'}`} />
+        </button>
 
-      <nav className={styles.nav}>
-        <div className={styles.row}>
-          <div className={styles.logoContainer}>
-            <div className={styles.logo}>
-              <Logo />
-            </div>
-          </div>
+        <h4>Dashboard</h4>
+      </div>
 
-          <ul className={styles.list}>
-            <li>
-              <Link href="/">
-                <a>
-                  Quem Somos
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/">
-                <a>
-                  Como vender conosco
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/">
-                <a>
-                  Contato
-                </a>
-              </Link>
-            </li>
-          </ul>
+      <div className={styles.column}>
+        <ul className={styles.menuList}>
+          <li className={styles.menuListItem}>
+            <button className={styles.profileItem}>
+              Vita&apos;s Materiais Médicos
+              <span>
+                <img src="/images/profile.png" alt="Neutral-Profile" />
+              </span>
+            </button>
 
-          <Link href="/">
-            <a className={styles.sellerLink}>
-              Área do lojista
-            </a>
-          </Link>
+            <ul>
+              <li>
+                <Link href="/dashboard">
+                  <a>
+                    Minha conta
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard">
+                  <a>
+                    Minhas estatísticas
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard">
+                  <a>
+                    Sair <FontAwesomeIcon icon="sign-out-alt" className={styles.icon} />
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </li>
+        </ul>
 
-          <div className={styles.registerLinkContainer}>
-            <Link href="/">
-              <a className={styles.registerLink}>
-                Cadastre-se
-              </a>
-            </Link>
-          </div>
+        <div className={styles.switchContainer}>
+          <input
+            className={`${styles.switch} ${styles.switchShadow}`}
+            type="checkbox"
+            checked={checked}
+            readOnly
+          />
+          <label
+            className={`${styles.switchLabel}`}
+            onClick={() => setChecked(!checked)}
+          ></label>
         </div>
-      </nav>
-
-      <div className={styles.info}>
-        <h2>O novo <span>marketplace</span> da <span>área médica</span></h2>
-        <h4>feito sob medida para impulsionar suas vendas</h4>
       </div>
     </div>
   )

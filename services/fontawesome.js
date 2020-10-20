@@ -8,7 +8,7 @@ import {
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
   faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,
   faMale, faLock, faUserAlt, faIdCard, faCalendarDay, faCreditCard, faWarehouse, faCalendar,
-  faPlayCircle
+  faPlayCircle, faTh, faBox, faLayerGroup, faOutdent, faIndent, faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -19,5 +19,5 @@ library.add(
   faBriefcaseMedical, faChevronDown, faChevronRight, faSearch, faCashRegister, faTruck,
   faShieldAlt, faHeart, faShareAlt, faTimesCircle, faAngleDoubleLeft, faMars, faVenus, faFemale,
   faMale, faLock, faUserAlt, faIdCard, faCalendarDay, faCreditCard, faWarehouse, faCalendar,
-  faPlayCircle
+  faPlayCircle, faTh, faBox, faLayerGroup, faOutdent, faIndent, faSignOutAlt
 )

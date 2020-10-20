@@ -5,7 +5,7 @@ import Link from 'next/link'
 import styles from './styles.module.css'
 
 function Logo ({ dark = false, minimizedLogo = false }) {
-  let filename = dark ? 'dark-logo' : 'light-logo'
+  let filename = dark ? 'dark-logo' : 'logo-vet'
   filename = minimizedLogo === true ? 'minimized-logo' : filename
 
   return (

@@ -1,7 +1,7 @@
 .inputBlock {
   position: relative;
   width: 100%;
-  height: 45px;
+  height: 50px;
 
   display: flex;
   align-items: center;
@@ -12,11 +12,12 @@
   height: 100%;
   padding: 0 12px;
   padding-left: 40px;
-  border: 1px solid #EEEEEE;
-  background-color: #FFFFFF;
-  color: #333333;
-  transition: all 200ms ease-in-out;
 
+  border-radius: 2px;
+  border: 1px solid #161A1D;
+  background-color: #161A1D;
+  color: #FFFFFF;
+  transition: all 200ms ease-in-out;
   font-size: 14px;
 
   display: flex;
@@ -31,27 +32,48 @@
 
 .icon {
   font-size: 14px;
-  color: #EEEEEE;
+  color: #383B3E;
   position: absolute;
   left: 12px;
   transition: all 200ms ease-in-out;
 }
 
 .input:focus + .icon {
-  color: #E2352D;
+  color: #22FF7A;
 }
 .input:focus {
-  border-color: #E2352D;
+  border-color: #22FF7A;
 }
 
+.eyeContent {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  padding: 0 12px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .eyeIcon {
   font-size: 14px;
-  color: #E2352D;
-  position: absolute;
-  right: 12px;
+  color: #22FF7A;
   transition: all 200ms ease;
-  cursor: pointer;
 }
 .opacity {
   opacity: .7;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .inputBlock {
+    height: 40px;
+  }
+
+  .input,
+  .icon,
+  .eyeIcon {
+    font-size: 12px;
+  }
 }

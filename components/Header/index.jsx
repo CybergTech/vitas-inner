@@ -48,7 +48,7 @@ function Header ({ minimizedMenu, setMinimizedMenu }) {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard">
+                <Link href="/conta/entrar">
                   <a>
                     Sair <FontAwesomeIcon icon="sign-out-alt" className={styles.icon} />
                   </a>

@@ -10,6 +10,28 @@ import styles from '../../styles/Home.module.css'
 function Dashboard () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
 
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {date: new Date()};
+  // }
+
+  // componentDidMount() {
+  //   this.timerID = setInterval(
+  //     () => this.tick(),
+  //     1000
+  //   );
+  // }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.timerID);
+  // }
+
+  // tick() {
+  //   this.setState({
+  //     date: new Date()
+  //   });
+  // }
+
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
       <Head>
@@ -26,6 +48,7 @@ function Dashboard () {
 
       <main className={grid.main}>
         <section className={styles.section}>
+          <div></div>
         </section>
       </main>
     </div>

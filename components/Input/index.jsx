@@ -46,14 +46,18 @@ function Input ({ name, value, placeholder, icon, ...rest }) {
       </label>
 
       {rest.type && rest.type === 'password'
-        ? <FontAwesomeIcon
-          icon={eyeIcon}
-          className={`${styles.eyeIcon} ${eyeIcon === 'eye-slash' && styles.opacity}`}
+        ? <div
+          className={styles.eyeContent}
           onClick={() => {
             setPasswordView(!passwordView)
             setInputFocus()
           }}
-        />
+        >
+          <FontAwesomeIcon
+            icon={eyeIcon}
+            className={`${styles.eyeIcon} ${eyeIcon === 'eye-slash' && styles.opacity}`}
+          />
+        </div>
         : ''
       }
     </div>

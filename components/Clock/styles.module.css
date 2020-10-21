@@ -1,0 +1,34 @@
+.clock {
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  width: 180px;
+
+  text-align: center;
+  font-size: 64px;
+  color: #FFFFFF;
+}
+
+.date {
+  position: relative;
+  width: fit-content;
+
+  font-size: 16px;
+  color: #22FF7A;
+  margin-top: 10px;
+}
+.date::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  height: 10px;
+
+  border-radius: 2px;
+  background-color: #383B3E;
+}

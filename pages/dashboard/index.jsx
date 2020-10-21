@@ -3,34 +3,13 @@ import Head from 'next/head'
 
 import AsideBar from '../../components/AsideBar'
 import Header from '../../components/Header'
+import Clock from '../../components/Clock'
 
 import grid from '../../styles/grid/dashboard.module.css'
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/main.module.css'
 
 function Dashboard () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {date: new Date()};
-  // }
-
-  // componentDidMount() {
-  //   this.timerID = setInterval(
-  //     () => this.tick(),
-  //     1000
-  //   );
-  // }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.timerID);
-  // }
-
-  // tick() {
-  //   this.setState({
-  //     date: new Date()
-  //   });
-  // }
 
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
@@ -48,7 +27,7 @@ function Dashboard () {
 
       <main className={grid.main}>
         <section className={styles.section}>
-          <div></div>
+          <Clock />
         </section>
       </main>
     </div>

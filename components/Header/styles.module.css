@@ -84,13 +84,13 @@
   position: absolute;
   right: 40px;
   top: calc(100% + 20px);
-
   width: 70%;
 
   background-color: #EFEEEE;
   border-radius: 2px 0px 2px 2px;
   font-size: 14px;
   z-index: 30;
+  animation: fadeIn 200ms;
 
   flex-direction: column;
 }
@@ -202,3 +202,7 @@
   transform: translateX(10px);
 }
 
+
+@keyframes fadeIn {
+  0% {opacity: .2;}
+}

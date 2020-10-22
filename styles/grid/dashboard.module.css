@@ -1,6 +1,7 @@
 .wrapper {
   position: relative;
   width: 100%;
+  height: 100vh;
 
   display: grid;
   background-color: #222527;
@@ -43,5 +44,8 @@
   grid-area: main;
   position: relative;
   height: 100%;
+
+  padding: 2rem 0;
+  padding-bottom: 10rem;
   overflow-y: auto;
 }

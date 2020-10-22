@@ -19,63 +19,69 @@ function Statistics () {
 
       <div className={styles.statisticsWrapper}>
         <div className={styles.statistic}>
-          <Link href="/dashboard">
-            <a>
-              <div className={styles.info}>
-                <FontAwesomeIcon icon="layer-group" className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>
-                    <span>Pedidos</span><br />
-                    26
-                  </h4>
-                  <h5 className={styles.badStatistic}>
-                    <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
-                    14,13%
-                  </h5>
+          <button>
+            <Link href="/dashboard">
+              <a>
+                <div className={styles.info}>
+                  <FontAwesomeIcon icon="layer-group" className={styles.icon} />
+                  <div className={styles.content}>
+                    <h4>
+                      <span>Pedidos</span><br />
+                      26
+                    </h4>
+                    <h5 className={styles.badStatistic}>
+                      <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
+                      14,13%
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </Link>
+              </a>
+            </Link>
+          </button>
         </div>
 
         <div className={styles.statistic}>
-          <Link href="/dashboard">
-            <a>
-              <div className={styles.info}>
-                <FontAwesomeIcon icon="layer-group" className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>
-                    <span>Pedidos</span><br />
-                    26
-                  </h4>
-                  <h5>
-                    <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
-                    14,13%
-                  </h5>
+          <button>
+            <Link href="/dashboard">
+              <a>
+                <div className={styles.info}>
+                  <FontAwesomeIcon icon="layer-group" className={styles.icon} />
+                  <div className={styles.content}>
+                    <h4>
+                      <span>Pedidos</span><br />
+                      26
+                    </h4>
+                    <h5>
+                      <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
+                      14,13%
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </Link>
+              </a>
+            </Link>
+          </button>
         </div>
 
         <div className={styles.statistic}>
-          <Link href="/dashboard">
-            <a>
-              <div className={styles.info}>
-                <FontAwesomeIcon icon="layer-group" className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>
-                    <span>Pedidos</span><br />
-                    26
-                  </h4>
-                  <h5>
-                    <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
-                    14,13%
-                  </h5>
+          <button>
+            <Link href="/dashboard">
+              <a>
+                <div className={styles.info}>
+                  <FontAwesomeIcon icon="layer-group" className={styles.icon} />
+                  <div className={styles.content}>
+                    <h4>
+                      <span>Pedidos</span><br />
+                      26
+                    </h4>
+                    <h5>
+                      <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
+                      14,13%
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </Link>
+              </a>
+            </Link>
+          </button>
         </div>
       </div>
     </>

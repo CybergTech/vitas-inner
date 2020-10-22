@@ -1,9 +1,9 @@
 import React from 'react'
-
 import {
   XAxis, YAxis, Tooltip,
   Line, LineChart, ResponsiveContainer, CartesianGrid
 } from 'recharts'
+
 import Wrapper from '../Wrapper'
 
 const salesReport = [
@@ -20,7 +20,10 @@ function SalesReport () {
   const formatterToReal = number => `R$${Number(number).toLocaleString('pt-BR')}`
 
   return (
-    <Wrapper title="Relatório de Vendas">
+    <Wrapper
+      title="Relatório de vendas"
+      style={{ height: '280px' }}
+    >
       <ResponsiveContainer>
         <LineChart
           data={salesReport}
@@ -38,7 +41,7 @@ function SalesReport () {
           />
           <YAxis
             tickFormatter={formatterToReal}
-            stroke={0}
+            stroke="0"
             tickMargin={15}
             tick={{
               fill: '#FFF7',

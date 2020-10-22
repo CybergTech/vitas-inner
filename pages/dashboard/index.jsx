@@ -7,6 +7,8 @@ import Clock from '../../components/Clock'
 import Reminders from '../../components/Reminders'
 import SalesReport from '../../components/SalesReport'
 import Statistics from '../../components/Statistics'
+import EcoSellerIndex from '../../components/EcoSellerIndex'
+import TopProductsList from '../../components/TopProductsList'
 
 import grid from '../../styles/grid/dashboard.module.css'
 import mainStyles from '../../styles/main.module.css'
@@ -43,6 +45,18 @@ function Dashboard () {
 
             <div className={`${styles.flexColumn} ${styles.statitics}`}>
               <Statistics />
+            </div>
+          </div>
+        </section>
+
+        <section className={mainStyles.section}>
+          <div className={styles.row}>
+            <div className={`${styles.flexColumn} ${styles.normalColumn}`}>
+              <EcoSellerIndex />
+            </div>
+
+            <div className={`${styles.flexColumn} ${styles.normalColumn}`}>
+              <TopProductsList />
             </div>
           </div>
         </section>

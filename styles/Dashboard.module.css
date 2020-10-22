@@ -26,3 +26,6 @@
   height: 480px;
   padding-left: 2rem;
 }
+.flexColumn.normalColumn {
+  width: 48%;
+}

@@ -45,15 +45,15 @@ function Statistics () {
             <Link href="/dashboard">
               <a>
                 <div className={styles.info}>
-                  <FontAwesomeIcon icon="layer-group" className={styles.icon} />
+                  <FontAwesomeIcon icon="dollar-sign" className={styles.icon} />
                   <div className={styles.content}>
                     <h4>
-                      <span>Pedidos</span><br />
-                      26
+                      <span>Receita Bruta</span><br />
+                      R$10.234,23
                     </h4>
                     <h5>
                       <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
-                      14,13%
+                      30,40
                     </h5>
                   </div>
                 </div>
@@ -67,15 +67,15 @@ function Statistics () {
             <Link href="/dashboard">
               <a>
                 <div className={styles.info}>
-                  <FontAwesomeIcon icon="layer-group" className={styles.icon} />
+                  <FontAwesomeIcon icon="coins" className={styles.icon} />
                   <div className={styles.content}>
                     <h4>
-                      <span>Pedidos</span><br />
-                      26
+                      <span>Receita Líquida</span><br />
+                      R$4.900,99
                     </h4>
                     <h5>
                       <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
-                      14,13%
+                      50,20
                     </h5>
                   </div>
                 </div>

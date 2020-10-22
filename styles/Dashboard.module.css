@@ -15,14 +15,14 @@
 }
 
 .flexColumn.clockAndGraphics {
-  width: 75%;
+  width: 72%;
   height: 480px;
   padding-right: 2rem;
 
   border-right: 1px solid #383B3E;
 }
 .flexColumn.statitics {
-  width: 25%;
+  width: 28%;
   height: 480px;
   padding-left: 2rem;
 }

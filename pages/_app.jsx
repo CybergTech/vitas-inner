@@ -3,6 +3,10 @@ import React from 'react'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 
+import {
+  GoogleReCaptchaProvider
+} from 'react-google-recaptcha-v3'
+
 import '../services/fontawesome'
 
 import '../styles/globals.css'
@@ -18,7 +22,12 @@ Router.events.on('routeChangeError', () => NProgress.done())
 
 function App ({ Component, pageProps }) {
   return (
-    <Component {...pageProps} />
+    <GoogleReCaptchaProvider
+      reCaptchaKey="6LcmkMMUAAAAAPxWHrJjtxuatMbYllD9fdv6GZCx"
+      language="pt-BR"
+    >
+      <Component {...pageProps} />
+    </GoogleReCaptchaProvider>
   )
 }
 

@@ -36,7 +36,7 @@
 }
 
 
-.signinWrapper {
+.signWrapper {
   width: 60%;
   height: 360px;
   padding: 30px;
@@ -52,6 +52,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.signWrapper.signup {
+  height: 340px;
+}
 
 .form {
   position: relative;
@@ -62,8 +65,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.signupForm {
+.signWrapper.signup .form {
   height: 65%;
 }
 

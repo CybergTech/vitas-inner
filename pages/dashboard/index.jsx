@@ -9,6 +9,8 @@ import SalesReport from '../../components/SalesReport'
 import Statistics from '../../components/Statistics'
 import EcoSellerIndex from '../../components/EcoSellerIndex'
 import TopProductsList from '../../components/TopProductsList'
+import ProductsBrief from '../../components/ProductsBrief'
+import Rating from '../../components/Rating'
 
 import grid from '../../styles/grid/dashboard.module.css'
 import mainStyles from '../../styles/main.module.css'
@@ -57,6 +59,18 @@ function Dashboard () {
 
             <div className={`${styles.flexColumn} ${styles.normalColumn}`}>
               <TopProductsList />
+            </div>
+          </div>
+        </section>
+
+        <section className={mainStyles.section}>
+          <div className={styles.row}>
+            <div className={`${styles.flexColumn} ${styles.brief}`}>
+              <ProductsBrief />
+            </div>
+
+            <div className={`${styles.flexColumn} ${styles.rating}`}>
+              <Rating />
             </div>
           </div>
         </section>

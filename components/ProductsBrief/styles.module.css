@@ -1,0 +1,31 @@
+.container {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  width: 31%;
+  height: 50px;
+
+  background-color: #22FF7A;
+  border-radius: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item.red {
+  background-color: #FA3333;
+  color: #FFFFFF;
+}
+
+.item h4 {
+  font-family: 'Overpass-Black';
+  margin-right: 15px;
+}
+.item h5 {
+  font-family: 'Overpass-Regular';
+}

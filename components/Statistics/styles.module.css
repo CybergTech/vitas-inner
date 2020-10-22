@@ -130,7 +130,7 @@
 
 .statistic a .info h5.badStatistic,
 .statistic a .info h5.badStatistic .icon {
-  color: #fc4e4e;
+  color: #FA3333;
 }
 .statistic a .info h5.badStatistic .icon {
   transform: rotate(180deg);

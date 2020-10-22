@@ -29,3 +29,9 @@
 .flexColumn.normalColumn {
   width: 48%;
 }
+.flexColumn.brief {
+  width: 65%;
+}
+.flexColumn.rating {
+  width: 31%;
+}

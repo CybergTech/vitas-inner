@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 26px;
+}
+.icon + .icon {
+  margin-left: .3rem;
+}
+
+.container h3 {
+  position: relative;
+  top: 2px;
+
+  font-size: 26px;
+  font-family: 'Overpass-Bold';
+  color: #FFFFFF;
+}

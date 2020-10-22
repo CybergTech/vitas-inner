@@ -21,7 +21,7 @@ class Clock extends Component {
 
     this.timerID = setInterval(
       () => this.tick(),
-      5000
+      10000
     )
   }
 
@@ -51,6 +51,7 @@ class Clock extends Component {
     return (
       <div className={styles.clock}>
         <h3 className={styles.time}>{this.state.timeToRender}</h3>
+        <hr className={styles.divisionLine} />
         <h4 className={styles.date}>{this.state.dateToRender} - {this.state.weekDayToRender}</h4>
       </div>
     )

@@ -4,9 +4,13 @@ import Head from 'next/head'
 import AsideBar from '../../components/AsideBar'
 import Header from '../../components/Header'
 import Clock from '../../components/Clock'
+import Reminders from '../../components/Reminders'
+import SalesReport from '../../components/SalesReport'
+import Statistics from '../../components/Statistics'
 
 import grid from '../../styles/grid/dashboard.module.css'
-import styles from '../../styles/main.module.css'
+import mainStyles from '../../styles/main.module.css'
+import styles from '../../styles/Dashboard.module.css'
 
 function Dashboard () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
@@ -26,8 +30,21 @@ function Dashboard () {
       </header>
 
       <main className={grid.main}>
-        <section className={styles.section}>
-          <Clock />
+        <section className={mainStyles.section}>
+          <div className={styles.row}>
+            <div className={`${styles.flexColumn} ${styles.clockAndGraphics}`}>
+              <div className={styles.row}>
+                <Clock />
+                <Reminders />
+              </div>
+
+              <SalesReport />
+            </div>
+
+            <div className={`${styles.flexColumn} ${styles.statitics}`}>
+              <Statistics />
+            </div>
+          </div>
         </section>
       </main>
     </div>

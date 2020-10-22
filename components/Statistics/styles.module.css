@@ -1,0 +1,127 @@
+.title {
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+
+  background-color: #383B3E;
+  border-radius: 2px;
+  color: #FFFFFF;
+  font-size: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select {
+  width: 32%;
+  padding: 0;
+  font-size: 12px;
+
+  border: 1px solid transparent;
+  line-height: 1;
+  border-radius: 2px;
+  color: #FFF7;
+  background-color: transparent;
+
+  outline: 0;
+  transition: all ease 200ms;
+}
+
+.select:hover {
+  background-color: #FFF2;
+}
+
+.select:active {
+  background-color: #22FF7A;
+  color: #161A1D;
+}
+
+.statisticsWrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.statistic {
+  position: relative;
+  height: 31%;
+  width: 100%;
+}
+
+.statistic a {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  border: 5px solid #383B3E;
+  background-color: #383B3E;
+  border-radius: 2px;
+  transition: all ease 200ms;
+}
+.statistic a:hover {
+  border-color: #22FF7A;
+  background-color: #22FF7A;
+}
+
+.statistic a .info {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+
+  border-radius: 2px;
+  background-color: #222527;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statistic a .info .icon {
+  color: #22FF7A;
+  font-size: 22px;
+}
+
+.statistic a .info .content {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.statistic a .info h4 {
+  flex: 1;
+  margin: 0 1.2rem;
+  line-height: 22px;
+
+  color: #FFFFFF;
+  font-size: 22px;
+  font-family: 'Overpass-ExtraBold';
+}
+.statistic a .info h4 span {
+  color: #FFF7;
+  font-size: 14px;
+  font-family: 'Overpass-Regular';
+}
+
+.statistic a .info h5 {
+  font-size: 12px;
+  color: #22FF7A;
+}
+.statistic a .info h5 .icon {
+  font-size: 8px;
+  margin-right: 5px;
+}
+
+.statistic a .info h5.badStatistic,
+.statistic a .info h5.badStatistic .icon {
+  color: #fc4e4e;
+}
+.statistic a .info h5.badStatistic .icon {
+  transform: rotate(180deg);
+}

@@ -19,7 +19,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-google-recaptcha-v3": "^1.6.1",
-    "react-slide-toggle": "^0.3.5"
+    "react-slide-toggle": "^0.3.5",
+    "recharts": "^1.8.5"
   },
   "devDependencies": {
     "eslint": "^7.8.1",

@@ -9,7 +9,7 @@
 .wrapper {
   grid-template-columns: [first] auto repeat(12, minmax(auto, 1fr));
   /* column-gap: 15px; */
-  grid-template-rows: 90px 1fr;
+  grid-template-rows: 14% 86%;
   grid-template-areas:
     "aside header header header header header header header header header header header header"
     "aside main main main main main main main main main main main main"
@@ -42,4 +42,6 @@
 .main {
   grid-area: main;
   position: relative;
+  height: 100%;
+  overflow-y: auto;
 }

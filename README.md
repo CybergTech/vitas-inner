@@ -3,7 +3,8 @@
 #### Colors:
 
 - Fluorescent Green -> #22FF7A
-- Dark Gray -> #161A1D
+- Dark Gray 1 -> #161A1D
+- Dark Gray 2 -> #222527
 - Middle Gray -> #383B3E
 - Light Gray -> #EFEEEE
 - White -> #FFFFFF

@@ -16,6 +16,13 @@ import grid from '../../styles/grid/dashboard.module.css'
 import mainStyles from '../../styles/main.module.css'
 import styles from '../../styles/Dashboard.module.css'
 
+const paths = [
+  {
+    name: 'Dashboard',
+    href: '/dashboard'
+  }
+]
+
 function Dashboard () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
 
@@ -30,7 +37,11 @@ function Dashboard () {
       </aside>
 
       <header className={grid.header}>
-        <Header minimizedMenu={minimizedMenu} setMinimizedMenu={setMinimizedMenu} />
+        <Header
+          minimizedMenu={minimizedMenu}
+          setMinimizedMenu={setMinimizedMenu}
+          paths={paths}
+        />
       </header>
 
       <main className={grid.main}>

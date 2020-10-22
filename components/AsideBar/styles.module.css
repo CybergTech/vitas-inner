@@ -104,7 +104,6 @@
 }
 
 
-
 .nav.minimizedNav {
   padding: 2% 10%;
 }
@@ -153,6 +152,50 @@
 .nav.minimizedNav .listItem .list .listItem:hover {
   min-height: auto;
   border-color: #383B3E;
+}
+
+
+
+.listItem.opened > div > a > .chevron {
+  transform: rotate(90deg);
+}
+
+.listItem.opened .list {
+  display: inline;
+}
+
+.listItem.opened a {
+  opacity: 1;
+}
+
+.listItem.opened > div > a,
+.listItem.opened > div .listItem.active {
+  background-color: #383B3E22;
+  opacity: .5;
+}
+.listItem.opened a .list {
+  background-color: #161A1D;
+}
+.listItem.opened .list .listItem:first-child {
+  border-top: 1px solid #383B3E;
+}
+.listItem.opened .list .listItem:last-child {
+  border-bottom: none;
+}
+
+
+.nav.minimizedNav .listItem.opened .list {
+  display: none;
+}
+.nav.minimizedNav .listItem.opened:hover .list {
+  display: inline;
+}
+
+.nav.minimizedNav .listItem.opened > div > a,
+.nav.minimizedNav .listItem.opened > div .listItem.active,
+.nav.minimizedNav .listItem.opened > div a:hover {
+  background-color: #27292b;
+  opacity: 1;
 }
 
 /* @keyframes iconSlide {

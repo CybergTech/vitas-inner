@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
+import Path from './Path'
 
-function Header ({ minimizedMenu, setMinimizedMenu }) {
+function Header ({ minimizedMenu, setMinimizedMenu, paths }) {
   const [checked, setChecked] = useState(false)
 
   return (
@@ -19,7 +20,7 @@ function Header ({ minimizedMenu, setMinimizedMenu }) {
           <FontAwesomeIcon icon={`${!minimizedMenu ? 'outdent' : 'indent'}`} />
         </button>
 
-        <h4>Dashboard</h4>
+        <Path paths={paths} />
       </div>
 
       <div className={styles.column}>

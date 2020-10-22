@@ -143,8 +143,8 @@
 
 .switchContainer {
   position: fixed;
-  right: 2%;
-  bottom: 3%;
+  right: 1.5%;
+  bottom: 13%;
   display: flex;
 
   z-index: 30;

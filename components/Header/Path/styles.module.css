@@ -1,0 +1,41 @@
+.container {
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+}
+
+.item {
+  width: fit-content;
+  margin-right: 10px;
+
+  color: #FFFFFF;
+
+  display: flex;
+  align-items: center;
+}
+.item a {
+  font-size: 16px;
+  font-family: 'Overpass-Regular';
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+.item:last-child a {
+  font-family: 'Overpass-SemiBold';
+  pointer-events: none;
+}
+
+.icon {
+  position: relative;
+  top: -1px;
+  margin-left: 10px;
+  font-size: 6px;
+  color: #FFF7;
+}

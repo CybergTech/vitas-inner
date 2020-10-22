@@ -9,12 +9,18 @@ import styles from './styles.module.css'
 
 function AsideBar ({ activeLink, minimizedMenu }) {
   useEffect(() => {
-    const element = document.querySelector(`[${activeLink}]`)
-    if (element) {
-      element.classList.add(styles.active)
+    const elements = document.querySelectorAll(`[${activeLink}]`)
+    if (elements.length + 0) {
+      elements.forEach(element => {
+        element.classList.add(styles.active)
+
+        if (element.querySelector('div') && element.querySelector('div').childNodes[1]) {
+          element.classList.add(styles.opened)
+        }
+      })
     }
 
-    document.querySelectorAll(`.${styles.listItem} > div`).forEach(e => {
+    document.querySelectorAll(`.${styles.listItem}:not(.${styles.opened}) > div`).forEach(e => {
       e.onmouseenter = () => {
         if (e.childNodes[1]) {
           e.childNodes[1].style.display = 'inline'
@@ -75,9 +81,11 @@ function AsideBar ({ activeLink, minimizedMenu }) {
           <li
             className={styles.listItem}
             products="true"
+            product-painel="true"
+            product-register="true"
           >
             <div>
-              <Link href="/dashboard">
+              <Link href="/dashboard/produtos">
                 <a>
                   <span>
                     <FontAwesomeIcon icon="box" className={styles.icon} />
@@ -88,12 +96,29 @@ function AsideBar ({ activeLink, minimizedMenu }) {
               </Link>
 
               <ul className={styles.list}>
-                <li className={styles.listItem}>
-                  <Link href="/dashboard">
+                <li
+                  className={styles.listItem}
+                  product-painel="true"
+                >
+                  <Link href="/dashboard/produtos">
                     <a>
                       <span>
                         <FontAwesomeIcon icon="box" className={styles.icon} />
-                        <span>Meus produtos</span>
+                        <span>Painel</span>
+                      </span>
+                      <FontAwesomeIcon icon="chevron-right" className={`${styles.icon} ${styles.chevron}`} />
+                    </a>
+                  </Link>
+                </li>
+                <li
+                  className={styles.listItem}
+                  product-register="true"
+                >
+                  <Link href="/dashboard/produtos/cadastrar">
+                    <a>
+                      <span>
+                        <FontAwesomeIcon icon="box" className={styles.icon} />
+                        <span>Cadastrar</span>
                       </span>
                       <FontAwesomeIcon icon="chevron-right" className={`${styles.icon} ${styles.chevron}`} />
                     </a>

@@ -83,6 +83,7 @@ function AsideBar ({ activeLink, minimizedMenu }) {
             products="true"
             product-painel="true"
             product-register="true"
+            product-list="true"
           >
             <div>
               <Link href="/dashboard/produtos">
@@ -119,6 +120,20 @@ function AsideBar ({ activeLink, minimizedMenu }) {
                       <span>
                         <FontAwesomeIcon icon="box" className={styles.icon} />
                         <span>Cadastrar</span>
+                      </span>
+                      <FontAwesomeIcon icon="chevron-right" className={`${styles.icon} ${styles.chevron}`} />
+                    </a>
+                  </Link>
+                </li>
+                <li
+                  className={styles.listItem}
+                  product-list="true"
+                >
+                  <Link href="/dashboard/produtos/lista">
+                    <a>
+                      <span>
+                        <FontAwesomeIcon icon="box" className={styles.icon} />
+                        <span>Lista</span>
                       </span>
                       <FontAwesomeIcon icon="chevron-right" className={`${styles.icon} ${styles.chevron}`} />
                     </a>

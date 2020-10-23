@@ -6,7 +6,40 @@
   justify-content: space-between;
 }
 
+.row {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.row.biggerRow {
+  flex: 1;
+  margin-top: 1rem;
+}
+
+.flexColumn {
+  position: relative;
+  height: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flexColumn.biggerColumn {
+  min-width: 66%;
+  padding-right: 2rem;
+
+  border-right: 1px solid #383B3E;
+}
+.flexColumn.littleColumn {
+  flex: 1;
+  padding-left: 2rem;
+}
+
 .item {
+  position: relative;
   width: 31%;
   height: 50px;
 
@@ -21,6 +54,28 @@
   background-color: #FA3333;
   color: #FFFFFF;
 }
+.item.gray {
+  background-color: #383B3E;
+  color: #FFFFFF;
+}
+.item.biggerItem {
+  height: 100%;
+  padding: 20px;
+
+  flex-direction: column;
+  justify-content: space-around;
+}
+.item.biggerItemRow {
+  width: 100%;
+}
+.item.biggerItemHeight {
+  padding: 25px 10px;
+  height: 120px;
+}
+.item.biggerItemHeight .flexColumn {
+  height: 100%;
+  align-items: center;
+}
 
 .item h4 {
   font-family: 'Overpass-Black';
@@ -28,4 +83,54 @@
 }
 .item h5 {
   font-family: 'Overpass-Regular';
+}
+
+
+.item.biggerItem h4 {
+  margin-right: 0;
+}
+.item.biggerItem p {
+  width: 100%;
+
+  text-align: center;
+  font-family: 'Overpass-Regular';
+  font-size: 14px;
+}
+.item.biggerItem h5 {
+  padding: 5px 12px;
+  padding-bottom: 3px;
+
+  border-radius: 2px;
+  font-family: 'Overpass-Black';
+  font-size: 16px;
+  background-color: #22FF7A;
+  color: #161A1D;
+}
+
+.item.biggerItemRow {
+  font-family: 'Overpass-Regular';
+}
+.item.biggerItemRow span {
+  font-family: 'Overpass-Black';
+  margin-right: 10px;
+}
+
+.item.biggerItemHeight .row {
+  justify-content: space-around;
+}
+.item.biggerItemHeight p span {
+  margin-right: 0;
+}
+.item.biggerItemHeight h4 {
+  font-family: 'Overpass-SemiBold';
+  color: #22FF7A;
+  margin-right: 0;
+  font-size: 14px;
+}
+
+.bigArrow {
+  position: absolute;
+  bottom: 7px;
+  left: 5%;
+  width: calc(90% - 2rem);
 }

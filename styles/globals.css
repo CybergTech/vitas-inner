@@ -45,7 +45,7 @@
   font-weight: normal;
 
   scrollbar-width: thin;
-  scrollbar-color: #22FF7AAA transparent;
+  scrollbar-color: #383B3E transparent;
 }
 
 * ::-webkit-scrollbar {
@@ -55,7 +55,7 @@
   background: transparent;
 }
 * ::-webkit-scrollbar-thumb {
-  background-color: #22FF7AAA;
+  background-color: #383B3E;
   border-radius: 30px;
 }
 

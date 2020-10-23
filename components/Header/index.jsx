@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import Link from 'next/link'
@@ -9,13 +10,18 @@ import Path from './Path'
 function Header ({ minimizedMenu, setMinimizedMenu, paths }) {
   const [checked, setChecked] = useState(false)
 
+  function handleChangeMenuVisibility () {
+    localStorage.setItem('minimizedMenu', !minimizedMenu)
+    setMinimizedMenu(!minimizedMenu)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.column}>
         <button
           className={styles.hideMenuButton}
           title={`${!minimizedMenu ? 'Esconder' : 'Mostrar'} o menu`}
-          onClick={() => setMinimizedMenu(!minimizedMenu)}
+          onClick={() => handleChangeMenuVisibility()}
         >
           <FontAwesomeIcon icon={`${!minimizedMenu ? 'outdent' : 'indent'}`} />
         </button>

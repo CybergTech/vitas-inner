@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable no-undef */
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import AsideBar from '../../components/AsideBar'
@@ -25,6 +26,12 @@ const paths = [
 
 function Dashboard () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.minimizedMenu !== undefined) {
+      setMinimizedMenu(localStorage.minimizedMenu === 'true')
+    }
+  }, [])
 
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>

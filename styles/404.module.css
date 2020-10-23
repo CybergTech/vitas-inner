@@ -1,0 +1,25 @@
+.row {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.container h2 {
+  color: #22FF7A;
+  font-size: 24px;
+}
+.container p {
+  width: 45%;
+  margin-top: 1rem;
+
+  line-height: 25px;
+  color: #FFF7;
+}

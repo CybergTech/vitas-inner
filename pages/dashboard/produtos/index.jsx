@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+/* eslint-disable no-undef */
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import AsideBar from '../../../components/AsideBar'
 import Header from '../../../components/Header'
 import Clock from '../../../components/Clock'
 import ProductsBrief from '../../../components/ProductsBrief'
+import Button from '../../../components/Button'
 
 import grid from '../../../styles/grid/dashboard.module.css'
 import mainStyles from '../../../styles/main.module.css'
@@ -27,6 +28,12 @@ function productPainel () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
   const [text, setText] = useState('')
 
+  useEffect(() => {
+    if (localStorage.minimizedMenu !== undefined) {
+      setMinimizedMenu(localStorage.minimizedMenu === 'true')
+    }
+  }, [])
+
   function handleShowProductsList () {
     setText(<FontAwesomeIcon icon="spinner" pulse className={styles.loadingIcon} />)
     document.querySelector(`.${styles.wrapper}`).classList.add(styles.active)
@@ -35,7 +42,7 @@ function productPainel () {
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
       <Head>
-        <title>Dashboard - Ecovitas Marketplace</title>
+        <title>Painel - Produtos - Ecovitas Marketplace</title>
       </Head>
 
       <aside className={grid.aside}>
@@ -63,22 +70,17 @@ function productPainel () {
 
         <section className={mainStyles.section}>
           <div className={`${styles.row} ${styles.start}`}>
-            <button className={styles.button}>
-              <Link href="/dashboard/produtos/cadastrar">
-                <a>
-                  <FontAwesomeIcon icon="plus" className={styles.icon} />
-                  Adicionar produto
-                </a>
-              </Link>
-            </button>
-            <button className={styles.button}>
-              <Link href="/dashboard/produtos/lista">
-                <a>
-                  <FontAwesomeIcon icon="th-list" className={styles.icon} />
-                  Lista dos produtos
-                </a>
-              </Link>
-            </button>
+            <Button
+              icon="plus"
+              text="Adicionar produto"
+              link="/dashboard/produtos/cadastrar"
+            />
+
+            <Button
+              icon="th-list"
+              text="Lista dos produtos"
+              link="/dashboard/produtos/lista"
+            />
           </div>
 
           <div className={styles.row}>
@@ -87,13 +89,11 @@ function productPainel () {
         </section>
 
         <section className={mainStyles.section}>
-          <button
-            className={styles.transparentButton}
+          <Button
+            icon="th-list"
+            text="Mostrar aqui minha lista de produtos"
             onClick={() => handleShowProductsList()}
-          >
-            Mostrar aqui minha lista de produtos
-            <FontAwesomeIcon icon="chevron-down" className={styles.icon} />
-          </button>
+          />
 
           <div className={styles.wrapper}>
             {text}

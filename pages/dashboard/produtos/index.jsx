@@ -24,7 +24,7 @@ const paths = [
   }
 ]
 
-function productPainel () {
+function ProductPainel () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
   const [text, setText] = useState('')
 
@@ -61,28 +61,28 @@ function productPainel () {
         <section className={mainStyles.section}>
           <div className={styles.row}>
             <div className={`${styles.flexColumn}`}>
-              <div className={styles.row}>
-                <Clock />
+              <Clock />
+            </div>
+
+            <div className={styles.flexColumn}>
+              <div className={`${styles.row} ${styles.linkButtons}`}>
+                <Button
+                  icon="plus"
+                  text="Adicionar produto"
+                  link="/dashboard/produtos/cadastrar"
+                />
+
+                <Button
+                  icon="th-list"
+                  text="Lista dos produtos"
+                  link="/dashboard/produtos/lista"
+                />
               </div>
             </div>
           </div>
         </section>
 
         <section className={mainStyles.section}>
-          <div className={`${styles.row} ${styles.start}`}>
-            <Button
-              icon="plus"
-              text="Adicionar produto"
-              link="/dashboard/produtos/cadastrar"
-            />
-
-            <Button
-              icon="th-list"
-              text="Lista dos produtos"
-              link="/dashboard/produtos/lista"
-            />
-          </div>
-
           <div className={styles.row}>
             <ProductsBrief completeVersion />
           </div>
@@ -104,4 +104,4 @@ function productPainel () {
   )
 }
 
-export default productPainel
+export default ProductPainel

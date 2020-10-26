@@ -18,6 +18,9 @@
   display: flex;
   align-items: center;
 }
+.button.darkest {
+  background-color: #222527;
+}
 
 .button a {
   padding: 8px 18px;

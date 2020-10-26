@@ -12,6 +12,10 @@
 .row + .row {
   margin-top: 1.2rem;
 }
+.row.linkButtons {
+  height: 100px;
+  align-items: flex-end;
+}
 
 .flexColumn {
   position: relative;
@@ -21,6 +25,9 @@
   justify-content: space-between;
 }
 
+.flexColumn.wideColumn {
+  width: 100%;
+}
 .flexColumn.clockAndGraphics {
   width: 72%;
   height: 480px;

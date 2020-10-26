@@ -28,12 +28,12 @@ const paths = [
     href: '/dashboard/produtos'
   },
   {
-    name: 'Cadastrar',
-    href: '/dashboard/produtos/cadastrar'
+    name: 'Lista',
+    href: '/dashboard/produtos/lista'
   }
 ]
 
-function ProductRegister () {
+function ProductList () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
 
   const [key, setKey] = useState(0)
@@ -87,11 +87,11 @@ function ProductRegister () {
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
       <Head>
-        <title>Cadastrar - Produtos - Ecovitas Marketplace</title>
+        <title>Lista - Produtos - Ecovitas Marketplace</title>
       </Head>
 
       <aside className={grid.aside}>
-        <AsideBar activeLink="product-register" minimizedMenu={minimizedMenu} />
+        <AsideBar activeLink="product-list" minimizedMenu={minimizedMenu} />
       </aside>
 
       <header className={grid.header}>
@@ -118,9 +118,9 @@ function ProductRegister () {
                 />
 
                 <Button
-                  icon="th-list"
-                  text="Lista dos produtos"
-                  link="/dashboard/produtos/lista"
+                  icon="plus"
+                  text="Adicionar produto"
+                  link="/dashboard/produtos/cadastrar"
                 />
               </div>
             </div>
@@ -178,4 +178,4 @@ function ProductRegister () {
   )
 }
 
-export default ProductRegister
+export default ProductList

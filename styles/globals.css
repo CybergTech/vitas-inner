@@ -39,7 +39,6 @@
 
 * {
   box-sizing: border-box;
-  outline: none;
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -57,6 +56,9 @@
 * ::-webkit-scrollbar-thumb {
   background-color: #383B3E;
   border-radius: 30px;
+}
+* ::-webkit-scrollbar-thumb:hover {
+  background-color: #585b5e;
 }
 
 
@@ -106,6 +108,14 @@ textarea {
   color: #FFF7;
 }
 
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+input {
+  outline: none;
+}
+
 button,
 input[type=image],
 a {
@@ -150,7 +160,7 @@ h6 {
   bottom: 4%;
   right: 0;
   width: 310px;
-  height: 80vh;
+  height: auto;
   padding-right: 20px;
   z-index: 9999;
 

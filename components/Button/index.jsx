@@ -5,11 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
-function Button ({ icon, text, link, ...rest }) {
-  const extraClasses = !link ? styles.notALink : ''
+function Button ({ icon, text, link, submitButton, darkestBackground, ...rest }) {
+  let extraClasses = !link ? styles.notALink : ''
+  extraClasses += ` ${submitButton && styles.submit}`
+  extraClasses += ` ${darkestBackground && styles.darkest}`
+
   const mainInfo = <>
     {icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
-    {text}
+    {text && text}
   </>
 
   return (

@@ -7,31 +7,10 @@
   margin-top: 2rem;
 }
 
-.sectionFlex {
-  display: flex;
-  justify-content: space-between;
-}
+.sectionTitle {
+  margin-top: 1rem;
+  margin-bottom: .5rem;
 
-.titleSection {
-  font-size: 18px;
-  color: #E2352D;
-  margin-bottom: 5vh;
-}
-
-.mgB2 {
-  margin-bottom: 2vh;
-}
-
-.brandList {
-  position: relative;
-  width: 100%;
-}
-
-.productList {
-  position: relative;
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  color: #22FF7A;
+  font-size: 24px;
 }

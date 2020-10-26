@@ -1,0 +1,17 @@
+.form {
+  position: relative;
+  width: 55%;
+
+  display: flex;
+}
+
+.productList {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+
+  /* display: flex; */
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

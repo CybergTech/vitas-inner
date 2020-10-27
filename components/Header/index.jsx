@@ -20,10 +20,10 @@ function Header ({ minimizedMenu, setMinimizedMenu, paths }) {
       <div className={styles.column}>
         <button
           className={styles.hideMenuButton}
-          title={`${!minimizedMenu ? 'Esconder' : 'Mostrar'} o menu`}
           onClick={() => handleChangeMenuVisibility()}
         >
           <FontAwesomeIcon icon={`${!minimizedMenu ? 'outdent' : 'indent'}`} />
+          <span>{!minimizedMenu ? 'Esconder' : 'Mostrar'} o menu</span>
         </button>
 
         <Path paths={paths} />

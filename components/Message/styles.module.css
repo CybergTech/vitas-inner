@@ -127,10 +127,10 @@
   width: 100%;
 }
 .progressContainer.success {
-  background-color: #22FF7A77;
+  background-color: #22FF7A44;
 }
 .progressContainer.error {
-  background-color: #ff494977;
+  background-color: #ff494944;
 }
 
 .progressBar {

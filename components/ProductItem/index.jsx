@@ -14,9 +14,9 @@ function ProductItem ({ product, asList, showAddToCardButtons }) {
         <a className={styles.link}>
           <div
             className={`${styles.sex} ${asList ? styles.hide : ''}`}
-            title="Produto feminino"
           >
             <FontAwesomeIcon icon="female" />
+            <span>Produto feminino</span>
           </div>
 
           <img
@@ -37,7 +37,7 @@ function ProductItem ({ product, asList, showAddToCardButtons }) {
               </h4>
 
               <Button
-                text="Vender"
+                text="Cadastrar"
                 darkestBackground
               />
             </div>

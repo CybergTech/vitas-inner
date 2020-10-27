@@ -1,0 +1,316 @@
+.form {
+  position: relative;
+  width: 65%;
+
+  display: flex;
+}
+
+.tableContainer {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+
+  color: #FFFFFF;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.tableContainer > div {
+  font-size: 14px;
+  font-family: 'Overpass-Regular';
+}
+
+.table {
+  position: relative;
+  width: 100%;
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+.table thead th {
+  padding: 10px 0;
+  background-color: #383B3E;
+  color: #FFF7;
+  /* border-radius: 2px; */
+}
+.table thead th:first-child {
+  width: 4%;
+}
+.table thead th:nth-child(2),
+.table thead th:nth-child(3) {
+  width: 13%;
+}
+.table thead th:nth-child(4) {
+  width: 30%;
+  padding-left: 20px;
+  text-align: left;
+}
+.table thead th:nth-child(5),
+.table thead th:nth-child(7),
+.table thead th:nth-child(8) {
+  width: 9.5%;
+}
+.table thead th:nth-child(6) {
+  width: 11.5%;
+}
+
+.table thead th:nth-child(1n+2) {
+  border-left: 1px solid #222527;
+}
+
+.table thead th:first-child {
+  border-radius: 2px 0 0 2px;
+}
+.table thead th:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+.table tbody tr {
+  position: relative;
+}
+
+.table tbody td {
+  padding: 1.2rem 10px;
+
+  font-size: 14px;
+  font-family: 'Overpass-Regular';
+  text-align: center;
+
+  border-bottom: 1px solid #383B3E;
+}
+.table tbody td:nth-child(4) {
+  text-align: left;
+}
+.table tbody td:last-child {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .table tbody tr::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: .5%;
+
+  width: 99%;
+  height: 1px;
+
+  background-color: #383B3E;
+} */
+
+.table tbody td .row {
+  display: flex;
+  align-items: center;
+}
+.table tbody td .row img {
+  width: 30px;
+  margin-right: .6rem;
+}
+
+.table tbody td .success {
+  color: #22FF7A;
+}
+.table tbody td span {
+  position: relative;
+}
+
+.table tbody td span span {
+  display: none;
+
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5px);
+  width: 200px;
+  padding: .5rem;
+
+  animation: fadeIn 200ms;
+  z-index: 1050;
+
+  border-radius: 2px;
+  background-color: #161A1D;
+  color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+
+  font-family: 'Overpass-Regular';
+  font-size: 12px;
+}
+
+.table tbody td span:hover span {
+  display: inline;
+}
+
+.checkboxContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxLabel {
+  position: relative;
+  top: -1px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  font-size: 22px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkboxLabel .checkboxCustom {
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  transition: all 200ms ease-out;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  border: 1px solid #FFFFFF;
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkboxCustom {
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  border: 1px solid #22FF7A;
+}
+
+.checkboxLabel .checkboxCustom::after {
+  content: "";
+  height: 0px;
+  width: 0px;
+  opacity: 1;
+  border: solid #22FF7A;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  transition: all 200ms ease-out;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkboxCustom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  width: 2px;
+  height: 6px;
+  opacity: 1;
+  border: solid #22FF7A;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+}
+
+.label {
+  font-size: 14px;
+  font-family: 'Overpass-Regular';
+}
+
+
+.pagination {
+  margin-right: 2rem;
+}
+
+.paginationButtons,
+.bigStepsButtons {
+  display: flex;
+  align-items: center;
+}
+
+.paginationButtons > span {
+  margin: 0 .8rem;
+}
+
+.paginationButtons .button {
+  position: relative;
+  width: 20px;
+  height: 20px;
+
+  border: none;
+  background-color: transparent;
+  color: #FFFFFF;
+
+  cursor: pointer;
+}
+.paginationButtons .button + .button {
+  margin-left: .3rem;
+}
+
+.paginationButtons .button:disabled,
+.paginationButtons .button:disabled:hover {
+  background-color: transparent;
+  color: #FFF7;
+}
+
+.paginationButtons .button .icon {
+  font-size: 12px;
+}
+
+.paginationButtons .button span {
+  display: none;
+
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5px);
+  width: 110px;
+  padding: .5rem;
+
+  animation: fadeIn 200ms;
+  z-index: 1050;
+
+  border-radius: 2px;
+  border-top-right-radius: 0;
+  background-color: #161A1D;
+  color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+
+  font-family: 'Overpass-Regular';
+  font-size: 12px;
+}
+
+.paginationButtons .button:hover span {
+  display: inline;
+}
+
+.bigStepsButtons:first-child {
+  margin-right: 1rem;
+}
+.bigStepsButtons:last-child {
+  margin-left: 1rem;
+}
+
+
+
+@keyframes fadeIn {
+  0% {opacity: .2;}
+}

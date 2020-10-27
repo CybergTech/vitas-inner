@@ -46,5 +46,7 @@
   height: 100%;
 
   padding: 2rem 0;
+  padding-bottom: 7.5rem;
   overflow-y: auto;
+  overflow-x: hidden;
 }

@@ -8,7 +8,6 @@ import { exists } from '../../../services/validation'
 import AsideBar from '../../../components/AsideBar'
 import Header from '../../../components/Header'
 import Message from '../../../components/Message'
-import Clock from '../../../components/Clock'
 import Button from '../../../components/Button'
 import Input from '../../../components/Input'
 import ProductItem from '../../../components/ProductItem'
@@ -104,26 +103,18 @@ function ProductRegister () {
 
       <main className={grid.main}>
         <section className={mainStyles.section}>
-          <div className={dashboardStyles.row}>
-            <div className={`${dashboardStyles.flexColumn}`}>
-              <Clock />
-            </div>
+          <div className={`${dashboardStyles.row} ${dashboardStyles.start}`}>
+            <Button
+              icon="box"
+              text="Painel de produtos"
+              link="/dashboard/produtos"
+            />
 
-            <div className={dashboardStyles.flexColumn}>
-              <div className={`${dashboardStyles.row} ${dashboardStyles.linkButtons}`}>
-                <Button
-                  icon="box"
-                  text="Painel de produtos"
-                  link="/dashboard/produtos"
-                />
-
-                <Button
-                  icon="th-list"
-                  text="Lista dos produtos"
-                  link="/dashboard/produtos/lista"
-                />
-              </div>
-            </div>
+            <Button
+              icon="th-list"
+              text="Lista dos produtos"
+              link="/dashboard/produtos/lista"
+            />
           </div>
         </section>
 

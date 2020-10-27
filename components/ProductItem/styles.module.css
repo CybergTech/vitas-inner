@@ -32,6 +32,33 @@
   color: #FFF4;
 }
 
+.sex span {
+  display: none;
+
+  position: absolute;
+  left: 0;
+  top: calc(100% + 5px);
+  width: 130px;
+  padding: .5rem;
+
+  animation: fadeIn 200ms;
+
+  border-radius: 2px;
+  background-color: #161A1D;
+  color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+
+  font-family: 'Overpass-Regular';
+  font-size: 14px;
+  text-align: center;
+}
+
+.sex:hover span {
+  display: inline;
+}
+
 .hide {
   display: none;
 }

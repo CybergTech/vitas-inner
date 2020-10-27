@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './styles.module.css'
 
 function Statistics () {
+  const [period, setPeriod] = useState('seven_days')
+  const [labelText, setLabelText] = useState('7 dias')
+
+  useEffect(() => {
+    if (period === 'seven_days') {
+      setLabelText('7 dias')
+    } else if (period === 'fifteen_days') {
+      setLabelText('15 dias')
+    } else {
+      setLabelText('30 dias')
+    }
+  }, [period])
+
   return (
     <>
       <div className={styles.title}>
         <span>Estatísticas</span>
 
-        <select className={styles.select}>
-          <option value="">7 dias</option>
-          <option value="">15 dias</option>
-          <option value="">30 dias</option>
+        <select
+          className={styles.select}
+          value={period}
+          onChange={e => setPeriod(e.target.value)}
+        >
+          <option value="seven_days">7 dias</option>
+          <option value="fifteen_days">15 dias</option>
+          <option value="thirty_days">30 dias</option>
         </select>
       </div>
 
@@ -29,9 +46,11 @@ function Statistics () {
                       <span>Pedidos</span><br />
                       26
                     </h4>
+
                     <h5 className={styles.badStatistic}>
                       <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
                       14,13%
+                      <span>Referente aos {labelText} passados</span>
                     </h5>
                   </div>
                 </div>
@@ -54,6 +73,7 @@ function Statistics () {
                     <h5>
                       <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
                       30,40
+                      <span>Referente aos {labelText} passados</span>
                     </h5>
                   </div>
                 </div>
@@ -76,6 +96,7 @@ function Statistics () {
                     <h5>
                       <FontAwesomeIcon icon="long-arrow-alt-up" className={styles.icon} />
                       50,20
+                      <span>Referente aos {labelText} passados</span>
                     </h5>
                   </div>
                 </div>

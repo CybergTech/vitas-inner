@@ -4,17 +4,17 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .row.start {
   justify-content: flex-start;
 }
+.row.end {
+  justify-content: flex-end;
+}
 
 .row + .row {
   margin-top: 1.2rem;
-}
-.row.linkButtons {
-  height: 100px;
-  align-items: flex-end;
 }
 
 .flexColumn {

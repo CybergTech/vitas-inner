@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import AsideBar from '../../../components/AsideBar'
 import Header from '../../../components/Header'
-import Clock from '../../../components/Clock'
 import ProductsBrief from '../../../components/ProductsBrief'
 import Button from '../../../components/Button'
 
@@ -59,26 +58,18 @@ function ProductPainel () {
 
       <main className={grid.main}>
         <section className={mainStyles.section}>
-          <div className={styles.row}>
-            <div className={`${styles.flexColumn}`}>
-              <Clock />
-            </div>
+          <div className={`${styles.row} ${styles.start}`}>
+            <Button
+              icon="plus"
+              text="Adicionar produto"
+              link="/dashboard/produtos/cadastrar"
+            />
 
-            <div className={styles.flexColumn}>
-              <div className={`${styles.row} ${styles.linkButtons}`}>
-                <Button
-                  icon="plus"
-                  text="Adicionar produto"
-                  link="/dashboard/produtos/cadastrar"
-                />
-
-                <Button
-                  icon="th-list"
-                  text="Lista dos produtos"
-                  link="/dashboard/produtos/lista"
-                />
-              </div>
-            </div>
+            <Button
+              icon="th-list"
+              text="Lista dos produtos"
+              link="/dashboard/produtos/lista"
+            />
           </div>
         </section>
 

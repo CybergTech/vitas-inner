@@ -44,6 +44,10 @@
   font-size: 10px;
   margin-right: 8px;
 }
+.button .icon.reverse {
+  margin-right: 0;
+  margin-left: 8px;
+}
 
 .button a:hover,
 .button.notALink:hover {

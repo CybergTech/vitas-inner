@@ -12,6 +12,7 @@ function Button ({
   submitButton,
   darkestBackground,
   mini,
+  reverse,
   children,
   ...rest
 }) {
@@ -22,8 +23,16 @@ function Button ({
   const blockExtraClasses = ` ${mini && styles.mini}`
 
   const mainInfo = <>
-    {!!icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
-    {!!text && text}
+    {reverse
+      ? <>
+        {!!text && text}
+        {!!icon && <FontAwesomeIcon icon={icon} className={`${styles.icon} ${styles.reverse}`} />}
+      </>
+      : <>
+        {!!icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
+        {!!text && text}
+      </>
+    }
   </>
 
   return (

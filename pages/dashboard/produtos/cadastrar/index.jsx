@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { exists } from '../../../services/validation'
+import { exists } from '../../../../services/validation'
 
-import AsideBar from '../../../components/AsideBar'
-import Header from '../../../components/Header'
-import Message from '../../../components/Message'
-import Button from '../../../components/Button'
-import Input from '../../../components/Input'
-import ProductItem from '../../../components/ProductItem'
+import AsideBar from '../../../../components/AsideBar'
+import Header from '../../../../components/Header'
+import Message from '../../../../components/Message'
+import Button from '../../../../components/Button'
+import Input from '../../../../components/Input'
+import ProductItem from '../../../../components/ProductItem'
 
-import grid from '../../../styles/grid/dashboard.module.css'
-import mainStyles from '../../../styles/main.module.css'
-import dashboardStyles from '../../../styles/Dashboard.module.css'
-import styles from '../../../styles/ProductRegister.module.css'
+import grid from '../../../../styles/grid/dashboard.module.css'
+import mainStyles from '../../../../styles/main.module.css'
+import dashboardStyles from '../../../../styles/Dashboard.module.css'
+import styles from '../../../../styles/ProductRegister.module.css'
 
 const paths = [
   {
@@ -146,6 +146,15 @@ function ProductRegister () {
           </div>
 
           <div className={styles.productList}>
+            <div className={dashboardStyles.row}>
+              <Button
+                icon="long-arrow-alt-right"
+                text="Cadastrar novo produto"
+                link="/dashboard/produtos/cadastrar/novo"
+                reverse
+              />
+            </div>
+
             <ProductItem />
             <ProductItem />
             <ProductItem />

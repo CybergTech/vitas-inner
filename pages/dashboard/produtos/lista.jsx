@@ -16,7 +16,7 @@ import grid from '../../../styles/grid/dashboard.module.css'
 import mainStyles from '../../../styles/main.module.css'
 import dashboardStyles from '../../../styles/Dashboard.module.css'
 import buttonStyles from '../../../components/Button/styles.module.css'
-import styles from '../../../styles/ProductList.module.css'
+import styles from '../../../styles/product/ProductList.module.css'
 
 const Items = [
   {

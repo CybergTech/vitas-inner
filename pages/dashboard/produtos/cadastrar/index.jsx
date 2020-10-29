@@ -15,7 +15,7 @@ import ProductItem from '../../../../components/ProductItem'
 import grid from '../../../../styles/grid/dashboard.module.css'
 import mainStyles from '../../../../styles/main.module.css'
 import dashboardStyles from '../../../../styles/Dashboard.module.css'
-import styles from '../../../../styles/ProductRegister.module.css'
+import styles from '../../../../styles/product/ProductRegister.module.css'
 
 const paths = [
   {

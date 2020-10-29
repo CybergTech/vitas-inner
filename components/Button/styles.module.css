@@ -27,6 +27,7 @@
 }
 .button.submit {
   height: 50px;
+  justify-content: center;
 }
 
 .button a {

@@ -11,6 +11,7 @@ import '../services/fontawesome'
 
 import '../styles/globals.css'
 import '../styles/nprogress.css'
+import '../styles/suneditor.css'
 
 Router.events.on('routeChangeStart', url => {
   // console.log(`Loading: ${url}`)

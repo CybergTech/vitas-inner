@@ -4,11 +4,14 @@ import Head from 'next/head'
 
 import AsideBar from '../../../../components/AsideBar'
 import Header from '../../../../components/Header'
+import Message from '../../../../components/Message'
 import Button from '../../../../components/Button'
+import Input from '../../../../components/Input'
 
 import grid from '../../../../styles/grid/dashboard.module.css'
 import mainStyles from '../../../../styles/main.module.css'
 import dashboardStyles from '../../../../styles/Dashboard.module.css'
+import styles from '../../../../styles/product/NewProductRegister.module.css'
 
 const paths = [
   {
@@ -32,6 +35,50 @@ const paths = [
 function NewProductRegister () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
 
+  const [key, setKey] = useState(1)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [messages, setMessages] = useState([])
+
+  function handleFormSubmit (e) {
+    e.preventDefault()
+
+    if (!exists(email) && !exists(password)) {
+      setMessages([...messages, <Message
+        key={key}
+        type="error"
+        text="Por favor, preencha o campo de email e senha!"
+      />])
+    } else if (!exists(email)) {
+      setMessages([...messages, <Message
+        key={key}
+        type="error"
+        text="Por favor, preencha o campo de email!"
+      />])
+    } else if (!validEmail(email)) {
+      setMessages([...messages, <Message
+        key={key}
+        type="error"
+        text="Por favor, preencha um email válido!"
+      />])
+    } else if (!exists(password)) {
+      setMessages([...messages, <Message
+        key={key}
+        type="error"
+        text="Por favor, preencha o campo de senha!"
+      />])
+    } else {
+      setMessages([...messages, <Message
+        key={key}
+        type="success"
+        text="Todos os dados foram preenchidos!"
+      />])
+    }
+
+    setKey(key + 1)
+    Router.push('/dashboard')
+  }
+
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
       <Head>
@@ -52,25 +99,37 @@ function NewProductRegister () {
 
       <main className={grid.main}>
         <section className={mainStyles.section}>
-          <div className={`${dashboardStyles.row} ${dashboardStyles.start}`}>
-            <Button
-              icon="box"
-              text="Painel de produtos"
-              link="/dashboard/produtos"
-            />
-
-            <Button
-              icon="th-list"
-              text="Lista dos produtos"
-              link="/dashboard/produtos/lista"
-            />
-          </div>
-        </section>
-
-        <section className={mainStyles.section}>
           <div className={dashboardStyles.row}>
             <div className={`${dashboardStyles.flexColumn} ${dashboardStyles.wideColumn}`}>
-              <h3 className={mainStyles.sectionTitle}>Cadastrar o novo produto</h3>
+              <form className={styles.form}>
+                <div className={styles.formGroup}>
+                  <Input
+                    name="email"
+                    value={email}
+                    placeholder="Email"
+                    icon="envelope"
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <Input
+                    name="password"
+                    value={password}
+                    placeholder="Senha"
+                    type="password"
+                    icon="lock"
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  text="Continuar"
+                  style={{ width: '13%' }}
+                  submitButton
+                />
+              </form>
             </div>
           </div>
         </section>

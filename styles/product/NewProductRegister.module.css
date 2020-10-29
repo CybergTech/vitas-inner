@@ -1,0 +1,14 @@
+.form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  position: relative;
+  width: 100%;
+}
+.formGroup + .formGroup {
+  margin-top: 1rem;
+}

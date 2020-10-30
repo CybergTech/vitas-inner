@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
 }
+.inputBlock.zIndex800 {
+  z-index: 800;
+}
 
 .input {
   width: 100%;
@@ -28,6 +31,9 @@
 
 .pdR {
   padding-right: 40px;
+}
+.pdR2 {
+  padding-right: 80px;
 }
 
 .icon {
@@ -63,6 +69,20 @@
 }
 .opacity {
   opacity: .7;
+}
+
+.maxLengthContent {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  padding: 0 12px;
+
+  color: #FFF7;
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

@@ -1,8 +1,16 @@
 .form {
+  position: relative;
   width: 100%;
 
   display: flex;
   flex-direction: column;
+}
+
+.show {
+  display: inline;
+}
+.hide {
+  display: none;
 }
 
 .formGroup {
@@ -10,5 +18,239 @@
   width: 100%;
 }
 .formGroup + .formGroup {
+  margin-top: 1.5rem;
+}
+
+.groupSubtitles {
+  position: relative;
+  width: 100%;
+  margin-bottom: .5rem;
+
+  display: flex;
+  align-items: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #22FF7A;
+}
+
+.subtitleHelp {
+  position: relative;
+  top: 2px;
+
+  margin: 0 16px;
+  font-size: 11px;
+  color: #FFF7;
+}
+
+.subtitleHelp span {
+  display: none;
+
+  position: absolute;
+  left: 0;
+  top: calc(100% + 5px);
+  width: 200px;
+  padding: .5rem;
+
+  animation: fadeIn 200ms;
+  z-index: 1050;
+
+  border-radius: 2px;
+  background-color: #FFF;
+  color: #161A1D;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+
+  font-family: 'Overpass-Regular';
+}
+.subtitleHelp:hover span {
+  display: inline;
+}
+
+.line {
+  flex: 1;
+  border-top: 1px;
+  border-width: 1px;
+  border-color: #FFF7;
+}
+
+.searchInputGroup {
+  position: relative;
+  width: 100%;
+}
+
+.backgroundToSearch {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: #161A1D99;
+  animation: fadeIn 200ms;
+  z-index: 700;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+}
+.row + .row,
+.row.otherCategory {
   margin-top: 1rem;
+}
+
+.bigColumn {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.column {
+  position: relative;
+  height: 100%;
+  width: 20%;
+
+  margin-left: 1.5rem;
+}
+.column.fitContent {
+  width: fit-content;
+}
+
+.othersCategories {
+  position: relative;
+  width: 100%;
+}
+
+.searchResult {
+  position: absolute;
+  left: 0;
+  top: calc(100% - 2px);
+  width: 100%;
+  height: 300px;
+
+  border-radius: 0 0 2px 2px;
+  background-color: #383B3E;
+  animation: fadeIn 200ms;
+}
+.searchResult.zIndex799 {
+  z-index: 799;
+}
+
+.helpBlock {
+  padding-top: 5px;
+  color: #FFF;
+  font-size: 14px;
+  font-family: 'Overpass-Regular';
+}
+
+
+.checkboxContainer {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin-top: .5rem;
+}
+
+.checkboxLabel {
+  position: relative;
+  top: -1px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  font-size: 22px;
+  margin-right: 1rem;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkboxLabel .checkboxCustom {
+  height: 20px;
+  width: 20px;
+  background-color: #161A1D;
+  transition: all 200ms ease-out;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  border: 1px solid #FFF7;
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkboxCustom {
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  border-color: #22FF7A;
+}
+
+.checkboxLabel .checkboxCustom::after {
+  content: "";
+  height: 0px;
+  width: 0px;
+  opacity: 1;
+  border: solid #22FF7A;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  transition: all 200ms ease-out;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkboxCustom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  width: 3px;
+  height: 9px;
+  opacity: 1;
+  border: solid #22FF7A;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+}
+
+.label {
+  position: relative;
+  top: 1px;
+
+  color: #FFFFFF;
+  font-size: 16px;
+  font-family: 'Overpass-Bold';
+}
+
+
+.submitButtonContainer {
+  position: relative;
+  width: 13%;
+  margin-top: 3rem;
+}
+
+
+
+@keyframes fadeIn {
+  0% {opacity: .2;}
 }

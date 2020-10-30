@@ -29,6 +29,16 @@
   height: 50px;
   justify-content: center;
 }
+.button.withoutBack {
+  background-color: transparent;
+  padding: 0;
+  font-family: 'Overpass-Regular';
+}
+.button.borderedButton {
+  border: 2px solid #22FF7A;
+  background-color: transparent;
+  color: #22FF7A;
+}
 
 .button a {
   padding: 8px 18px;
@@ -41,10 +51,18 @@
   display: flex;
   align-items: center;
 }
+
 .button .icon {
   font-size: 10px;
   margin-right: 8px;
 }
+.button.borderedButton .icon {
+  position: relative;
+  top: -1px;
+  margin-right: 15px;
+  font-size: 12px;
+}
+
 .button .icon.reverse {
   margin-right: 0;
   margin-left: 8px;
@@ -55,6 +73,11 @@
   opacity: 1;
   background-color: #22FF7A;
   color: #161A1D;
+}
+.button.withoutBack:hover {
+  background-color: transparent;
+  color: #FFFFFF;
+  opacity: .89;
 }
 
 .buttonBlock.mini + .buttonBlock.mini {
@@ -67,10 +90,10 @@
 
   justify-content: center;
 }
-.buttonBlock.mini .button .icon {
+.buttonBlock.mini .button .icon,
+.button.iconMarginNone .icon {
   margin-right: 0;
 }
-
 
 .menu {
   display: none;

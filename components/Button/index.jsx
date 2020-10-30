@@ -13,14 +13,20 @@ function Button ({
   darkestBackground,
   mini,
   reverse,
+  iconMarginNone,
   children,
+  withoutBack,
+  borderedButton,
   ...rest
 }) {
+  const blockExtraClasses = ` ${mini && styles.mini}`
+
   let extraClasses = !link ? styles.notALink : ''
   extraClasses += ` ${submitButton && styles.submit}`
   extraClasses += ` ${darkestBackground && styles.darkest}`
-
-  const blockExtraClasses = ` ${mini && styles.mini}`
+  extraClasses += ` ${withoutBack && styles.withoutBack}`
+  extraClasses += ` ${borderedButton && styles.borderedButton}`
+  extraClasses += ` ${iconMarginNone && styles.iconMarginNone}`
 
   const mainInfo = <>
     {reverse
@@ -41,6 +47,7 @@ function Button ({
     >
       <button
         className={`${styles.button} ${extraClasses}`}
+        type="button"
         {...rest}
       >
         {link

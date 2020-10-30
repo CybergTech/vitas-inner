@@ -6,13 +6,16 @@ import useFocus from '../../hooks/useFocus'
 
 import styles from './styles.module.css'
 
-function Input ({ name, value, placeholder, icon, ...rest }) {
+function Input ({ name, value, placeholder, icon, maxLength, zIndex800, ...rest }) {
   const [inputRef, setInputFocus] = useFocus()
 
   const [passwordView, setPasswordView] = useState(false)
   const [eyeIcon, setEyeIcon] = useState('eye')
 
-  const extraClasses = rest.type && rest.type === 'password' && styles.pdR
+  const blockExtraClasses = ` ${zIndex800 && styles.zIndex800}`
+
+  let extraClasses = rest.type && rest.type === 'password' && styles.pdR
+  extraClasses += ` ${maxLength !== undefined && styles.pdR2}`
 
   useEffect(() => {
     if (rest.type && rest.type === 'password') {
@@ -29,19 +32,22 @@ function Input ({ name, value, placeholder, icon, ...rest }) {
   }, [passwordView])
 
   return (
-    <div className={styles.inputBlock}>
+    <div
+      className={`${styles.inputBlock} ${blockExtraClasses}`}
+    >
       <input
         type="text"
-        id={name}
-        name={name}
+        id={name !== undefined ? name : null}
+        name={name !== undefined ? name : null}
         value={value}
         placeholder={placeholder}
         className={`${styles.input} ${extraClasses}`}
         ref={inputRef}
+        maxLength={maxLength !== undefined ? Number(maxLength) : ''}
         {...rest}
       />
 
-      <label htmlFor={name} className={styles.icon}>
+      <label htmlFor={name !== undefined ? name : ''} className={styles.icon}>
         <FontAwesomeIcon icon={icon} />
       </label>
 
@@ -59,6 +65,14 @@ function Input ({ name, value, placeholder, icon, ...rest }) {
           />
         </div>
         : ''
+      }
+
+      {maxLength !== undefined &&
+        <div
+          className={styles.maxLengthContent}
+        >
+          {value.length}/{maxLength}
+        </div>
       }
     </div>
   )

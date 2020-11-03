@@ -63,3 +63,21 @@ export const cnpjMask = value => {
     .replace(/(\d{4})(\d)/, '$1-$2')
     .replace(/(-\d{2})\d+?$/, '$1')
 }
+
+export const eanMask = value => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{13})\d+?$/, '$1')
+}
+
+export const measureMask = value => {
+  value = value.replace(/\D/g, '')
+  // console.log(value)
+
+  value = Number(value).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })
+
+  return value
+}

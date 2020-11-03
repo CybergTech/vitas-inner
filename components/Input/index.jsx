@@ -1,12 +1,23 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CurrencyInput from 'react-currency-input'
 
 import useFocus from '../../hooks/useFocus'
 
 import styles from './styles.module.css'
 
-function Input ({ name, value, placeholder, icon, maxLength, zIndex800, ...rest }) {
+function Input ({
+  name,
+  value,
+  placeholder,
+  icon,
+  maxLength,
+  zIndex800,
+  prefix,
+  currencyInput,
+  ...rest
+}) {
   const [inputRef, setInputFocus] = useFocus()
 
   const [passwordView, setPasswordView] = useState(false)
@@ -14,8 +25,9 @@ function Input ({ name, value, placeholder, icon, maxLength, zIndex800, ...rest 
 
   const blockExtraClasses = ` ${zIndex800 && styles.zIndex800}`
 
-  let extraClasses = rest.type && rest.type === 'password' && styles.pdR
-  extraClasses += ` ${maxLength !== undefined && styles.pdR2}`
+  let extraClasses = ` ${(maxLength !== undefined && maxLength[1] === true) && styles.pdR2}`
+  extraClasses += ` ${((icon !== undefined) || (prefix !== undefined && prefix[1] === 'left')) && styles.pdL}`
+  extraClasses += ` ${((prefix !== undefined && prefix[1] === 'right') || (rest.type && rest.type === 'password')) && styles.pdR}`
 
   useEffect(() => {
     if (rest.type && rest.type === 'password') {
@@ -35,21 +47,44 @@ function Input ({ name, value, placeholder, icon, maxLength, zIndex800, ...rest 
     <div
       className={`${styles.inputBlock} ${blockExtraClasses}`}
     >
-      <input
-        type="text"
-        id={name !== undefined ? name : null}
-        name={name !== undefined ? name : null}
-        value={value}
-        placeholder={placeholder}
-        className={`${styles.input} ${extraClasses}`}
-        ref={inputRef}
-        maxLength={maxLength !== undefined ? Number(maxLength) : ''}
-        {...rest}
-      />
+      {currencyInput === undefined
+        ? <input
+          type="text"
+          id={name !== undefined ? name : null}
+          name={name !== undefined ? name : null}
+          value={value}
+          placeholder={placeholder}
+          className={`${styles.input} ${extraClasses}`}
+          ref={inputRef}
+          maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
+          {...rest}
+        />
+        : <CurrencyInput
+          id={name !== undefined ? name : null}
+          name={name !== undefined ? name : null}
+          value={value}
+          placeholder={placeholder}
+          className={`${styles.input} ${extraClasses}`}
+          ref={inputRef}
+          maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
+          {...rest}
+        />
+      }
 
-      <label htmlFor={name !== undefined ? name : ''} className={styles.icon}>
-        <FontAwesomeIcon icon={icon} />
-      </label>
+      {icon !== undefined &&
+        <label htmlFor={name !== undefined ? name : ''} className={styles.icon}>
+          <FontAwesomeIcon icon={icon} />
+        </label>
+      }
+
+      {prefix !== undefined &&
+        <label
+          htmlFor={name !== undefined ? name : ''}
+          className={`${styles.prefix} ${prefix[1] === 'right' ? styles.right : styles.left}`}
+        >
+          {prefix[0]}
+        </label>
+      }
 
       {rest.type && rest.type === 'password'
         ? <div
@@ -67,7 +102,7 @@ function Input ({ name, value, placeholder, icon, maxLength, zIndex800, ...rest 
         : ''
       }
 
-      {maxLength !== undefined &&
+      {(maxLength !== undefined && maxLength[1] === true) &&
         <div
           className={styles.maxLengthContent}
         >

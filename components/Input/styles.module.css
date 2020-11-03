@@ -14,7 +14,6 @@
   width: 100%;
   height: 100%;
   padding: 0 12px;
-  padding-left: 40px;
 
   border-radius: 2px;
   border: 1px solid #161A1D;
@@ -27,13 +26,18 @@
   align-items: center;
   justify-content: space-between;
 }
-
-
-.pdR {
+.input.pdL {
+  padding-left: 40px;
+}
+.input.pdR {
   padding-right: 40px;
 }
-.pdR2 {
+.input.pdR2 {
   padding-right: 80px;
+}
+
+.input:focus {
+  border-color: #22FF7A;
 }
 
 .icon {
@@ -43,12 +47,24 @@
   left: 12px;
   transition: all 200ms ease-in-out;
 }
-
 .input:focus + .icon {
   color: #22FF7A;
 }
-.input:focus {
-  border-color: #22FF7A;
+
+.prefix {
+  font-size: 14px;
+  color: #383B3E;
+  position: absolute;
+  transition: all 200ms ease-in-out;
+}
+.prefix.left {
+  left: 12px;
+}
+.prefix.right {
+  right: 12px;
+}
+.input:focus + .prefix {
+  color: #FFFFFF;
 }
 
 .eyeContent {

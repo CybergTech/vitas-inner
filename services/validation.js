@@ -73,7 +73,7 @@ function validDate (date, birthday = false) {
   if (!error && birthday) {
     const typedDate = new Date(date.split('/').reverse())
     const currentDate = new Date()
-    console.log(typedDate, currentDate)
+    // console.log(typedDate, currentDate)
 
     if (typedDate > currentDate) {
       error = true

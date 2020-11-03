@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react'
 import Head from 'next/head'
+import Router from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { exists } from '../../../../services/validation'
@@ -45,12 +46,9 @@ function NewProductRegister () {
   const [brandIcon, setBrandIcon] = useState('chevron-right')
   const [showBrandModal, setShowBrandModal] = useState(false)
 
-  const [category, setCategory] = useState('')
-  const [categoryIcon, setCategoryIcon] = useState('chevron-right')
-  const [showCategoryModal, setShowCategoryModal] = useState(false)
-
-  const [othersCategories, setOthersCategories] = useState([])
-  const [othersCategoriesIcon, setOthersCategoriesIcon] = useState([])
+  const [categories, setCategories] = useState([
+    { key: key, name: '', icon: 'chevron-right', showModal: false }
+  ])
 
   const [variation, setVariation] = useState(false)
 
@@ -72,67 +70,51 @@ function NewProductRegister () {
     setBrandIcon('chevron-right')
   }
 
-  function changeCategory (value) {
-    setCategory(value)
-
-    if (value.length > 0) {
-      setShowCategoryModal(true)
-      setCategoryIcon('spinner')
-    } else {
-      setShowCategoryModal(false)
-      setCategoryIcon('chevron-right')
-    }
-  }
-
-  function handleClearCategoryModal () {
-    setShowCategoryModal(false)
-    setCategoryIcon('chevron-right')
-  }
-
-  function addOtherCategory () {
-    setOthersCategories([
-      ...othersCategories,
-      { key: key, category: '', showModal: false }
+  function addCategory () {
+    setCategories([
+      ...categories,
+      { key: key, name: '', icon: 'chevron-right', showModal: false }
     ])
 
     setKey(key + 1)
   }
 
-  function removeOtherCategory (key) {
-    // document.querySelector(`[data-key="${index}"]`).remove()
-    const updatedOthersCategories = othersCategories.filter(otherCategory => otherCategory.key !== key)
-    setOthersCategories(updatedOthersCategories)
+  function removeCategory (key) {
+    const updatedCategories = categories.filter(category => category.key !== key)
+    setCategories(updatedCategories)
   }
 
-  function changeOtherCategory (position, field, value) {
-    const updatedOthersCategories = othersCategories.map((otherCategory, index) => {
+  function changeCategory (position, field, value) {
+    const updatedCategories = categories.map((category, index) => {
       if (index === position) {
         return {
-          ...otherCategory,
+          ...category,
           showModal: value.length > 0,
+          icon: (value.length > 0) ? 'spinner' : 'chevron-right',
           [field]: value
         }
       }
 
-      return otherCategory
+      return category
     })
 
-    setOthersCategories(updatedOthersCategories)
+    setCategories(updatedCategories)
   }
 
-  function handleClearOtherCategoryModal (position) {
-    const updatedOthersCategories = othersCategories.map((otherCategory, index) => {
+  function handleClearCategoryModal (position) {
+    const updatedCategories = categories.map((category, index) => {
       if (index === position) {
         return {
-          ...otherCategory,
-          showModal: false
+          ...category,
+          showModal: false,
+          icon: 'chevron-right'
         }
       }
 
-      return otherCategory
+      return category
     })
 
-    setOthersCategories(updatedOthersCategories)
+    setCategories(updatedCategories)
   }
 
   function handleFormSubmit (e) {
@@ -150,25 +132,19 @@ function NewProductRegister () {
         type="error"
         text="Por favor, preencha o campo de marca!"
       />])
-    } else if (!exists(category)) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Por favor, preencha o campo de categoria!"
-      />])
     } else {
-      let othersCategoriesCheck = true
-      othersCategories.forEach(otherCategory => {
-        if (!exists(otherCategory.category)) {
-          othersCategoriesCheck = false
+      let categoriesCheck = true
+      categories.forEach(category => {
+        if (!exists(category.name)) {
+          categoriesCheck = false
         }
       })
 
-      if (othersCategoriesCheck === false) {
+      if (categoriesCheck === false) {
         setMessages([...messages, <Message
           key={key}
           type="error"
-          text="Uma das categorias extras está sem preencher."
+          text="Uma das categorias está sem preencher."
         />])
       } else {
         setMessages([...messages, <Message
@@ -176,6 +152,8 @@ function NewProductRegister () {
           type="success"
           text="Todos os dados foram preenchidos!"
         />])
+
+        Router.push('/dashboard/produtos/cadastrar/novo2')
       }
     }
 
@@ -185,7 +163,7 @@ function NewProductRegister () {
   return (
     <div className={`${grid.wrapper} ${minimizedMenu && grid.hideMenu}`}>
       <Head>
-        <title>Cadastrar - Produtos - Ecovitas Marketplace</title>
+        <title>Novo - Cadastrar - Produtos - Ecovitas Marketplace</title>
       </Head>
 
       <aside className={grid.aside}>
@@ -217,7 +195,7 @@ function NewProductRegister () {
                     value={title}
                     placeholder=""
                     icon="heading"
-                    maxLength={200}
+                    maxLength={[200, true]}
                     onChange={e => setTitle(e.target.value)}
                   />
 
@@ -248,6 +226,7 @@ function NewProductRegister () {
                       icon={brandIcon}
                       zIndex800={!!showBrandModal}
                       onChange={e => changeBrand(e.target.value)}
+                      onBlur={() => handleClearBrandModal()}
                     />
 
                     <div
@@ -255,17 +234,17 @@ function NewProductRegister () {
                     ></div>
                   </div>
 
-                  <div className={styles.helpBlock}>
+                  {/* <div className={styles.helpBlock}>
                     <Button
                       text="Não achei a marca, cadastrar uma nova"
                       withoutBack
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className={styles.formGroup}>
                   <div className={styles.groupSubtitles}>
-                    <label htmlFor="category" className={styles.subtitle}>Categoria(s)</label>
+                    <label htmlFor="category0" className={styles.subtitle}>Categoria(s)</label>
                     <span className={styles.subtitleHelp}>
                       <FontAwesomeIcon icon="question-circle" />
                       <span></span>
@@ -274,82 +253,62 @@ function NewProductRegister () {
                   </div>
 
                   <div className={styles.searchInputGroup}>
-                    <div
-                      className={`${styles.backgroundToSearch} ${showCategoryModal ? styles.show : styles.hide}`}
-                      onClick={() => handleClearCategoryModal()}
-                    ></div>
-
-                    <div className={styles.row}>
-                      <div className={styles.bigColumn}>
-                        <Input
-                          name="category"
-                          value={category}
-                          placeholder=""
-                          icon={categoryIcon}
-                          zIndex800={!!showCategoryModal}
-                          onChange={e => changeCategory(e.target.value)}
-                        />
-
+                    {categories.map((category, index) => (
+                      <div className={styles.row} key={index}>
                         <div
-                          className={`${styles.searchResult} ${showCategoryModal ? `${styles.show} ${styles.zIndex799}` : styles.hide}`}
-                        ></div>
-                      </div>
-
-                      <div className={styles.column}>
-                        <Button
-                          icon="plus"
-                          text="Adicionar categoria"
-                          style={{ width: '100%' }}
-                          borderedButton
-                          submitButton
-                          onClick={() => addOtherCategory()}
-                        />
-                      </div>
-                    </div>
-
-                    {othersCategories.map((otherCategory, index) => (
-                      <div className={styles.othersCategories} key={index}>
-                        <div
-                          className={`${styles.backgroundToSearch} ${otherCategory.showModal ? styles.show : styles.hide}`}
-                          onClick={() => handleClearOtherCategoryModal(index)}
+                          className={`${styles.backgroundToSearch} ${category.showModal ? styles.show : styles.hide}`}
+                          onClick={() => handleClearCategoryModal(index)}
                         ></div>
 
-                        <div className={`${styles.row} ${styles.otherCategory}`}>
+                        <div className={`${styles.row} ${styles.category}`}>
                           <div className={styles.bigColumn}>
                             <Input
                               name={`category${index}`}
-                              value={otherCategory.category}
+                              value={category.name}
                               placeholder=""
-                              icon={categoryIcon}
-                              zIndex800={!!otherCategory.showModal}
-                              onChange={e => changeOtherCategory(index, 'category', e.target.value)}
+                              icon={category.icon}
+                              zIndex800={!!category.showModal}
+                              onChange={e => changeCategory(index, 'name', e.target.value)}
+                              onBlur={() => handleClearCategoryModal(index)}
                             />
 
                             <div
-                              className={`${styles.searchResult} ${otherCategory.showModal ? `${styles.show} ${styles.zIndex799}` : styles.hide}`}
+                              className={`${styles.searchResult} ${category.showModal ? `${styles.show} ${styles.zIndex799}` : styles.hide}`}
                             ></div>
                           </div>
 
-                          <div className={`${styles.column} ${styles.fitContent}`}>
-                            <Button
-                              icon="minus"
-                              borderedButton
-                              submitButton
-                              iconMarginNone
-                              onClick={() => removeOtherCategory(otherCategory.key)}
-                            />
-                          </div>
+                          {index === 0
+                            ? <div className={styles.column}>
+                              <Button
+                                icon="plus"
+                                text="Adicionar categoria"
+                                style={{ width: '100%' }}
+                                borderedButton
+                                submitButton
+                                onClick={() => addCategory()}
+                              />
+                            </div>
+                            : <div className={`${styles.column} ${styles.fitContent}`}>
+                              <Button
+                                icon="minus"
+                                borderedButton
+                                submitButton
+                                iconMarginNone
+                                onClick={() => removeCategory(category.key)}
+                              />
+                            </div>
+                          }
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className={styles.helpBlock}>
+                  {/* <div className={styles.helpBlock}>
                     <Button
                       text="Não achei a categoria, cadastrar uma nova"
                       withoutBack
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className={styles.formGroup}>

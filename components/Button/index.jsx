@@ -7,6 +7,7 @@ import styles from './styles.module.css'
 
 function Button ({
   icon,
+  content,
   text,
   link,
   submitButton,
@@ -17,9 +18,11 @@ function Button ({
   children,
   withoutBack,
   borderedButton,
+  justLikeInputs,
   ...rest
 }) {
-  const blockExtraClasses = ` ${mini && styles.mini}`
+  let blockExtraClasses = ` ${mini && styles.mini}`
+  blockExtraClasses += ` ${justLikeInputs && styles.justLikeInputs}`
 
   let extraClasses = !link ? styles.notALink : ''
   extraClasses += ` ${submitButton && styles.submit}`
@@ -28,13 +31,27 @@ function Button ({
   extraClasses += ` ${borderedButton && styles.borderedButton}`
   extraClasses += ` ${iconMarginNone && styles.iconMarginNone}`
 
+  const contentElement = content !== undefined
+    ? (
+      content[1] === 'icon'
+        ? <FontAwesomeIcon icon={content[0]} className={styles.icon} />
+        : <img
+          src={content[0]}
+          alt=""
+          className={styles.photo}
+        />
+    )
+    : ''
+
   const mainInfo = <>
     {reverse
       ? <>
         {!!text && text}
         {!!icon && <FontAwesomeIcon icon={icon} className={`${styles.icon} ${styles.reverse}`} />}
+        {contentElement}
       </>
       : <>
+        {contentElement}
         {!!icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
         {!!text && text}
       </>

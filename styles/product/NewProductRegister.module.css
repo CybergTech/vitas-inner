@@ -340,7 +340,6 @@
   font-family: 'Overpass-Bold';
 }
 
-
 .wrap {
 	perspective: 800px;
   perspective-origin: 50% 100px;
@@ -388,6 +387,90 @@
 	transform: translateZ(100px);
 }
 
+
+.photoButton {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  border: none;
+  border-radius: 2px;
+  background-color: #161A1D;
+  color: #FFF;
+  overflow: hidden;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+}
+
+.photoButton .prefix {
+  position: relative;
+  width: 18%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoButton .prefix .icon {
+  font-size: 18px;
+  color: #383B3E;
+  transition: all ease 200ms;
+}
+.photoButton:hover .prefix .icon {
+  color: #22FF7A;
+}
+
+.photoButton .prefix .photo {
+  height: 90%;
+  width: 90%;
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 2px 0 0 2px;
+}
+
+.photoButton .content {
+  flex: 1;
+  height: 100%;
+  padding: 10px;
+
+  overflow: hidden;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.photoButton .content:hover {
+  overflow: auto;
+}
+
+.removePhotoButton {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding: 3px 0;
+
+  color: #FFF;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all ease 200ms;
+
+  display: flex;
+}
+.removePhotoButton:hover {
+  color: #22FF7A;
+}
+
+.removePhotoButton .icon {
+  position: relative;
+  top: 1px;
+
+  font-size: 10px;
+  margin-right: 6px;
+}
 
 
 

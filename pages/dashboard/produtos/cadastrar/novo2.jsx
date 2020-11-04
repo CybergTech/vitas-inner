@@ -14,6 +14,7 @@ import Button from '../../../../components/Button'
 import Input from '../../../../components/Input'
 import Textarea from '../../../../components/Textarea'
 import Table from '../../../../components/Table'
+import UploadModal from '../../../../components/UploadModal'
 
 import 'suneditor/dist/css/suneditor.min.css'
 
@@ -80,6 +81,19 @@ function NewProductRegister () {
 
   const [ean, setEan] = useState('')
   const [helpEan, setHelpEan] = useState('')
+
+  const [contentPhotoButton, setContentPhotoButton] = useState([
+    ['camera', 'icon'], ['camera', 'icon'], ['camera', 'icon']
+  ])
+  const [photos, setPhotos] = useState([
+    {}, {}, {}, {}
+  ])
+  const [photosSrc, setPhotosSrc] = useState([
+    '', '', '', ''
+  ])
+
+  const [show, setShow] = useState(false)
+  const [currentPhoto, setCurrentPhoto] = useState(false)
 
   const [messages, setMessages] = useState([])
 
@@ -160,6 +174,23 @@ function NewProductRegister () {
   function changeEan (e) {
     setHelpEan('')
     setEan(eanMask(e))
+  }
+
+  function handleShowUploadModal (index) {
+    setCurrentPhoto(index)
+    setShow(true)
+  }
+
+  function clearPhoto (position) {
+    const updatedPhotos = photos.map((photo, index) => {
+      if (index === position) {
+        return {}
+      }
+
+      return photo
+    })
+
+    setPhotos(updatedPhotos)
   }
 
   function clearAllHelps () {
@@ -437,7 +468,7 @@ function NewProductRegister () {
                   </div>
                 </div>
 
-                <div className={styles.formGroup}>
+                {/* <div className={styles.formGroup}>
                   <div className={styles.groupSubtitles}>
                     <label htmlFor="shortDescription" className={styles.subtitle}>Descrição curta</label>
                     <span className={styles.subtitleHelp}>
@@ -458,7 +489,7 @@ function NewProductRegister () {
                   <div className={`${styles.helpBlock} ${styles.error}`}>
                     {helpShortDescription}
                   </div>
-                </div>
+                </div> */}
 
                 <div className={styles.formGroup}>
                   <div className={styles.groupSubtitles}>
@@ -681,6 +712,156 @@ function NewProductRegister () {
                       </div>
                     </div>
                   </div>
+
+                  <div className={styles.row}>
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label className={styles.inputLabel}>Foto 1</label>
+                      {Object.keys(photos[0]).length !== 0 &&
+                        <span
+                          className={styles.removePhotoButton}
+                          onClick={() => clearPhoto(0)}
+                        >
+                          <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                        </span>
+                      }
+
+                      <button
+                        type="button"
+                        className={styles.photoButton}
+                        onClick={() => handleShowUploadModal(0)}
+                      >
+                        <div className={styles.prefix}>
+                          {Object.keys(photos[0]).length === 0
+                            ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                            : <img
+                              src={photos[0].src}
+                              alt={photos[0][0].name}
+                              className={styles.photo}
+                            />
+                          }
+                        </div>
+                        <div className={styles.content}>
+                          {Object.keys(photos[0]).length === 0
+                            ? 'Insira a foto do produto'
+                            : photos[0][0].name
+                          }
+                        </div>
+                      </button>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label className={styles.inputLabel}>Foto 2</label>
+                      {Object.keys(photos[1]).length !== 0 &&
+                        <span
+                          className={styles.removePhotoButton}
+                          onClick={() => clearPhoto(1)}
+                        >
+                          <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                        </span>
+                      }
+
+                      <button
+                        type="button"
+                        className={styles.photoButton}
+                        onClick={() => handleShowUploadModal(1)}
+                      >
+                        <div className={styles.prefix}>
+                          {Object.keys(photos[1]).length === 0
+                            ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                            : <img
+                              src={photos[1].src}
+                              alt={photos[1][0].name}
+                              className={styles.photo}
+                            />
+                          }
+                        </div>
+                        <div className={styles.content}>
+                          {Object.keys(photos[1]).length === 0
+                            ? 'Insira a foto do produto'
+                            : photos[1][0].name
+                          }
+                        </div>
+                      </button>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label className={styles.inputLabel}>Foto 3</label>
+                      {Object.keys(photos[2]).length !== 0 &&
+                        <span
+                          className={styles.removePhotoButton}
+                          onClick={() => clearPhoto(2)}
+                        >
+                          <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                        </span>
+                      }
+
+                      <button
+                        type="button"
+                        className={styles.photoButton}
+                        onClick={() => handleShowUploadModal(2)}
+                      >
+                        <div className={styles.prefix}>
+                          {Object.keys(photos[2]).length === 0
+                            ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                            : <img
+                              src={photos[2].src}
+                              alt={photos[2][0].name}
+                              className={styles.photo}
+                            />
+                          }
+                        </div>
+                        <div className={styles.content}>
+                          {Object.keys(photos[2]).length === 0
+                            ? 'Insira a foto do produto'
+                            : photos[2][0].name
+                          }
+                        </div>
+                      </button>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label className={styles.inputLabel}>Foto 4</label>
+                      {Object.keys(photos[3]).length !== 0 &&
+                        <span
+                          className={styles.removePhotoButton}
+                          onClick={() => clearPhoto(3)}
+                        >
+                          <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                        </span>
+                      }
+
+                      <button
+                        type="button"
+                        className={styles.photoButton}
+                        onClick={() => handleShowUploadModal(3)}
+                      >
+                        <div className={styles.prefix}>
+                          {Object.keys(photos[3]).length === 0
+                            ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                            : <img
+                              src={photos[3].src}
+                              alt={photos[3][0].name}
+                              className={styles.photo}
+                            />
+                          }
+                        </div>
+                        <div className={styles.content}>
+                          {Object.keys(photos[3]).length === 0
+                            ? 'Insira a foto do produto'
+                            : photos[3][0].name
+                          }
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  <UploadModal
+                    show={show}
+                    setShow={setShow}
+                    photos={photos}
+                    setPhotos={setPhotos}
+                    currentPhoto={currentPhoto}
+                  />
                 </div>
 
                 <div className={styles.submitButtonContainer}>

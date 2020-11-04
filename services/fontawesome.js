@@ -11,7 +11,8 @@ import {
   faPlayCircle, faTh, faBox, faLayerGroup, faOutdent, faIndent, faSignOutAlt,
   faLongArrowAltUp, faLongArrowAltDown, faLongArrowAltRight, faMedal, faStar, faStarHalfAlt,
   faDollarSign, faCoins, faHeading, faQuestionCircle, faCommentAlt,
-  faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward
+  faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward,
+  faCamera, faCloudUploadAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -25,5 +26,6 @@ library.add(
   faPlayCircle, faTh, faBox, faLayerGroup, faOutdent, faIndent, faSignOutAlt,
   faLongArrowAltUp, faLongArrowAltDown, faLongArrowAltRight, faMedal, faStar, faStarHalfAlt,
   faDollarSign, faCoins, faHeading, faQuestionCircle, faCommentAlt,
-  faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward
+  faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward,
+  faCamera, faCloudUploadAlt
 )

@@ -141,6 +141,10 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
               id="upload-file"
             />
           </div>
+
+          <div className={styles.urlOption}>
+            Desejo digitar a URL
+          </div>
         </main>
       </div>
 

@@ -12,7 +12,6 @@ import Header from '../../../../components/Header'
 import Message from '../../../../components/Message'
 import Button from '../../../../components/Button'
 import Input from '../../../../components/Input'
-import Textarea from '../../../../components/Textarea'
 import Table from '../../../../components/Table'
 import UploadModal from '../../../../components/UploadModal'
 
@@ -49,16 +48,18 @@ function NewProductRegister () {
 
   const [key, setKey] = useState(1)
 
-  const [principalFeatures, setPrincipalFeatures] = useState([
-    { title: '', description: '' }
+  const [sku, setSku] = useState('')
+  const [helpSku, setHelpSku] = useState('')
+
+  const [ean, setEan] = useState('')
+  const [helpEan, setHelpEan] = useState('')
+
+  const [photos, setPhotos] = useState([
+    {}, {}, {}, {}
   ])
-  const [helpPrincipalFeatures, setHelpPrincipalFeatures] = useState('')
 
-  const [shortDescription, setShortDescription] = useState('')
-  const [helpShortDescription, setHelpShortDescription] = useState('')
-
-  const [longDescription, setLongDescription] = useState('')
-  const [helpLongDescription, setHelpLongDescription] = useState('')
+  const [show, setShow] = useState(false)
+  const [currentPhoto, setCurrentPhoto] = useState(false)
 
   const [height, setHeight] = useState('0,00')
   const [helpHeight, setHelpHeight] = useState('')
@@ -76,63 +77,41 @@ function NewProductRegister () {
     '', '', ''
   ])
 
-  const [sku, setSku] = useState('')
-  const [helpSku, setHelpSku] = useState('')
-
-  const [ean, setEan] = useState('')
-  const [helpEan, setHelpEan] = useState('')
-
-  const [contentPhotoButton, setContentPhotoButton] = useState([
-    ['camera', 'icon'], ['camera', 'icon'], ['camera', 'icon']
+  const [principalFeatures, setPrincipalFeatures] = useState([
+    { title: '', description: '' }
   ])
-  const [photos, setPhotos] = useState([
-    {}, {}, {}, {}
-  ])
-  const [photosSrc, setPhotosSrc] = useState([
-    '', '', '', ''
-  ])
+  const [helpPrincipalFeatures, setHelpPrincipalFeatures] = useState('')
 
-  const [show, setShow] = useState(false)
-  const [currentPhoto, setCurrentPhoto] = useState(false)
+  const [longDescription, setLongDescription] = useState('')
+  const [helpLongDescription, setHelpLongDescription] = useState('')
 
   const [messages, setMessages] = useState([])
 
-  function changePrincipalFeature (position = null, field, value) {
-    const updatedPrincipalFeatures = principalFeatures.map((feature, index) => {
+  function changeSku (e) {
+    setHelpSku('')
+    setSku(e)
+  }
+
+  function changeEan (e) {
+    setHelpEan('')
+    setEan(eanMask(e))
+  }
+
+  function handleShowUploadModal (index) {
+    setCurrentPhoto(index)
+    setShow(true)
+  }
+
+  function clearPhoto (position) {
+    const updatedPhotos = photos.map((photo, index) => {
       if (index === position) {
-        return {
-          ...feature,
-          [field]: value
-        }
+        return {}
       }
 
-      return feature
+      return photo
     })
 
-    setHelpPrincipalFeatures('')
-    setPrincipalFeatures(updatedPrincipalFeatures)
-  }
-
-  function addPrincipalFeature () {
-    setPrincipalFeatures([
-      ...principalFeatures,
-      { title: '', description: '' }
-    ])
-  }
-
-  function removePrincipalFeature (indexKey) {
-    const updatedPrincipalFeatures = principalFeatures.filter((_, index) => index !== indexKey)
-    setPrincipalFeatures(updatedPrincipalFeatures)
-  }
-
-  function changeShortDescription (e) {
-    setHelpShortDescription('')
-    setShortDescription(e)
-  }
-
-  function changeLongDescription (e) {
-    setHelpLongDescription('')
-    setLongDescription(e)
+    setPhotos(updatedPhotos)
   }
 
   function changeHeight (e, maskedvalue, floatvalue) {
@@ -166,31 +145,37 @@ function NewProductRegister () {
     }
   }
 
-  function changeSku (e) {
-    setHelpSku('')
-    setSku(e)
-  }
-
-  function changeEan (e) {
-    setHelpEan('')
-    setEan(eanMask(e))
-  }
-
-  function handleShowUploadModal (index) {
-    setCurrentPhoto(index)
-    setShow(true)
-  }
-
-  function clearPhoto (position) {
-    const updatedPhotos = photos.map((photo, index) => {
+  function changePrincipalFeature (position = null, field, value) {
+    const updatedPrincipalFeatures = principalFeatures.map((feature, index) => {
       if (index === position) {
-        return {}
+        return {
+          ...feature,
+          [field]: value
+        }
       }
 
-      return photo
+      return feature
     })
 
-    setPhotos(updatedPhotos)
+    setHelpPrincipalFeatures('')
+    setPrincipalFeatures(updatedPrincipalFeatures)
+  }
+
+  function addPrincipalFeature () {
+    setPrincipalFeatures([
+      ...principalFeatures,
+      { title: '', description: '' }
+    ])
+  }
+
+  function removePrincipalFeature (indexKey) {
+    const updatedPrincipalFeatures = principalFeatures.filter((_, index) => index !== indexKey)
+    setPrincipalFeatures(updatedPrincipalFeatures)
+  }
+
+  function changeLongDescription (e) {
+    setHelpLongDescription('')
+    setLongDescription(e)
   }
 
   function clearAllHelps () {
@@ -216,6 +201,25 @@ function NewProductRegister () {
     let status = 1
 
     clearAllHelps()
+
+    if (!exists(sku)) {
+      setHelpSku(
+        setAHelpError('O SKU é obrigatório.')
+      )
+      status = 0
+    }
+
+    if (!exists(ean)) {
+      setHelpEan(
+        setAHelpError('O EAN é obrigatório.')
+      )
+      status = 0
+    } else if (ean.length < 13) {
+      setHelpEan(
+        setAHelpError('O EAN precisa ter 13 números.')
+      )
+      status = 0
+    }
 
     principalFeatures.every((feature, index) => {
       const titleCheck = !exists(feature.title)
@@ -291,25 +295,6 @@ function NewProductRegister () {
       status = 0
     }
 
-    if (!exists(sku)) {
-      setHelpSku(
-        setAHelpError('O SKU é obrigatório.')
-      )
-      status = 0
-    }
-
-    if (!exists(ean)) {
-      setHelpEan(
-        setAHelpError('O EAN é obrigatório.')
-      )
-      status = 0
-    } else if (ean.length < 13) {
-      setHelpEan(
-        setAHelpError('O EAN precisa ter 13 números.')
-      )
-      status = 0
-    }
-
     if (status === 0) {
       setMessages([...messages, <Message
         key={key}
@@ -324,26 +309,7 @@ function NewProductRegister () {
       />])
     }
 
-    // if (
-    //   !exists(longDescription) ||
-    //   longDescription === '<p></p>' ||
-    //   longDescription === '<p><br></p>'
-    // ) {
-    //   setMessages([...messages, <Message
-    //     key={key}
-    //     type="error"
-    //     text="Por favor, preencha o campo de descrição do produto!"
-    //   />])
-    // } else {
-    //   setMessages([...messages, <Message
-    //     key={key}
-    //     type="success"
-    //     text="Todos os dados foram preenchidos!"
-    //   />])
-    // }
-
     setKey(key + 1)
-    // Router.push('/dashboard/produtos/cadastrar/novo2')
   }
 
   return (
@@ -412,269 +378,6 @@ function NewProductRegister () {
                 className={styles.form}
                 onSubmit={e => handleFormSubmit(e)}
               >
-                <div className={styles.formGroup}>
-                  <div className={styles.groupSubtitles}>
-                    <label htmlFor="title0" className={styles.subtitle}>Características principais</label>
-                    <hr className={styles.line} />
-                  </div>
-
-                  {principalFeatures.map((feature, index) => (
-                    <div className={`${dashboardStyles.flexColumn} ${dashboardStyles.wide}`} key={index}>
-                      <div className={styles.row}>
-                        <div className={styles.bigColumn}>
-                          <Input
-                            name={`title${index}`}
-                            value={feature.title}
-                            placeholder="Título"
-                            icon="chevron-right"
-                            onChange={e => changePrincipalFeature(index, 'title', e.target.value)}
-                          />
-                        </div>
-
-                        <div className={styles.bigColumn}>
-                          <Input
-                            name={`description${index}`}
-                            value={feature.description}
-                            placeholder="Descrição"
-                            icon="chevron-right"
-                            onChange={e => changePrincipalFeature(index, 'description', e.target.value)}
-                          />
-                        </div>
-
-                        <div className={`${styles.column} ${styles.fitContent}`}>
-                          {index !== 0
-                            ? <Button
-                              icon="minus"
-                              borderedButton
-                              submitButton
-                              iconMarginNone
-                              onClick={() => removePrincipalFeature(index)}
-                            />
-                            : <Button
-                              icon="plus"
-                              borderedButton
-                              submitButton
-                              iconMarginNone
-                              onClick={() => addPrincipalFeature(index)}
-                            />
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className={`${styles.helpBlock} ${styles.error}`}>
-                    {helpPrincipalFeatures}
-                  </div>
-                </div>
-
-                {/* <div className={styles.formGroup}>
-                  <div className={styles.groupSubtitles}>
-                    <label htmlFor="shortDescription" className={styles.subtitle}>Descrição curta</label>
-                    <span className={styles.subtitleHelp}>
-                      <FontAwesomeIcon icon="question-circle" />
-                      <span>Este é o texto que vai embutido na descrição da página através das Meta Tags</span>
-                    </span>
-                  </div>
-
-                  <Textarea
-                    name="shortDescription"
-                    value={shortDescription}
-                    icon="comment-alt"
-                    maxLength={300}
-                    style={{ minHeight: '105px', maxHeight: '105px', height: '105px' }}
-                    onChange={e => changeShortDescription(e.target.value)}
-                  />
-
-                  <div className={`${styles.helpBlock} ${styles.error}`}>
-                    {helpShortDescription}
-                  </div>
-                </div> */}
-
-                <div className={styles.formGroup}>
-                  <div className={styles.groupSubtitles}>
-                    <label className={styles.subtitle}>Descrição longa</label>
-                    <span className={styles.subtitleHelp}>
-                      <FontAwesomeIcon icon="question-circle" />
-                      <span>Este é o texto que será mostrado na visualização completa do produto</span>
-                    </span>
-                  </div>
-
-                  <div className={dashboardStyles.row}>
-                    <SunEditor
-                      value={longDescription}
-                      onChange={changeLongDescription}
-                      lang="pt_br"
-                      setDefaultStyle="font-family: Overpass-Regular; font-size: 14px; background-color: #161A1D; color: #FFF; border-radius: 2px;"
-                      //
-                      setOptions={{
-                        height: 300,
-                        paragraphStyles: [
-                          'spaced',
-                          'bordered',
-                          {
-                            name: 'Padrão',
-                            class: '__se__customClass'
-                          }
-                        ],
-                        buttonList: [
-                          ['undo', 'redo'],
-                          [':p-Mais Parágrafos-default.more_paragraph', 'paragraphStyle', 'blockquote'],
-                          ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-                          ['removeFormat'],
-                          ['outdent', 'indent'],
-                          ['list', 'lineHeight'],
-                          ['template'],
-                          ['-right', ':i-Mais-default.more_vertical', 'showBlocks', 'preview', 'print'],
-                          ['-right', 'fullScreen']
-                        ],
-                        templates: [
-                          {
-                            name: 'Template Básico',
-                            html: `
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                              <p><br></p>
-
-                              <p><strong>Placeholder text commonly used:</strong></p>
-
-                              <ul>
-                                <li>Linha 1</li>
-                                <li>Linha 2</li>
-                                <li>Linha 3</li>
-                              </ul>
-                            `
-                          }
-                        ]
-                      }}
-                    />
-                  </div>
-
-                  <div className={`${styles.helpBlock} ${styles.error}`}>
-                    {helpLongDescription}
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <div className={styles.groupSubtitles}>
-                    <label className={styles.subtitle}>Dados para cálculo do frete</label>
-                    <span className={styles.subtitleHelp}>
-                      <FontAwesomeIcon icon="question-circle" />
-                      <span>Estas medidas são referente à embalagem do produto</span>
-                    </span>
-                    {/* <hr className={styles.line} /> */}
-                  </div>
-
-                  <div className={styles.row}>
-                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                      <label htmlFor="height" className={styles.inputLabel}>Altura</label>
-
-                      <Input
-                        name="height"
-                        prefix={['m', 'right']}
-                        maxLength={[10, false]}
-                        currencyInput
-                        decimalSeparator=","
-                        thousandSeparator="."
-                        value={height}
-                        onChangeEvent={changeHeight}
-                        onFocus={() => changeFreight('height')}
-                        onBlur={() => changeFreight()}
-                      />
-
-                      <div className={`${styles.helpBlock} ${styles.error}`}>
-                        {helpHeight}
-                      </div>
-                    </div>
-
-                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                      <label htmlFor="width" className={styles.inputLabel}>Largura</label>
-
-                      <Input
-                        name="width"
-                        prefix={['m', 'right']}
-                        maxLength={[10, false]}
-                        currencyInput
-                        decimalSeparator=","
-                        thousandSeparator="."
-                        value={width}
-                        onChangeEvent={changeWidth}
-                        onFocus={() => changeFreight('width')}
-                        onBlur={() => changeFreight()}
-                      />
-
-                      <div className={`${styles.helpBlock} ${styles.error}`}>
-                        {helpWidth}
-                      </div>
-                    </div>
-
-                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                      <label htmlFor="length" className={styles.inputLabel}>Comprimento</label>
-
-                      <Input
-                        name="length"
-                        prefix={['m', 'right']}
-                        maxLength={[10, false]}
-                        currencyInput
-                        decimalSeparator=","
-                        thousandSeparator="."
-                        value={length}
-                        onChangeEvent={changeLength}
-                        onFocus={() => changeFreight('length')}
-                        onBlur={() => changeFreight()}
-                      />
-
-                      <div className={`${styles.helpBlock} ${styles.error}`}>
-                        {helpLength}
-                      </div>
-                    </div>
-
-                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                      <label htmlFor="weight" className={styles.inputLabel}>Peso</label>
-
-                      <Input
-                        name="weight"
-                        prefix={['kg', 'right']}
-                        maxLength={[10, false]}
-                        currencyInput
-                        decimalSeparator=","
-                        thousandSeparator="."
-                        value={weight}
-                        onChangeEvent={changeWeight}
-                      />
-
-                      <div className={`${styles.helpBlock} ${styles.error}`}>
-                        {helpWeight}
-                      </div>
-                    </div>
-
-                    <div className={`${styles.biggestColumn} ${styles.center}`}>
-                      {/* <div className={styles.wrap}>
-                        <div className={styles.cube}>
-                          <div className={styles.front}></div>
-                          <div className={styles.back}></div>
-                          <div className={styles.top}></div>
-                          <div className={styles.bottom}></div>
-                          <div className={styles.left}></div>
-                          <div className={styles.right}></div>
-                        </div>
-                      </div> */}
-
-                      <img
-                        src="/images/freight.svg"
-                        alt="Freight-Illustration"
-                        className={styles.freightImage}
-                      />
-
-                      <h5 className={`${styles.freightHeight} ${activeStyle[0]}`}>Altura</h5>
-                      <h5 className={`${styles.freightWidth} ${activeStyle[1]}`}>Largura</h5>
-                      <h5 className={`${styles.freightLength} ${activeStyle[2]}`}>Comprimento</h5>
-                    </div>
-                  </div>
-                </div>
-
                 <div className={styles.formGroup}>
                   <div className={styles.groupSubtitles}>
                     <label htmlFor="sku" className={styles.subtitle}>Mais sobre o produto</label>
@@ -862,6 +565,245 @@ function NewProductRegister () {
                     setPhotos={setPhotos}
                     currentPhoto={currentPhoto}
                   />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <div className={styles.groupSubtitles}>
+                    <label className={styles.subtitle}>Dados para cálculo do frete</label>
+                    <span className={styles.subtitleHelp}>
+                      <FontAwesomeIcon icon="question-circle" />
+                      <span>Estas medidas são referente à embalagem do produto</span>
+                    </span>
+                  </div>
+
+                  <div className={styles.row}>
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label htmlFor="height" className={styles.inputLabel}>Altura</label>
+
+                      <Input
+                        name="height"
+                        prefix={['m', 'right']}
+                        maxLength={[10, false]}
+                        currencyInput
+                        decimalSeparator=","
+                        thousandSeparator="."
+                        value={height}
+                        onChangeEvent={changeHeight}
+                        onFocus={() => changeFreight('height')}
+                        onBlur={() => changeFreight()}
+                      />
+
+                      <div className={`${styles.helpBlock} ${styles.error}`}>
+                        {helpHeight}
+                      </div>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label htmlFor="width" className={styles.inputLabel}>Largura</label>
+
+                      <Input
+                        name="width"
+                        prefix={['m', 'right']}
+                        maxLength={[10, false]}
+                        currencyInput
+                        decimalSeparator=","
+                        thousandSeparator="."
+                        value={width}
+                        onChangeEvent={changeWidth}
+                        onFocus={() => changeFreight('width')}
+                        onBlur={() => changeFreight()}
+                      />
+
+                      <div className={`${styles.helpBlock} ${styles.error}`}>
+                        {helpWidth}
+                      </div>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label htmlFor="length" className={styles.inputLabel}>Comprimento</label>
+
+                      <Input
+                        name="length"
+                        prefix={['m', 'right']}
+                        maxLength={[10, false]}
+                        currencyInput
+                        decimalSeparator=","
+                        thousandSeparator="."
+                        value={length}
+                        onChangeEvent={changeLength}
+                        onFocus={() => changeFreight('length')}
+                        onBlur={() => changeFreight()}
+                      />
+
+                      <div className={`${styles.helpBlock} ${styles.error}`}>
+                        {helpLength}
+                      </div>
+                    </div>
+
+                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                      <label htmlFor="weight" className={styles.inputLabel}>Peso</label>
+
+                      <Input
+                        name="weight"
+                        prefix={['kg', 'right']}
+                        maxLength={[10, false]}
+                        currencyInput
+                        decimalSeparator=","
+                        thousandSeparator="."
+                        value={weight}
+                        onChangeEvent={changeWeight}
+                      />
+
+                      <div className={`${styles.helpBlock} ${styles.error}`}>
+                        {helpWeight}
+                      </div>
+                    </div>
+
+                    <div className={`${styles.biggestColumn} ${styles.center}`}>
+                      {/* <div className={styles.wrap}>
+                        <div className={styles.cube}>
+                          <div className={styles.front}></div>
+                          <div className={styles.back}></div>
+                          <div className={styles.top}></div>
+                          <div className={styles.bottom}></div>
+                          <div className={styles.left}></div>
+                          <div className={styles.right}></div>
+                        </div>
+                      </div> */}
+
+                      <img
+                        src="/images/freight.svg"
+                        alt="Freight-Illustration"
+                        className={styles.freightImage}
+                      />
+
+                      <h5 className={`${styles.freightHeight} ${activeStyle[0]}`}>Altura</h5>
+                      <h5 className={`${styles.freightWidth} ${activeStyle[1]}`}>Largura</h5>
+                      <h5 className={`${styles.freightLength} ${activeStyle[2]}`}>Comprimento</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <div className={styles.groupSubtitles}>
+                    <label htmlFor="title0" className={styles.subtitle}>Características principais</label>
+                    <hr className={styles.line} />
+                  </div>
+
+                  {principalFeatures.map((feature, index) => (
+                    <div className={`${dashboardStyles.flexColumn} ${dashboardStyles.wide}`} key={index}>
+                      <div className={styles.row}>
+                        <div className={styles.bigColumn}>
+                          <Input
+                            name={`title${index}`}
+                            value={feature.title}
+                            placeholder="Título"
+                            icon="chevron-right"
+                            onChange={e => changePrincipalFeature(index, 'title', e.target.value)}
+                          />
+                        </div>
+
+                        <div className={styles.bigColumn}>
+                          <Input
+                            name={`description${index}`}
+                            value={feature.description}
+                            placeholder="Descrição"
+                            icon="chevron-right"
+                            onChange={e => changePrincipalFeature(index, 'description', e.target.value)}
+                          />
+                        </div>
+
+                        <div className={`${styles.column} ${styles.fitContent}`}>
+                          {index !== 0
+                            ? <Button
+                              icon="minus"
+                              borderedButton
+                              submitButton
+                              iconMarginNone
+                              onClick={() => removePrincipalFeature(index)}
+                            />
+                            : <Button
+                              icon="plus"
+                              borderedButton
+                              submitButton
+                              iconMarginNone
+                              onClick={() => addPrincipalFeature(index)}
+                            />
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className={`${styles.helpBlock} ${styles.error}`}>
+                    {helpPrincipalFeatures}
+                  </div>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <div className={styles.groupSubtitles}>
+                    <label className={styles.subtitle}>Descrição longa</label>
+                    <span className={styles.subtitleHelp}>
+                      <FontAwesomeIcon icon="question-circle" />
+                      <span>Este é o texto que será mostrado na visualização completa do produto</span>
+                    </span>
+                  </div>
+
+                  <div className={dashboardStyles.row}>
+                    <SunEditor
+                      value={longDescription}
+                      onChange={changeLongDescription}
+                      lang="pt_br"
+                      setDefaultStyle="font-family: Overpass-Regular; font-size: 14px; background-color: #161A1D; color: #FFF; border-radius: 2px;"
+                      //
+                      setOptions={{
+                        height: 300,
+                        paragraphStyles: [
+                          'spaced',
+                          'bordered',
+                          {
+                            name: 'Padrão',
+                            class: '__se__customClass'
+                          }
+                        ],
+                        buttonList: [
+                          ['undo', 'redo'],
+                          [':p-Mais Parágrafos-default.more_paragraph', 'paragraphStyle', 'blockquote'],
+                          ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                          ['removeFormat'],
+                          ['outdent', 'indent'],
+                          ['list', 'lineHeight'],
+                          ['template'],
+                          ['-right', ':i-Mais-default.more_vertical', 'showBlocks', 'preview', 'print'],
+                          ['-right', 'fullScreen']
+                        ],
+                        templates: [
+                          {
+                            name: 'Template Básico',
+                            html: `
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                              <p><br></p>
+
+                              <p><strong>Placeholder text commonly used:</strong></p>
+
+                              <ul>
+                                <li>Linha 1</li>
+                                <li>Linha 2</li>
+                                <li>Linha 3</li>
+                              </ul>
+                            `
+                          }
+                        ]
+                      }}
+                    />
+                  </div>
+
+                  <div className={`${styles.helpBlock} ${styles.error}`}>
+                    {helpLongDescription}
+                  </div>
                 </div>
 
                 <div className={styles.submitButtonContainer}>

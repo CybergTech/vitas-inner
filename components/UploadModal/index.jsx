@@ -209,6 +209,11 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
                     placeholder="URL aqui..."
                     value={typedUrl}
                     onChange={e => setTypedUrl(e.target.value)}
+                    onKeyUp={e => {
+                      if (e.keyCode && e.keyCode === 13) {
+                        fetchUrl()
+                      }
+                    }}
                   />
                 </div>
 

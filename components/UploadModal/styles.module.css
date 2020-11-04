@@ -139,7 +139,7 @@
 }
 .main.urlUploading {
   padding: 0;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .upload {

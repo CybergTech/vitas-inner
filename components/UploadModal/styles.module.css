@@ -133,8 +133,13 @@
   color: #FFFFFF;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.main.urlUploading {
+  padding: 0;
+  justify-content: space-around;
 }
 
 .upload {
@@ -146,6 +151,7 @@
   border: 2px dashed #FFFFFF;
   cursor: pointer;
   transition: all ease 200ms;
+  animation: fadeIn 200ms;
 
   display: flex;
   flex-direction: column;
@@ -196,6 +202,67 @@
   font-size: 14px;
   text-align: center;
 }
+
+
+.goBack {
+  position: relative;
+  padding: 5px;
+
+  cursor: pointer;
+  animation: fadeIn 200ms;
+
+  display: flex;
+  align-items: center;
+}
+
+.goBack span {
+  display: none;
+
+  position: absolute;
+  left: -55px;
+  top: calc(100% + 10px);
+  width: 170px;
+  padding: .5rem;
+
+  animation: fadeIn 200ms;
+  z-index: 1050;
+  font-size: 12px;
+
+  border-radius: 2px;
+  background-color: #161A1D;
+  color: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -moz-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+  -webkit-box-shadow: 0px 1px 8px rgba(30,30,30,.25);
+
+  font-family: 'Overpass-Regular';
+}
+.goBack:hover span {
+  display: inline;
+}
+
+.row {
+  position: relative;
+  width: 85%;
+
+  animation: fadeIn 200ms;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bigColumn {
+  flex: 1;
+  position: relative;
+}
+
+.bigColumn + .normalColumn {
+  margin-left: 1rem;
+}
+
+
+
 
 @keyframes fadeIn {
   0% {opacity: .2;}

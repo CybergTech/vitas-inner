@@ -5,10 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { exists } from '../../services/validation'
 
 import Button from '../Button'
+import Input from '../Input'
 
 import styles from './styles.module.css'
 
 function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
+  const [urlUploading, setUrlUploading] = useState(false)
+  const [typedUrl, setTypedUrl] = useState('')
+
   const [files, setFiles] = useState('')
   const [uploadedFile, setUploadedFile] = useState('')
   const [imgSrc, setImgSrc] = useState('')
@@ -17,54 +21,60 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
   useEffect(() => {
     const drop_ = document.querySelector(`.${styles.upload} #upload-file`)
 
-    drop_.addEventListener('dragenter', function () {
-      document.querySelector(`.${styles.upload}`).classList.add(`${styles.highlight}`)
-    })
-    drop_.addEventListener('dragleave', function () {
-      document.querySelector(`.${styles.upload}`).classList.remove(`${styles.highlight}`)
-    })
-    drop_.addEventListener('drop', function () {
-      document.querySelector(`.${styles.upload}`).classList.remove(`${styles.highlight}`)
-    })
-  }, [])
+    if (drop_) {
+      drop_.addEventListener('dragenter', function () {
+        document.querySelector(`.${styles.upload}`).classList.add(`${styles.highlight}`)
+      })
+      drop_.addEventListener('dragleave', function () {
+        document.querySelector(`.${styles.upload}`).classList.remove(`${styles.highlight}`)
+      })
+      drop_.addEventListener('drop', function () {
+        document.querySelector(`.${styles.upload}`).classList.remove(`${styles.highlight}`)
+      })
+    }
+  }, [urlUploading])
 
   useEffect(() => {
-    document.querySelector('#upload-file').addEventListener('change', function () {
-      setUploadedFile('')
-      setImgSrc('')
-      setStatus(0)
+    const inputUpload = document.querySelector('#upload-file')
 
-      var files = this.files
-      setFiles(files)
-      for (var i = 0; i < files.length; i++) {
-        var info = validarArquivo(files[i])
+    if (inputUpload) {
+      inputUpload.addEventListener('change', function () {
+        setUploadedFile('')
+        setImgSrc('')
+        setStatus(0)
 
-        if (info.error === undefined) {
-          var reader = new FileReader()
-          reader.onload = function (e) {
-            setImgSrc(e.target.result)
+        var files = this.files
+        setFiles(files)
+        for (var i = 0; i < files.length; i++) {
+          var info = validarArquivo(files[i])
+
+          if (info.error === undefined) {
+            var reader = new FileReader()
+            reader.onload = function (e) {
+              setImgSrc(e.target.result)
+            }
+            reader.readAsDataURL(this.files[0])
+
+            setStatus(1)
+
+            setUploadedFile(
+              <p className={styles.success}>
+                <FontAwesomeIcon icon="check-circle" className={styles.icon} />
+                {info.success}
+              </p>
+            )
+          } else {
+            setUploadedFile(
+              <p className={styles.error}>
+                <FontAwesomeIcon icon="exclamation-triangle" className={styles.icon} />
+                {info.error}
+              </p>
+            )
           }
-          reader.readAsDataURL(this.files[0])
-
-          setStatus(1)
-
-          setUploadedFile(
-            <p className={styles.success}>
-              <FontAwesomeIcon icon="check-circle" className={styles.icon} />
-              {info.success}
-            </p>
-          )
-        } else {
-          setUploadedFile(
-            <p className={styles.error}>
-              <FontAwesomeIcon icon="exclamation-triangle" className={styles.icon} />
-              {info.error}
-            </p>
-          )
         }
-      };
-    })
-  }, [])
+      })
+    }
+  }, [urlUploading])
 
   function validarArquivo (file) {
     var mime_types = ['image/jpeg', 'image/png', 'image/webp']
@@ -88,8 +98,14 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
 
   function closeUploadModal () {
     setShow(false)
+
+    changeUrlUploading(false)
+    setTypedUrl('')
+
+    setFiles('')
     setUploadedFile('')
     setImgSrc('')
+
     setStatus(0)
   }
 
@@ -98,9 +114,19 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
 
     const updatedPhotos = photos.map((photo, index) => {
       if (index === currentPhoto) {
-        return {
-          ...files,
-          src: imgSrc
+        if (files !== '') {
+          return {
+            ...files,
+            src: imgSrc
+          }
+        } else {
+          return {
+            0: {
+              name: imgSrc
+            },
+            fetchUrl: true,
+            src: imgSrc
+          }
         }
       }
 
@@ -109,6 +135,50 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
 
     setPhotos(updatedPhotos)
     setFiles('')
+  }
+
+  function changeUrlUploading (to) {
+    setUrlUploading(to)
+
+    setTypedUrl('')
+
+    setFiles('')
+    setUploadedFile('')
+    setImgSrc('')
+
+    setStatus(0)
+  }
+
+  function fetchUrl () {
+    setStatus(0)
+    setUploadedFile(
+      <p><FontAwesomeIcon icon="spinner" pulse /></p>
+    )
+    setImgSrc('')
+
+    const image = new Image()
+    image.src = typedUrl
+
+    image.addEventListener('load', () => {
+      setStatus(1)
+      setImgSrc(typedUrl)
+      console.log(image)
+
+      setUploadedFile(
+        <p className={styles.success}>
+          <FontAwesomeIcon icon="check-circle" className={styles.icon} />
+          Enviando: {typedUrl.length > 30 ? `${typedUrl.substr(0, 30)}...` : typedUrl}
+        </p>
+      )
+    })
+    image.addEventListener('error', () => {
+      setUploadedFile(
+        <p className={styles.error}>
+          <FontAwesomeIcon icon="exclamation-triangle" className={styles.icon} />
+          Não foi possível buscar uma imagem através deste link. Por favor, tente novamente
+        </p>
+      )
+    })
   }
 
   return (
@@ -124,27 +194,71 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
           <FontAwesomeIcon icon="times" />
         </span>
 
-        <h3 className={styles.title}>
+        <div className={styles.title}>
           Carregamento da foto do produto
-        </h3>
+        </div>
 
-        <main className={styles.main}>
-          <div className={styles.upload}>
-            <label htmlFor="upload-file">
-              <FontAwesomeIcon icon="cloud-upload-alt" className={styles.icon} />
-              <p>Arraste o arquivo ou clique aqui para buscar em seu computador</p>
-            </label>
+        <main className={`${styles.main} ${urlUploading === true && styles.urlUploading}`}>
+          {urlUploading === true
+            ? <>
+              <div className={styles.row}>
+                <div className={styles.bigColumn}>
+                  <Input
+                    name="typed_url"
+                    icon="link"
+                    placeholder="URL aqui..."
+                    value={typedUrl}
+                    onChange={e => setTypedUrl(e.target.value)}
+                  />
+                </div>
 
-            <input
-              type="file"
-              accept="image/jpg,image/jpeg,image/png,image/webp"
-              id="upload-file"
-            />
-          </div>
+                <div className={styles.normalColumn}>
+                  <Button
+                    icon="long-arrow-alt-right"
+                    text="Buscar arquivo"
+                    reverse
+                    borderedButton
+                    submitButton
+                    disabled={typedUrl.length === 0}
+                    onClick={() => fetchUrl()}
+                  />
+                </div>
+              </div>
 
-          <div className={styles.urlOption}>
-            Desejo digitar a URL
-          </div>
+              <span
+                className={styles.goBack}
+                onClick={() => changeUrlUploading(false)}
+              >
+                <img
+                  src="/images/icons/back.svg"
+                  alt="Go-back"
+                />
+                <span>Voltar à arrastar ou buscar arquivo do seu computador</span>
+              </span>
+            </>
+            : <>
+              <div className={styles.upload}>
+                <label htmlFor="upload-file">
+                  <FontAwesomeIcon icon="cloud-upload-alt" className={styles.icon} />
+                  <p>Arraste o arquivo ou clique aqui para buscar em seu computador</p>
+                </label>
+
+                <input
+                  type="file"
+                  accept="image/jpg,image/jpeg,image/png,image/webp"
+                  id="upload-file"
+                />
+              </div>
+
+              <Button
+                icon="link"
+                text="Desejo digitar a URL"
+                borderedButton
+                style={{ marginTop: '1rem', animation: 'fadeIn 200ms' }}
+                onClick={() => changeUrlUploading(true)}
+              />
+            </>
+          }
         </main>
       </div>
 

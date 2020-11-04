@@ -446,7 +446,7 @@ function NewProductRegister () {
                         <div className={styles.content}>
                           {Object.keys(photos[0]).length === 0
                             ? 'Insira a foto do produto'
-                            : photos[0][0].name
+                            : photos[0][0].name.length > 23 ? `${photos[0][0].name.substr(0, 23)}...` : photos[0][0].name
                           }
                         </div>
                       </button>
@@ -481,7 +481,7 @@ function NewProductRegister () {
                         <div className={styles.content}>
                           {Object.keys(photos[1]).length === 0
                             ? 'Insira a foto do produto'
-                            : photos[1][0].name
+                            : photos[1][0].name.length > 23 ? `${photos[1][0].name.substr(0, 23)}...` : photos[1][0].name
                           }
                         </div>
                       </button>
@@ -516,7 +516,7 @@ function NewProductRegister () {
                         <div className={styles.content}>
                           {Object.keys(photos[2]).length === 0
                             ? 'Insira a foto do produto'
-                            : photos[2][0].name
+                            : photos[2][0].name.length > 23 ? `${photos[2][0].name.substr(0, 23)}...` : photos[2][0].name
                           }
                         </div>
                       </button>
@@ -551,7 +551,7 @@ function NewProductRegister () {
                         <div className={styles.content}>
                           {Object.keys(photos[3]).length === 0
                             ? 'Insira a foto do produto'
-                            : photos[3][0].name
+                            : photos[3][0].name.length > 23 ? `${photos[3][0].name.substr(0, 23)}...` : photos[3][0].name
                           }
                         </div>
                       </button>

@@ -21,7 +21,9 @@
   margin-top: 1.5rem;
 }
 
-.groupSubtitles {
+.groupSubtitles,
+.miniSubtitles,
+.stokSubtitles {
   position: relative;
   width: 100%;
   margin-bottom: .5rem;
@@ -29,10 +31,34 @@
   display: flex;
   align-items: center;
 }
+.miniSubtitles {
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.stokSubtitles {
+  position: absolute;
+  z-index: 10;
+}
+
+.columnMiniSubtitles {
+  position: relative;
+  width: 100%;
+  height: 45px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
 .subtitle {
   font-size: 18px;
   color: #22FF7A;
+}
+
+.stokSubtitles .subtitle {
+  color: #FFFFFF;
+  font-size: 16px;
 }
 
 .subtitleHelp {
@@ -67,6 +93,10 @@
 }
 .subtitleHelp:hover span {
   display: inline;
+}
+
+.subtitleHelp.fitContent span {
+  width: 130px;
 }
 
 .line {
@@ -107,6 +137,10 @@
   margin-top: 1rem;
 }
 
+.row.start {
+  justify-content: flex-start;
+}
+
 .biggestColumn {
   position: relative;
   width: 340px;
@@ -117,12 +151,23 @@
   justify-content: center;
 }
 
+.biggerColumn {
+  position: relative;
+  flex: 2;
+  height: 100%;
+
+  display: flex;
+}
+
 .bigColumn {
   position: relative;
   flex: 1;
   height: 100%;
 }
-.bigColumn + .bigColumn {
+.bigColumn + .bigColumn,
+.bigColumn + .biggerColumn,
+.biggerColumn + .biggerColumn,
+.biggerColumn + .bigColumn {
   margin-left: .8rem;
 }
 
@@ -130,11 +175,21 @@
   position: relative;
   height: 100%;
   width: 20%;
-
-  margin-left: 1.5rem;
 }
 .column.fitContent {
   width: fit-content;
+}
+
+.column.biggerMargin {
+  margin-top: 45px;
+}
+
+.column + .column {
+  margin-left: .8rem;
+}
+
+.bigColumn + .column {
+  margin-left: 1.5rem;
 }
 
 .othersCategories {
@@ -194,6 +249,11 @@
   font-size: 14px;
   color: #FFF7;
   font-family: 'Overpass-Regular';
+}
+
+.highlightedLabel {
+  font-size: 12px;
+  color: #22FF7A;
 }
 
 
@@ -470,6 +530,40 @@
 
   font-size: 10px;
   margin-right: 6px;
+}
+
+
+.radioContainer {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 300px;
+}
+.radioContainer input[type=radio] {
+  display: none;
+}
+
+.radioLabel {
+  display: block;
+}
+.radioLabel:nth-child(1n+2) {
+  margin-top: .3rem;
+}
+
+.radioLabel span {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin: -1px 4px 0 0;
+
+  vertical-align: middle;
+  background: url("../../public/images/icons/unchecked-input-radio.svg") no-repeat;
+
+  cursor: pointer;
+}
+
+.radioContainer input[type=radio]:checked + .radioLabel span {
+  background: url("../../public/images/icons/checked-input-radio.svg") no-repeat;
 }
 
 

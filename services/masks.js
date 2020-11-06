@@ -3,6 +3,11 @@ export const withoutNumber = value => {
     .replace(/\d/g, '')
 }
 
+export const justNumbersMask = value => {
+  return value
+    .replace(/\D/g, '')
+}
+
 export const cvvMask = value => {
   return value
     .replace(/\D/g, '')

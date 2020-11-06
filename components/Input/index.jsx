@@ -15,6 +15,7 @@ function Input ({
   maxLength,
   zIndex800,
   prefix,
+  image,
   currencyInput,
   ...rest
 }) {
@@ -47,68 +48,80 @@ function Input ({
     <div
       className={`${styles.inputBlock} ${blockExtraClasses}`}
     >
-      {currencyInput === undefined
-        ? <input
-          type="text"
-          id={name !== undefined ? name : null}
-          name={name !== undefined ? name : null}
-          value={value}
-          placeholder={placeholder}
-          className={`${styles.input} ${extraClasses}`}
-          ref={inputRef}
-          maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
-          {...rest}
-        />
-        : <CurrencyInput
-          id={name !== undefined ? name : null}
-          name={name !== undefined ? name : null}
-          value={value}
-          placeholder={placeholder}
-          className={`${styles.input} ${extraClasses}`}
-          ref={inputRef}
-          maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
-          {...rest}
-        />
-      }
-
-      {icon !== undefined &&
-        <label htmlFor={name !== undefined ? name : ''} className={styles.icon}>
-          <FontAwesomeIcon icon={icon} />
-        </label>
-      }
-
-      {prefix !== undefined &&
-        <label
-          htmlFor={name !== undefined ? name : ''}
-          className={`${styles.prefix} ${prefix[1] === 'right' ? styles.right : styles.left}`}
-        >
-          {prefix[0]}
-        </label>
-      }
-
-      {rest.type && rest.type === 'password'
-        ? <div
-          className={styles.eyeContent}
-          onClick={() => {
-            setPasswordView(!passwordView)
-            setInputFocus()
-          }}
-        >
-          <FontAwesomeIcon
-            icon={eyeIcon}
-            className={`${styles.eyeIcon} ${eyeIcon === 'eye-slash' && styles.opacity}`}
+      {image !== undefined &&
+        <div className={styles.descriptionContent}>
+          <img
+            src={`/images/${image[0]}`}
+            alt="Description-Picture"
+            className={styles.descriptionPicture}
           />
         </div>
-        : ''
       }
 
-      {(maxLength !== undefined && maxLength[1] === true) &&
-        <div
-          className={styles.maxLengthContent}
-        >
-          {value.length}/{maxLength}
-        </div>
-      }
+      <div className={styles.inputContent}>
+        {currencyInput === undefined
+          ? <input
+            type="text"
+            id={name !== undefined ? name : null}
+            name={name !== undefined ? name : null}
+            value={value}
+            placeholder={placeholder}
+            className={`${styles.input} ${extraClasses}`}
+            ref={inputRef}
+            maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
+            {...rest}
+          />
+          : <CurrencyInput
+            id={name !== undefined ? name : null}
+            name={name !== undefined ? name : null}
+            value={value}
+            placeholder={placeholder}
+            className={`${styles.input} ${extraClasses}`}
+            ref={inputRef}
+            maxLength={maxLength !== undefined ? Number(maxLength[0]) : ''}
+            {...rest}
+          />
+        }
+
+        {icon !== undefined &&
+          <label htmlFor={name !== undefined ? name : ''} className={styles.icon}>
+            <FontAwesomeIcon icon={icon} />
+          </label>
+        }
+
+        {prefix !== undefined &&
+          <label
+            htmlFor={name !== undefined ? name : ''}
+            className={`${styles.prefix} ${prefix[1] === 'right' ? styles.right : styles.left}`}
+          >
+            {prefix[0]}
+          </label>
+        }
+
+        {rest.type && rest.type === 'password'
+          ? <div
+            className={styles.eyeContent}
+            onClick={() => {
+              setPasswordView(!passwordView)
+              setInputFocus()
+            }}
+          >
+            <FontAwesomeIcon
+              icon={eyeIcon}
+              className={`${styles.eyeIcon} ${eyeIcon === 'eye-slash' && styles.opacity}`}
+            />
+          </div>
+          : ''
+        }
+
+        {(maxLength !== undefined && maxLength[1] === true) &&
+          <div
+            className={styles.maxLengthContent}
+          >
+            {value.length}/{maxLength}
+          </div>
+        }
+      </div>
     </div>
   )
 }

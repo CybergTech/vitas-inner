@@ -3,7 +3,8 @@ import React from 'react'
 
 import styles from './styles.module.css'
 
-function Select ({ name, value, mini, children, ...rest }) {
+function Select ({ name, value, mini, fitContent, children, ...rest }) {
+  const blockExtraClasses = fitContent && styles.fitContent
   const extraClasses = mini && styles.mini
 
   const selectItem = <select
@@ -20,7 +21,7 @@ function Select ({ name, value, mini, children, ...rest }) {
     <>
       {mini
         ? <>{selectItem}</>
-        : <div className={styles.selectBlock}>
+        : <div className={`${styles.selectBlock} ${blockExtraClasses}`}>
           {selectItem}
         </div>
       }

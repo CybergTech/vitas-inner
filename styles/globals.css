@@ -162,7 +162,7 @@ h6 {
   width: 310px;
   height: auto;
   padding-right: 20px;
-  z-index: 9999;
+  z-index: 7000;
 
   display: flex;
   flex-direction: column;

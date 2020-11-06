@@ -4,9 +4,10 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #3337;
+
+  background-color: #161A1DBB;
+  z-index: 8000;
   animation: fadeIn 200ms;
-  z-index: 851;
 
   display: flex;
   justify-content: center;

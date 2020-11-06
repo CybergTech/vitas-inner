@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,7 +10,7 @@ import Input from '../Input'
 
 import styles from './styles.module.css'
 
-function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
+function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto, setHelpPhoto }) {
   const [urlUploading, setUrlUploading] = useState(false)
   const [typedUrl, setTypedUrl] = useState('')
 
@@ -77,6 +78,7 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
   }, [urlUploading])
 
   function validarArquivo (file) {
+    // eslint-disable-next-line camelcase
     var mime_types = ['image/jpeg', 'image/png', 'image/webp']
 
     if (mime_types.indexOf(file.type) === -1) {
@@ -135,6 +137,7 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto }) {
 
     setPhotos(updatedPhotos)
     setFiles('')
+    setHelpPhoto('')
   }
 
   function changeUrlUploading (to) {

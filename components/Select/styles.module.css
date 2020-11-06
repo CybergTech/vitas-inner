@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
 }
+.selectBlock.fitContent {
+  width: auto;
+}
 
 .select {
   width: 100%;

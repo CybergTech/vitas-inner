@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { exists } from '../../../../services/validation'
-import { eanMask, justNumbersMask } from '../../../../services/masks'
+import { eanMask } from '../../../../services/masks'
 
 import AsideBar from '../../../../components/AsideBar'
 import Header from '../../../../components/Header'
@@ -15,6 +15,7 @@ import Input from '../../../../components/Input'
 import Select from '../../../../components/Select'
 import Table from '../../../../components/Table'
 import UploadModal from '../../../../components/UploadModal'
+import Loading from '../../../../components/Loading'
 
 import 'suneditor/dist/css/suneditor.min.css'
 
@@ -47,6 +48,8 @@ const paths = [
 function NewProductRegister () {
   const [minimizedMenu, setMinimizedMenu] = useState(false)
 
+  const [loading, setLoading] = useState(false)
+
   const [key, setKey] = useState(1)
 
   const [sku, setSku] = useState('')
@@ -61,6 +64,7 @@ function NewProductRegister () {
 
   const [show, setShow] = useState(false)
   const [currentPhoto, setCurrentPhoto] = useState(false)
+  const [helpPhoto, setHelpPhoto] = useState('')
 
   const [height, setHeight] = useState('0,00')
   const [helpHeight, setHelpHeight] = useState('')
@@ -92,9 +96,25 @@ function NewProductRegister () {
     { value: 'height', label: 'Tamanho' }
   ]
 
+  const volumeMeasureOptions = [
+    { value: 'ml', label: 'ml - mililitro' },
+    { value: 'l', label: 'l - litro' },
+    { value: 'kg', label: 'kg - quilograma' },
+    { value: 'g', label: 'g - grama' }
+  ]
+
+  const heightMeasureOptions = [
+    { value: 'pp', label: 'pp' },
+    { value: 'p', label: 'p' },
+    { value: 'm', label: 'm' },
+    { value: 'g', label: 'g' },
+    { value: 'gg', label: 'gg' }
+  ]
+
   const [variations, setVariations] = useState([
     {
       title: 'color',
+      measure: '',
       variationsOfVariations: [{
         name: '',
         retailerMinStok: '0',
@@ -195,6 +215,7 @@ function NewProductRegister () {
   function removePrincipalFeature (indexKey) {
     const updatedPrincipalFeatures = principalFeatures.filter((_, index) => index !== indexKey)
     setPrincipalFeatures(updatedPrincipalFeatures)
+    setHelpPrincipalFeatures('')
   }
 
   function changeLongDescription (e) {
@@ -233,6 +254,7 @@ function NewProductRegister () {
 
         return {
           ...variation,
+          measure: '',
           [field]: value
         }
       }
@@ -271,6 +293,7 @@ function NewProductRegister () {
         ...variations,
         {
           title: title,
+          measure: '',
           variationsOfVariations: [{
             name: '',
             retailerMinStok: '0',
@@ -288,6 +311,7 @@ function NewProductRegister () {
   function removeVariation (indexKey) {
     const updatedVariations = variations.filter((_, index) => index !== indexKey)
     setVariations(updatedVariations)
+    setHelpVariations('')
   }
 
   function changeVariationOfVariation (position, position_, field, value) {
@@ -315,6 +339,7 @@ function NewProductRegister () {
       return variation
     })
 
+    setHelpVariations('')
     setVariations(updatedVariations)
   }
 
@@ -357,6 +382,7 @@ function NewProductRegister () {
       return variation
     })
 
+    setHelpVariations('')
     setVariations(updatedVariations)
   }
 
@@ -382,6 +408,7 @@ function NewProductRegister () {
 
   function handleFormSubmit (e) {
     e.preventDefault()
+    setLoading(true)
     let status = 1
 
     clearAllHelps()
@@ -405,32 +432,14 @@ function NewProductRegister () {
       status = 0
     }
 
-    principalFeatures.every((feature, index) => {
-      const titleCheck = !exists(feature.title)
-      const descriptionCheck = !exists(feature.description)
-
-      if (titleCheck || descriptionCheck) {
-        let specific = titleCheck ? 'o título' : ''
-        specific = descriptionCheck ? 'a descrição' : specific
-        specific = titleCheck && descriptionCheck ? 'o título e a descrição' : specific
-
-        setHelpPrincipalFeatures(
-          setAHelpError(`A ${index + 1}ª característica está faltando ${specific}.`)
-        )
-        status = 0
-        return false
-      }
-
-      return true
-    })
-
     if (
-      !exists(longDescription) ||
-      longDescription === '<p></p>' ||
-      longDescription === '<p><br></p>'
+      Object.keys(photos[0]).length === 0 &&
+      Object.keys(photos[1]).length === 0 &&
+      Object.keys(photos[2]).length === 0 &&
+      Object.keys(photos[3]).length === 0
     ) {
-      setHelpLongDescription(
-        setAHelpError('A descrição longa é obrigatória.')
+      setHelpPhoto(
+        setAHelpError('Ao menos uma foto é obrigatória.')
       )
       status = 0
     }
@@ -472,18 +481,105 @@ function NewProductRegister () {
       status = 0
     }
 
+    principalFeatures.every((feature, index) => {
+      const titleCheck = !exists(feature.title)
+      const descriptionCheck = !exists(feature.description)
+
+      if (titleCheck || descriptionCheck) {
+        let specific = titleCheck ? 'o título' : ''
+        specific = descriptionCheck ? 'a descrição' : specific
+        specific = titleCheck && descriptionCheck ? 'o título e a descrição' : specific
+
+        setHelpPrincipalFeatures(
+          setAHelpError(`A ${index + 1}ª característica está faltando ${specific}.`)
+        )
+        status = 0
+        return false
+      }
+
+      return true
+    })
+
+    if (
+      !exists(longDescription) ||
+      longDescription === '<p></p>' ||
+      longDescription === '<p><br></p>'
+    ) {
+      setHelpLongDescription(
+        setAHelpError('A descrição longa é obrigatória.')
+      )
+      status = 0
+    }
+
+    variations.every((variation, index) => {
+      const titleCheck = !exists(variation.title)
+      let measureCheck = false
+
+      console.log(variation.measure)
+
+      if (variation.title === 'volume' || variation.title === 'height') {
+        measureCheck = !exists(variation.measure)
+      }
+
+      if (titleCheck || measureCheck) {
+        let specific = titleCheck ? 'o tipo de variação' : ''
+        specific = measureCheck ? 'a unidade de medida' : specific
+        specific = titleCheck && measureCheck ? 'o tipo de variação e a unidade de medida' : specific
+
+        setHelpVariations(
+          setAHelpError(`A ${index + 1}ª variação está faltando ${specific}.`)
+        )
+        status = 0
+        return false
+      }
+
+      variation.variationsOfVariations.every((variation_, index_) => {
+        const nameCheck = !exists(variation_.name)
+        const retailerMinStokCheck = !exists(variation_.retailerMinStok)
+        const retailerStokCheck = !exists(variation_.retailerStok)
+        const wholesalerMinStokCheck = !exists(variation_.wholesalerMinStok)
+        const wholesalerStokCheck = !exists(variation_.wholesalerStok)
+
+        if (
+          nameCheck ||
+          retailerMinStokCheck ||
+          retailerStokCheck ||
+          wholesalerMinStokCheck ||
+          wholesalerStokCheck
+        ) {
+          let specific = nameCheck ? 'o nome da variação' : ''
+          specific = retailerMinStokCheck ? 'o estoque mínimo' : specific
+          specific = nameCheck && retailerMinStokCheck ? 'o tipo de variação e a unidade de medida' : specific
+
+          setHelpVariations(
+            setAHelpError(`A ${index + 1}ª variação está faltando ${specific}.`)
+          )
+          status = 0
+          return false
+        }
+      })
+
+      return true
+    })
+
     if (status === 0) {
-      setMessages([...messages, <Message
-        key={key}
-        type="error"
-        text="Ocorreu algum erro!"
-      />])
+      setTimeout(() => {
+        setMessages([...messages, <Message
+          key={key}
+          type="error"
+          text="Ocorreu algum erro!"
+        />])
+        setLoading(false)
+      }, 600)
     } else {
-      setMessages([...messages, <Message
-        key={key}
-        type="success"
-        text="Todos os dados foram preenchidos!"
-      />])
+      setTimeout(() => {
+        setMessages([...messages, <Message
+          key={key}
+          type="success"
+          text="Todos os dados foram preenchidos!"
+        />])
+        setLoading(false)
+      }, 600)
     }
 
     setKey(key + 1)
@@ -735,12 +831,17 @@ function NewProductRegister () {
                     </div>
                   </div>
 
+                  <div className={`${styles.helpBlock} ${styles.error}`}>
+                    {helpPhoto}
+                  </div>
+
                   <UploadModal
                     show={show}
                     setShow={setShow}
                     photos={photos}
                     setPhotos={setPhotos}
                     currentPhoto={currentPhoto}
+                    setHelpPhoto={setHelpPhoto}
                   />
                 </div>
 
@@ -1013,6 +1114,12 @@ function NewProductRegister () {
 
                         <div className={`${styles.row} ${styles.start}`}>
                           <div className={`${styles.column} ${styles.fitContent}`}>
+                            {/* <Input
+                              name={`variationTitle${index}`}
+                              maxLength={[40, true]}
+                              value={variation.title}
+                              onChange={e => changeVariation(index, 'title', e.target.value)}
+                            /> */}
                             <Select
                               name={`variationTitle${index}`}
                               value={variation.title}
@@ -1023,6 +1130,29 @@ function NewProductRegister () {
                               )}
                             </Select>
                           </div>
+
+                          {(variation.title === 'volume' || variation.title === 'height') &&
+                            <div className={`${styles.column} ${styles.fitContent}`}>
+                              <Select
+                                name={`variationMeasure${index}`}
+                                value={variation.measure}
+                                fitContent
+                                onChange={e => changeVariation(index, 'measure', e.target.value)}
+                              >
+                                <option value="" disabled hidden>
+                                  Escolha uma medida
+                                </option>
+                                {variation.title === 'volume'
+                                  ? volumeMeasureOptions.map(option =>
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                  )
+                                  : heightMeasureOptions.map(option =>
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                  )
+                                }
+                              </Select>
+                            </div>
+                          }
 
                           <div className={`${styles.column} ${styles.fitContent}`}>
                             <Button
@@ -1070,10 +1200,6 @@ function NewProductRegister () {
                                 value={variation_.name}
                                 onChange={e => changeVariationOfVariation(index, index_, 'name', e.target.value)}
                               />
-
-                              <div className={`${styles.helpBlock} ${styles.error}`}>
-                                {helpHeight}
-                              </div>
                             </div>
 
                             <div className={styles.biggerColumn}>
@@ -1108,10 +1234,6 @@ function NewProductRegister () {
                                   value={variation_.retailerMinStok}
                                   onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerMinStok', e, maskedvalue, floatvalue)}
                                 />
-
-                                <div className={`${styles.helpBlock} ${styles.error}`}>
-                                  {helpHeight}
-                                </div>
                               </div>
 
                               <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
@@ -1136,10 +1258,6 @@ function NewProductRegister () {
                                   value={variation_.retailerStok}
                                   onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerStok', e, maskedvalue, floatvalue)}
                                 />
-
-                                <div className={`${styles.helpBlock} ${styles.error}`}>
-                                  {helpHeight}
-                                </div>
                               </div>
                             </div>
 
@@ -1175,10 +1293,6 @@ function NewProductRegister () {
                                   value={variation_.wholesalerMinStok}
                                   onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerMinStok', e, maskedvalue, floatvalue)}
                                 />
-
-                                <div className={`${styles.helpBlock} ${styles.error}`}>
-                                  {helpHeight}
-                                </div>
                               </div>
 
                               <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
@@ -1203,10 +1317,6 @@ function NewProductRegister () {
                                   value={variation_.wholesalerStok}
                                   onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerStok', e, maskedvalue, floatvalue)}
                                 />
-
-                                <div className={`${styles.helpBlock} ${styles.error}`}>
-                                  {helpHeight}
-                                </div>
                               </div>
                             </div>
 
@@ -1214,10 +1324,10 @@ function NewProductRegister () {
                               <div className={styles.columnMiniSubtitles}>
                                 <div className={styles.miniSubtitles}>
                                   <div className={styles.radioContainer} onChange={e => changeVariationOfVariation(index, index_, 'priceType', e.target.value)}>
-                                    <input type="radio" id={`uniquePrice${index}${index_}`} value="unique" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'unique'} />
+                                    <input type="radio" id={`uniquePrice${index}${index_}`} value="unique" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'unique'} readOnly />
                                     <label htmlFor={`uniquePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço único</label>
 
-                                    <input type="radio" id={`perStorePrice${index}${index_}`} value="perStore" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'perStore'} />
+                                    <input type="radio" id={`perStorePrice${index}${index_}`} value="perStore" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'perStore'} readOnly />
                                     <label htmlFor={`perStorePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço por loja</label>
                                   </div>
                                 </div>
@@ -1257,10 +1367,6 @@ function NewProductRegister () {
                                   onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'vitasB2BPrice', e, maskedvalue, floatvalue)}
                                 /></>
                               }
-
-                              <div className={`${styles.helpBlock} ${styles.error}`}>
-                                {helpHeight}
-                              </div>
                             </div>
 
                             <div className={`${styles.column} ${styles.fitContent} ${styles.biggerMargin}`}>
@@ -1297,14 +1403,14 @@ function NewProductRegister () {
                   </div>
 
                   <div className={`${styles.helpBlock} ${styles.error}`}>
-                    {helpPrincipalFeatures}
+                    {helpVariations}
                   </div>
                 </div>
 
                 <div className={styles.submitButtonContainer}>
                   <Button
                     type="submit"
-                    text="Continuar"
+                    text={loading ? <FontAwesomeIcon icon="spinner" pulse /> : 'Continuar'}
                     style={{ width: '100%' }}
                     submitButton
                   />
@@ -1314,6 +1420,8 @@ function NewProductRegister () {
           </div>
         </section>
       </main>
+
+      {loading && <Loading />}
 
       <div className="messagesContainer">
         {messages}

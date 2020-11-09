@@ -279,6 +279,20 @@ function NewProductRegister () {
     ])
   }
 
+  function copyFirstVariation (position) {
+    const updatedVariations = variations.map((variation, index) => {
+      if (index === position) {
+        return {
+          ...variations[0]
+        }
+      }
+
+      return variation
+    })
+
+    setVariations(updatedVariations)
+  }
+
   function removeVariation (indexKey) {
     const updatedVariations = variations.filter((_, index) => index !== indexKey)
     setVariations(updatedVariations)
@@ -548,56 +562,86 @@ function NewProductRegister () {
       status = 0
     }
 
-    variations.every((variation, index) => {
-      const titleCheck = !exists(variation.title)
-      let measureCheck = false
+    if (!exists(variationsTitle)) {
+      setHelpVariations(
+        setAHelpError('Está faltando o tipo de variação.')
+      )
+      status = 0
+    } else {
+      variations.every((variation, index) => {
+        const nameCheck = !exists(variation.name)
 
-      console.log(variation.measure)
-
-      if (variation.title === 'volume' || variation.title === 'height') {
-        measureCheck = !exists(variation.measure)
-      }
-
-      if (titleCheck || measureCheck) {
-        let specific = titleCheck ? 'o tipo de variação' : ''
-        specific = measureCheck ? 'a unidade de medida' : specific
-        specific = titleCheck && measureCheck ? 'o tipo de variação e a unidade de medida' : specific
-
-        setHelpVariations(
-          setAHelpError(`A ${index + 1}ª variação está faltando ${specific}.`)
-        )
-        status = 0
-        return false
-      }
-
-      variation.variationsOfVariation.every((variation_, index_) => {
-        const nameCheck = !exists(variation_.name)
-        const retailerMinStokCheck = !exists(variation_.retailerMinStok)
-        const retailerStokCheck = !exists(variation_.retailerStok)
-        const wholesalerMinStokCheck = !exists(variation_.wholesalerMinStok)
-        const wholesalerStokCheck = !exists(variation_.wholesalerStok)
-
-        if (
-          nameCheck ||
-          retailerMinStokCheck ||
-          retailerStokCheck ||
-          wholesalerMinStokCheck ||
-          wholesalerStokCheck
-        ) {
-          let specific = nameCheck ? 'o nome da variação' : ''
-          specific = retailerMinStokCheck ? 'o estoque mínimo' : specific
-          specific = nameCheck && retailerMinStokCheck ? 'o tipo de variação e a unidade de medida' : specific
-
+        if (nameCheck) {
           setHelpVariations(
-            setAHelpError(`A ${index + 1}ª variação está faltando ${specific}.`)
+            setAHelpError(`A ${index + 1}ª variação está faltando seu nome.`)
           )
           status = 0
           return false
         }
-      })
 
-      return true
-    })
+        variation.variationsOfVariation.every((variation_, index_) => {
+          const photosCheck = Object.keys(variation_.photo1).length === 0 &&
+          Object.keys(variation_.photo2).length === 0 &&
+          Object.keys(variation_.photo3).length === 0 &&
+          Object.keys(variation_.photo4).length === 0
+
+          // const retailerMinStokCheck = !exists(variation_.retailerMinStok) || variation_.retailerMinStok === '0'
+          const retailerStokCheck = !exists(variation_.retailerStok) || variation_.retailerStok === '0'
+
+          // const wholesalerMinStokCheck = !exists(variation_.wholesalerMinStok) || variation_.wholesalerMinStok === '0'
+          const wholesalerStokCheck = !exists(variation_.wholesalerStok) || variation_.wholesalerStok === '0'
+
+          const priceCheck = (variation_.priceType === 'unique') && (!exists(variation_.price) || variation_.price === '0,00')
+
+          const vitasPriceCheck = (variation_.priceType !== 'unique') && (!exists(variation_.vitasPrice) || variation_.vitasPrice === '0,00')
+          const vitasB2BPriceCheck = (variation_.priceType !== 'unique') && (!exists(variation_.vitasB2BPrice) || variation_.vitasB2BPrice === '0,00')
+
+          if (
+            photosCheck ||
+            retailerStokCheck ||
+            wholesalerStokCheck ||
+            priceCheck ||
+            vitasPriceCheck ||
+            vitasB2BPriceCheck
+          ) {
+            const specific = []
+            let finalFormattedText = ''
+
+            if (photosCheck) specific.push('uma foto (no mínimo)')
+            if (retailerStokCheck) specific.push('o estoque varejista')
+            if (wholesalerStokCheck) specific.push('o estoque atacadista')
+
+            if (variation_.priceType === 'unique') {
+              if (priceCheck) specific.push('o preço único')
+            } else {
+              if (vitasPriceCheck) specific.push("o preço da Vita's")
+              if (vitasB2BPriceCheck) specific.push("o preço da Vita's para Empresas")
+            }
+
+            specific.forEach((error, index) => {
+              if (specific[index + 1]) {
+                finalFormattedText += (index === 0 ? error : `, ${error}`)
+              } else {
+                finalFormattedText += (index === 0 ? error : ` e ${error}`)
+              }
+            })
+
+            setHelpVariations(
+              setAHelpError(
+                `A ${index_ + 1}ª variação de ${variation.name} está faltando ${finalFormattedText}.`
+              )
+            )
+            status = 0
+            return false
+          }
+
+          return true
+        })
+
+        if (status === 0) return false
+        return true
+      })
+    }
 
     if (status === 0) {
       setTimeout(() => {
@@ -694,7 +738,7 @@ function NewProductRegister () {
                   </div>
 
                   <div className={styles.row}>
-                    <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                    <div className={`${styles.biggerColumn} ${dashboardStyles.flexColumn}`}>
                       <label htmlFor="sku" className={styles.inputLabel}>Seu SKU</label>
 
                       <Input
@@ -1235,15 +1279,30 @@ function NewProductRegister () {
                           }
 
                           {index !== 0 &&
-                            <div className={`${styles.column} ${styles.fitContent}`}>
-                              <Button
-                                icon="minus"
-                                borderedButton
-                                submitButton
-                                iconMarginNone
-                                onClick={() => removeVariation(index)}
-                              />
-                            </div>
+                            <>
+                              <div className={`${styles.column} ${styles.fitContent}`}>
+                                <div className={`${styles.subtitleHelp} ${styles.fitContent} ${styles.justRelative}`}>
+                                  <Button
+                                    icon="copy"
+                                    borderedButton
+                                    submitButton
+                                    iconMarginNone
+                                    onClick={() => copyFirstVariation(index)}
+                                  />
+                                  <span>Copiar variação inicial</span>
+                                </div>
+                              </div>
+
+                              <div className={`${styles.column} ${styles.fitContent}`}>
+                                <Button
+                                  icon="minus"
+                                  borderedButton
+                                  submitButton
+                                  iconMarginNone
+                                  onClick={() => removeVariation(index)}
+                                />
+                              </div>
+                            </>
                           }
 
                           {variation.name.length > 0 &&

@@ -12,7 +12,7 @@ import {
   faLongArrowAltUp, faLongArrowAltDown, faLongArrowAltRight, faMedal, faStar, faStarHalfAlt,
   faDollarSign, faCoins, faHeading, faQuestionCircle, faCommentAlt,
   faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward,
-  faCamera, faCloudUploadAlt, faLink
+  faCamera, faCloudUploadAlt, faLink, faCopy
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -27,5 +27,5 @@ library.add(
   faLongArrowAltUp, faLongArrowAltDown, faLongArrowAltRight, faMedal, faStar, faStarHalfAlt,
   faDollarSign, faCoins, faHeading, faQuestionCircle, faCommentAlt,
   faPlus, faMinus, faThList, faPenAlt, faEllipsisV, faStepBackward, faStepForward,
-  faCamera, faCloudUploadAlt, faLink
+  faCamera, faCloudUploadAlt, faLink, faCopy
 )

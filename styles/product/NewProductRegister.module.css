@@ -69,6 +69,10 @@
   font-size: 11px;
   color: #FFF7;
 }
+.subtitleHelp.justRelative {
+  top: 0;
+  margin-left: 0;
+}
 
 .subtitleHelp span {
   display: none;

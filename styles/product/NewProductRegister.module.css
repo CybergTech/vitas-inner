@@ -141,6 +141,15 @@
   justify-content: flex-start;
 }
 
+.variationOfVariationContent {
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+}
+.variationOfVariationContent + .variationOfVariationContent {
+  margin-top: 2rem;
+}
+
 .biggestColumn {
   position: relative;
   width: 340px;
@@ -180,6 +189,12 @@
   width: fit-content;
 }
 
+.column.centerSelf.fitContent {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
 .column.biggerMargin {
   margin-top: 45px;
 }
@@ -190,6 +205,10 @@
 
 .bigColumn + .column {
   margin-left: 1.5rem;
+}
+
+.column.centerSelf.fitContent + .row {
+  margin-top: .3rem;
 }
 
 .othersCategories {
@@ -564,6 +583,19 @@
 
 .radioContainer input[type=radio]:checked + .radioLabel span {
   background: url("../../public/images/icons/checked-input-radio.svg") no-repeat;
+}
+
+
+.titleDescription {
+  color: #FFFFFF;
+  font-size: 12px;
+}
+
+.subtitleDescription {
+  color: #FFFFFF;
+}
+.subtitleDescription span {
+  color: #22FF7A;
 }
 
 

@@ -67,9 +67,17 @@
   font-size: 20px;
 }
 
-.separationLine {
-  margin-bottom: 1rem;
+.separationLineContainer {
+  position: relative;
+  margin: 2rem 0;
+  width: 100%;
 
+  display: flex;
+}
+
+.separationLine {
   flex: 1;
-  border-color: transparent;
+  border-top: 1px;
+  border-width: 1px;
+  border-color: #FFF7;
 }

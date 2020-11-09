@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -91,32 +91,24 @@ function NewProductRegister () {
   const [helpLongDescription, setHelpLongDescription] = useState('')
 
   const variationsOptions = [
-    { value: 'color', label: 'Cor' },
-    { value: 'volume', label: 'Volume' },
-    { value: 'height', label: 'Tamanho' }
+    { value: 'color', label: 'Cor', inputValue: '' },
+    { value: 'volume', label: 'Volume', inputValue: '' },
+    { value: 'height', label: 'Tamanho', inputValue: '' },
+    { value: 'quantity', label: 'Quantidade', inputValue: '' }
   ]
 
-  const volumeMeasureOptions = [
-    { value: 'ml', label: 'ml - mililitro' },
-    { value: 'l', label: 'l - litro' },
-    { value: 'kg', label: 'kg - quilograma' },
-    { value: 'g', label: 'g - grama' }
-  ]
+  const [variationsTitle, setVariationsTitle] = useState('color')
+  const [variationHasExtraVariations, setVariationHasExtraVariations] = useState(false)
 
-  const heightMeasureOptions = [
-    { value: 'pp', label: 'pp' },
-    { value: 'p', label: 'p' },
-    { value: 'm', label: 'm' },
-    { value: 'g', label: 'g' },
-    { value: 'gg', label: 'gg' }
-  ]
+  const [extraVariationsInputsStructure, setExtraVariationsInputsStructure] = useState([
+    ...variationsOptions.filter(option => option.value !== variationsTitle)
+  ])
 
   const [variations, setVariations] = useState([
     {
-      title: 'color',
-      measure: '',
-      variationsOfVariations: [{
-        name: '',
+      name: '',
+      variationsOfVariation: [{
+        extraVariationsInputs: extraVariationsInputsStructure,
         retailerMinStok: '0',
         retailerStok: '0',
         wholesalerMinStok: '0',
@@ -124,13 +116,30 @@ function NewProductRegister () {
         price: '0,00',
         vitasPrice: '0,00',
         vitasB2BPrice: '0,00',
-        priceType: 'unique'
+        priceType: 'unique',
+        photos: [{}, {}, {}, {}]
       }]
     }
   ])
   const [helpVariations, setHelpVariations] = useState('')
 
   const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    setExtraVariationsInputsStructure([
+      ...variationsOptions.filter(option => option.value !== variationsTitle)
+    ])
+  }, [variationsTitle])
+
+  useEffect(() => {
+    changeExtraVariationOfVariation(null)
+  }, [extraVariationsInputsStructure])
+
+  useEffect(() => {
+    if (variationHasExtraVariations === false) {
+      removeVariationOfVariation('all')
+    }
+  }, [variationHasExtraVariations])
 
   function changeSku (e) {
     setHelpSku('')
@@ -223,38 +232,15 @@ function NewProductRegister () {
     setLongDescription(e)
   }
 
+  function getLabelOfVariationsOptions (value) {
+    return variationsOptions.filter(option => option.value === value)[0].label
+  }
+
   function changeVariation (position = null, field, value) {
     const updatedVariations = variations.map((variation, index) => {
       if (index === position) {
-        if (field === 'title') {
-          let hasBeingChosen = false
-
-          variations.every((variation_, index_) => {
-            if (index_ !== index) {
-              if (variation_.title === value) {
-                hasBeingChosen = variationsOptions.filter(option => option.value === value)
-                return false
-              }
-            }
-
-            return true
-          })
-
-          if (hasBeingChosen !== false) {
-            setMessages([...messages, <Message
-              key={key}
-              type="error"
-              text={`A variação ${hasBeingChosen[0].label} já está sendo utilizada!`}
-            />])
-            setKey(key + 1)
-
-            return variation
-          }
-        }
-
         return {
           ...variation,
-          measure: '',
           [field]: value
         }
       }
@@ -267,45 +253,22 @@ function NewProductRegister () {
   }
 
   function addVariation () {
-    if (variations.length < variationsOptions.length) {
-      let title = 'color'
-      variationsOptions.every(option => {
-        let hasBeingChosen = false
-
-        variations.every(variation => {
-          if (variation.title === option.value) {
-            hasBeingChosen = true
-            return false
-          }
-
-          return true
-        })
-
-        if (!hasBeingChosen) {
-          title = option.value
-          return false
-        }
-
-        return true
-      })
-
-      setVariations([
-        ...variations,
-        {
-          title: title,
-          measure: '',
-          variationsOfVariations: [{
-            name: '',
-            retailerMinStok: '0',
-            retailerStok: '0',
-            wholesalerMinStok: '0',
-            wholesalerStok: '0',
-            price: '0,00',
-            priceType: 'unique'
-          }]
-        }
-      ])
-    }
+    setVariations([
+      ...variations,
+      {
+        name: '',
+        variationsOfVariation: [{
+          extraVariationsInputs: extraVariationsInputsStructure,
+          retailerMinStok: '0',
+          retailerStok: '0',
+          wholesalerMinStok: '0',
+          wholesalerStok: '0',
+          price: '0,00',
+          priceType: 'unique',
+          photos: [{}, {}, {}, {}]
+        }]
+      }
+    ])
   }
 
   function removeVariation (indexKey) {
@@ -314,10 +277,68 @@ function NewProductRegister () {
     setHelpVariations('')
   }
 
+  function changeExtraVariationOfVariation (position = null, position_ = null, position__ = null, field = null, value = null) {
+    const updatedVariations = variations.map((variation, index) => {
+      if (index === position) {
+        const updatedVariationsOfVariation = variation.variationsOfVariation.map(
+          (variation_, index_) => {
+            if (index_ === position_) {
+              const updatedExtraVariationsOfVariation = variation_.extraVariationsInputs.map(
+                (variation__, index__) => {
+                  if (index__ === position__) {
+                    return {
+                      ...variation__,
+                      [field]: value
+                    }
+                  }
+
+                  return variation__
+                }
+              )
+
+              return {
+                ...variation_,
+                extraVariationsInputs: updatedExtraVariationsOfVariation
+              }
+            }
+
+            return variation_
+          }
+        )
+
+        return {
+          ...variation,
+          variationsOfVariation: updatedVariationsOfVariation
+        }
+      } else if (position === null) {
+        const updatedVariationsOfVariation = variation.variationsOfVariation.map(
+          (variation_, index_) => {
+            const updatedExtraVariationsOfVariation = extraVariationsInputsStructure
+
+            return {
+              ...variation_,
+              extraVariationsInputs: updatedExtraVariationsOfVariation
+            }
+          }
+        )
+
+        return {
+          ...variation,
+          variationsOfVariation: updatedVariationsOfVariation
+        }
+      }
+
+      return variation
+    })
+
+    setHelpVariations('')
+    setVariations(updatedVariations)
+  }
+
   function changeVariationOfVariation (position, position_, field, value) {
     const updatedVariations = variations.map((variation, index) => {
       if (index === position) {
-        const updatedVariationsOfVariations = variation.variationsOfVariations.map(
+        const updatedVariationsOfVariation = variation.variationsOfVariation.map(
           (variation_, index_) => {
             if (index_ === position_) {
               return {
@@ -332,7 +353,7 @@ function NewProductRegister () {
 
         return {
           ...variation,
-          variationsOfVariations: updatedVariationsOfVariations
+          variationsOfVariation: updatedVariationsOfVariation
         }
       }
 
@@ -352,10 +373,10 @@ function NewProductRegister () {
       if (index === position) {
         return {
           ...variation,
-          variationsOfVariations: [
-            ...variation.variationsOfVariations,
+          variationsOfVariation: [
+            ...variation.variationsOfVariation,
             {
-              name: '',
+              extraVariationsInputs: extraVariationsInputsStructure,
               retailerMinStok: '0',
               retailerStok: '0',
               wholesalerMinStok: '0',
@@ -373,10 +394,12 @@ function NewProductRegister () {
     setVariations(updatedVariations)
   }
 
-  function removeVariationOfVariation (position, position_) {
+  function removeVariationOfVariation (position, position_ = null) {
     const updatedVariations = variations.map((variation, index) => {
-      if (index === position) {
-        variation.variationsOfVariations.splice(position_, 1)
+      if (position === 'all') {
+        variation.variationsOfVariation.splice(1)
+      } else if (index === position) {
+        variation.variationsOfVariation.splice(position_, 1)
       }
 
       return variation
@@ -533,7 +556,7 @@ function NewProductRegister () {
         return false
       }
 
-      variation.variationsOfVariations.every((variation_, index_) => {
+      variation.variationsOfVariation.every((variation_, index_) => {
         const nameCheck = !exists(variation_.name)
         const retailerMinStokCheck = !exists(variation_.retailerMinStok)
         const retailerStokCheck = !exists(variation_.retailerStok)
@@ -1092,80 +1115,122 @@ function NewProductRegister () {
 
                   {variations.map((variation, index) => {
                     let currentVariation = ''
-                    let variationHelp = ''
-                    if (variation.title === 'color') {
+                    let datalistId = null
+                    let variationNameSample = ''
+
+                    if (variationsTitle === 'color') {
                       currentVariation = 'cor'
-                      variationHelp = 'Branco, Preto, Azul, ...'
-                    } else if (variation.title === 'height') {
+                      datalistId = `variationsColorsNames${index}`
+                    } else if (variationsTitle === 'height') {
                       currentVariation = 'tamanho'
+                      datalistId = `variationsHeightsNames${index}`
+                    } else if (variationsTitle === 'quantity') {
+                      currentVariation = 'quantidade'
                     } else {
-                      currentVariation = variation.title
+                      currentVariation = variationsTitle
+                      datalistId = `variationsVolumesNames${index}`
+                    }
+
+                    if (variationHasExtraVariations === true) {
+                      variation.variationsOfVariation.map((variation_, index_) => {
+                        variation_.extraVariationsInputs.map((variation__, index__) => {
+                          if (index_ === 0) variationNameSample += ` ${variation__.inputValue}`
+                        })
+                      })
+                    } else {
+                      variationNameSample = ''
                     }
 
                     return (
                       <div className={`${dashboardStyles.flexColumn} ${dashboardStyles.wide}`} key={index}>
-                        {index !== 0 &&
-                          <hr className={dashboardStyles.separationLine} />
+                        {index === 0 &&
+                          <div className={`${styles.row} ${styles.start}`}>
+                            <div className={dashboardStyles.flexColumn}>
+                              <label htmlFor={`variationsTitle${index}`} className={styles.highlightedLabel}>
+                                Tipo de Variação
+                              </label>
+
+                              <div className={`${styles.column} ${styles.fitContent}`}>
+                                <Select
+                                  name={`variationsTitle${index}`}
+                                  value={variationsTitle}
+                                  onChange={e => setVariationsTitle(e.target.value)}
+                                >
+                                  {variationsOptions.map(option =>
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                  )}
+                                </Select>
+                              </div>
+                            </div>
+
+                            <div
+                              className={`${styles.column} ${styles.fitContent}`}
+                              style={{ marginLeft: '1rem', alignSelf: 'flex-end' }}
+                            >
+                              <Button
+                                icon={variationHasExtraVariations ? 'minus' : 'plus'}
+                                text={(variationHasExtraVariations ? 'Remover' : 'Adicionar') + ` variações além de ${currentVariation}`}
+                                submitButton
+                                onClick={() => setVariationHasExtraVariations(!variationHasExtraVariations)}
+                              />
+                            </div>
+                          </div>
                         }
 
-                        <label htmlFor={`variationTitle${index}`} className={styles.highlightedLabel}>
-                          Tipo de Variação
-                        </label>
+                        <div className={dashboardStyles.separationLineContainer}>
+                          <hr className={dashboardStyles.separationLine} />
+                        </div>
 
                         <div className={`${styles.row} ${styles.start}`}>
                           <div className={`${styles.column} ${styles.fitContent}`}>
-                            {/* <Input
-                              name={`variationTitle${index}`}
+                            <Input
+                              name={`variationName${index}`}
+                              placeholder={getLabelOfVariationsOptions(variationsTitle) + ' aqui...'}
                               maxLength={[40, true]}
-                              value={variation.title}
-                              onChange={e => changeVariation(index, 'title', e.target.value)}
-                            /> */}
-                            <Select
-                              name={`variationTitle${index}`}
-                              value={variation.title}
-                              onChange={e => changeVariation(index, 'title', e.target.value)}
-                            >
-                              {variationsOptions.map(option =>
-                                <option key={option.value} value={option.value}>{option.label}</option>
-                              )}
-                            </Select>
+                              value={variation.name}
+                              onChange={e => changeVariation(index, 'name', e.target.value)}
+                              list={datalistId}
+                            />
+
+                            <datalist id={`variationsColorsNames${index}`}>
+                              <option value="Branco" />
+                              <option value="Preto" />
+                              <option value="Rosa" />
+                              <option value="Azul" />
+                              <option value="Laranja" />
+                            </datalist>
+
+                            <datalist id={`variationsVolumesNames${index}`}>
+                              <option value="100ml" />
+                              <option value="1l" />
+                              <option value="2,5l" />
+                              <option value="200g" />
+                              <option value="1kg" />
+                            </datalist>
+
+                            <datalist id={`variationsHeightsNames${index}`}>
+                              <option value="PP" />
+                              <option value="P" />
+                              <option value="M" />
+                              <option value="G" />
+                              <option value="GG" />
+                            </datalist>
                           </div>
 
-                          {(variation.title === 'volume' || variation.title === 'height') &&
+                          {variationHasExtraVariations &&
                             <div className={`${styles.column} ${styles.fitContent}`}>
-                              <Select
-                                name={`variationMeasure${index}`}
-                                value={variation.measure}
-                                fitContent
-                                onChange={e => changeVariation(index, 'measure', e.target.value)}
-                              >
-                                <option value="" disabled hidden>
-                                  Escolha uma medida
-                                </option>
-                                {variation.title === 'volume'
-                                  ? volumeMeasureOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                  )
-                                  : heightMeasureOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                  )
-                                }
-                              </Select>
+                              <Button
+                                text={`+1 variação ${variation.name ? `de ${variation.name}` : ''}`}
+                                borderedButton
+                                submitButton
+                                iconMarginNone
+                                onClick={() => addVariationOfVariation(index)}
+                              />
                             </div>
                           }
 
-                          <div className={`${styles.column} ${styles.fitContent}`}>
-                            <Button
-                              text={`+1 variação de ${currentVariation}`}
-                              borderedButton
-                              submitButton
-                              iconMarginNone
-                              onClick={() => addVariationOfVariation(index)}
-                            />
-                          </div>
-
-                          <div className={`${styles.column} ${styles.fitContent}`}>
-                            {index !== 0 &&
+                          {index !== 0 &&
+                            <div className={`${styles.column} ${styles.fitContent}`}>
                               <Button
                                 icon="minus"
                                 borderedButton
@@ -1173,215 +1238,255 @@ function NewProductRegister () {
                                 iconMarginNone
                                 onClick={() => removeVariation(index)}
                               />
-                            }
-                          </div>
+                            </div>
+                          }
+
+                          {variation.name.length > 0 &&
+                            <div className={`${styles.column} ${styles.centerSelf} ${styles.fitContent}`} style={{ color: '#FFF' }}>
+                              <p className={styles.titleDescription}>
+                                Título parcial desta variação:
+                              </p>
+
+                              <p className={styles.subtitleDescription}>
+                                <span>Máscara Descartável</span> {variation.name}{variationNameSample}<span> ProtDesc</span>
+                              </p>
+                            </div>
+                          }
                         </div>
 
-                        {variation.variationsOfVariations.map((variation_, index_) => (
-                          <div className={styles.row} key={`${index}${index_}`}>
-                            <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                              <div className={styles.columnMiniSubtitles}>
-                                <div className={styles.miniSubtitles}>
-                                  <label htmlFor={`nameVariation${index_}`} className={styles.inputLabel}>Variação</label>
+                        {variation.variationsOfVariation.map((variation_, index_) => {
+                          let variationOfVariationNameSample = ''
 
-                                  {exists(variationHelp) &&
-                                    <span className={`${styles.subtitleHelp} ${styles.fitContent}`}>
+                          if (index_ !== 0 && variationHasExtraVariations === true) {
+                            variation_.extraVariationsInputs.map((variation__, index__) => {
+                              variationOfVariationNameSample += ` ${variation__.inputValue}`
+                            })
+                          } else {
+                            variationOfVariationNameSample = ''
+                          }
+
+                          return (
+                            <div
+                              className={styles.variationOfVariationContent}
+                              key={`${index}${index_}`}
+                            >
+                              {variationHasExtraVariations &&
+                                <>
+                                  {index_ !== 0 && variation.name.length > 0 &&
+                                    <div className={`${styles.column} ${styles.centerSelf} ${styles.fitContent}`} style={{ color: '#FFF' }}>
+                                      <p className={styles.titleDescription}>
+                                        Título parcial desta variação:
+                                      </p>
+
+                                      <p className={styles.subtitleDescription}>
+                                        <span>Máscara Descartável</span> {variation.name}{variationOfVariationNameSample}<span> ProtDesc</span>
+                                      </p>
+                                    </div>
+                                  }
+
+                                  <div className={styles.row}>
+                                    {variation_.extraVariationsInputs.map((variationInput, index__) => (
+                                      <div
+                                        className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}
+                                        key={index__}
+                                      >
+                                        <label htmlFor={`${variationInput.value}ExtraVariation${index}${index_}${index__}`} className={styles.inputLabel}>Variação de {variationInput.label}</label>
+
+                                        <Input
+                                          name={`${variationInput.value}ExtraVariation${index}${index_}${index__}`}
+                                          maxLength={[40, true]}
+                                          value={variationInput.inputValue}
+                                          onChange={e => changeExtraVariationOfVariation(index, index_, index__, 'inputValue', e.target.value)}
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+                                </>
+                              }
+
+                              <div className={styles.row}>
+                                <div className={styles.biggerColumn}>
+                                  <div className={styles.stokSubtitles}>
+                                    <label className={styles.subtitle}>Estoque Varejista</label>
+                                    <span className={styles.subtitleHelp}>
                                       <FontAwesomeIcon icon="question-circle" />
-                                      <span>{variationHelp}</span>
+                                      <span>Estoque Varejista é relativo à venda de produtos à unidade ou em pequenas quantidades e será utilizado na Vita&apos;s para clientes comuns</span>
                                     </span>
+                                    <hr className={styles.line} />
+                                  </div>
+
+                                  <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                    <div className={styles.columnMiniSubtitles}>
+                                      <div className={styles.miniSubtitles}>
+                                        <label htmlFor={`retailerMinStokVariation${index}${index_}`} className={styles.inputLabel}>Estoque mínimo</label>
+
+                                        <span className={`${styles.subtitleHelp}`}>
+                                          <FontAwesomeIcon icon="question-circle" />
+                                          <span>Quando o estoque deste produto chegar ao valor informado, você receberá uma mensagem para reabastecê-lo</span>
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <Input
+                                      name={`retailerMinStokVariation${index}${index_}`}
+                                      icon="boxes"
+                                      currencyInput
+                                      thousandSeparator="."
+                                      precision="0"
+                                      maxLength={[7, false]}
+                                      value={variation_.retailerMinStok}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerMinStok', e, maskedvalue, floatvalue)}
+                                    />
+                                  </div>
+
+                                  <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                    <div className={styles.columnMiniSubtitles}>
+                                      <div className={styles.miniSubtitles}>
+                                        <label htmlFor={`retailerStokVariation${index}${index_}`} className={styles.inputLabel}>Estoque</label>
+
+                                        <span className={`${styles.subtitleHelp}`}>
+                                          <FontAwesomeIcon icon="question-circle" />
+                                          <span>Aqui vai estoque atual deste produto</span>
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <Input
+                                      name={`retailerStokVariation${index}${index_}`}
+                                      icon="boxes"
+                                      currencyInput
+                                      thousandSeparator="."
+                                      precision="0"
+                                      maxLength={[7, false]}
+                                      value={variation_.retailerStok}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerStok', e, maskedvalue, floatvalue)}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className={styles.biggerColumn}>
+                                  <div className={styles.stokSubtitles}>
+                                    <label className={styles.subtitle}>Estoque Atacadista</label>
+                                    <span className={styles.subtitleHelp}>
+                                      <FontAwesomeIcon icon="question-circle" />
+                                      <span>Estoque Atacadista é relativo à venda de produtos em grandes quantidades e será utilizado na Vita&apos;s para Empresas</span>
+                                    </span>
+                                    <hr className={styles.line} />
+                                  </div>
+
+                                  <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                    <div className={styles.columnMiniSubtitles}>
+                                      <div className={styles.miniSubtitles}>
+                                        <label htmlFor={`wholesalerMinStokVariation${index}${index_}`} className={styles.inputLabel}>Estoque mínimo</label>
+
+                                        <span className={`${styles.subtitleHelp}`}>
+                                          <FontAwesomeIcon icon="question-circle" />
+                                          <span>Quando o estoque deste produto chegar ao valor informado, você receberá uma mensagem para reabastecê-lo</span>
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <Input
+                                      name={`wholesalerMinStokVariation${index}${index_}`}
+                                      icon="boxes"
+                                      currencyInput
+                                      thousandSeparator="."
+                                      precision="0"
+                                      maxLength={[7, false]}
+                                      value={variation_.wholesalerMinStok}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerMinStok', e, maskedvalue, floatvalue)}
+                                    />
+                                  </div>
+
+                                  <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                    <div className={styles.columnMiniSubtitles}>
+                                      <div className={styles.miniSubtitles}>
+                                        <label htmlFor={`wholesalerStokVariation${index}${index_}`} className={styles.inputLabel}>Estoque</label>
+
+                                        <span className={`${styles.subtitleHelp}`}>
+                                          <FontAwesomeIcon icon="question-circle" />
+                                          <span>Aqui vai estoque atual deste produto</span>
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <Input
+                                      name={`wholesalerStokVariation${index}${index_}`}
+                                      icon="boxes"
+                                      currencyInput
+                                      thousandSeparator="."
+                                      precision="0"
+                                      maxLength={[7, false]}
+                                      value={variation_.wholesalerStok}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerStok', e, maskedvalue, floatvalue)}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                  <div className={styles.columnMiniSubtitles}>
+                                    <div className={styles.miniSubtitles}>
+                                      <div className={styles.radioContainer} onChange={e => changeVariationOfVariation(index, index_, 'priceType', e.target.value)}>
+                                        <input type="radio" id={`uniquePrice${index}${index_}`} value="unique" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'unique'} readOnly />
+                                        <label htmlFor={`uniquePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço único</label>
+
+                                        <input type="radio" id={`perStorePrice${index}${index_}`} value="perStore" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'perStore'} readOnly />
+                                        <label htmlFor={`perStorePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço por loja</label>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {variation_.priceType === 'unique'
+                                    ? <Input
+                                      name={`priceVariation${index}${index_}`}
+                                      prefix={['R$', 'left']}
+                                      currencyInput
+                                      decimalSeparator=","
+                                      thousandSeparator="."
+                                      maxLength={[10, false]}
+                                      value={variation_.price}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'price', e, maskedvalue, floatvalue)}
+                                    />
+                                    : <><Input
+                                      name={`vitasPriceVariation${index}${index_}`}
+                                      prefix={['R$', 'left']}
+                                      currencyInput
+                                      decimalSeparator=","
+                                      thousandSeparator="."
+                                      maxLength={[10, false]}
+                                      image={['logos/vitas.ico', 'left']}
+                                      value={variation_.vitasPrice}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'vitasPrice', e, maskedvalue, floatvalue)}
+                                    />
+                                    <Input
+                                      name={`vitasB2BPriceVariation${index}${index_}`}
+                                      prefix={['R$', 'left']}
+                                      currencyInput
+                                      decimalSeparator=","
+                                      thousandSeparator="."
+                                      maxLength={[10, false]}
+                                      image={['logos/vitas.ico', 'left']}
+                                      value={variation_.vitasB2BPrice}
+                                      onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'vitasB2BPrice', e, maskedvalue, floatvalue)}
+                                    /></>
+                                  }
+                                </div>
+
+                                <div className={`${styles.column} ${styles.fitContent} ${styles.biggerMargin}`}>
+                                  {index_ !== 0 &&
+                                    <Button
+                                      icon="minus"
+                                      borderedButton
+                                      submitButton
+                                      iconMarginNone
+                                      onClick={() => removeVariationOfVariation(index, index_)}
+                                    />
                                   }
                                 </div>
                               </div>
-
-                              <Input
-                                name={`nameVariation${index_}`}
-                                // icon="chevron-right"
-                                maxLength={[30, true]}
-                                value={variation_.name}
-                                onChange={e => changeVariationOfVariation(index, index_, 'name', e.target.value)}
-                              />
                             </div>
-
-                            <div className={styles.biggerColumn}>
-                              <div className={styles.stokSubtitles}>
-                                <label className={styles.subtitle}>Estoque Varejista</label>
-                                <span className={styles.subtitleHelp}>
-                                  <FontAwesomeIcon icon="question-circle" />
-                                  <span>Estoque Varejista é relativo à venda de produtos à unidade ou em pequenas quantidades e será utilizado na Vita&apos;s para clientes comuns</span>
-                                </span>
-                                <hr className={styles.line} />
-                              </div>
-
-                              <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                                <div className={styles.columnMiniSubtitles}>
-                                  <div className={styles.miniSubtitles}>
-                                    <label htmlFor={`retailerMinStokVariation${index_}`} className={styles.inputLabel}>Estoque mínimo</label>
-
-                                    <span className={`${styles.subtitleHelp}`}>
-                                      <FontAwesomeIcon icon="question-circle" />
-                                      <span>Quando o estoque deste produto chegar ao valor informado, você receberá uma mensagem para reabastecê-lo</span>
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <Input
-                                  name={`retailerMinStokVariation${index_}`}
-                                  icon="boxes"
-                                  currencyInput
-                                  thousandSeparator="."
-                                  precision="0"
-                                  maxLength={[7, false]}
-                                  value={variation_.retailerMinStok}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerMinStok', e, maskedvalue, floatvalue)}
-                                />
-                              </div>
-
-                              <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                                <div className={styles.columnMiniSubtitles}>
-                                  <div className={styles.miniSubtitles}>
-                                    <label htmlFor={`retailerStokVariation${index_}`} className={styles.inputLabel}>Estoque</label>
-
-                                    <span className={`${styles.subtitleHelp}`}>
-                                      <FontAwesomeIcon icon="question-circle" />
-                                      <span>Aqui vai estoque atual deste produto</span>
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <Input
-                                  name={`retailerStokVariation${index_}`}
-                                  icon="boxes"
-                                  currencyInput
-                                  thousandSeparator="."
-                                  precision="0"
-                                  maxLength={[7, false]}
-                                  value={variation_.retailerStok}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'retailerStok', e, maskedvalue, floatvalue)}
-                                />
-                              </div>
-                            </div>
-
-                            <div className={styles.biggerColumn}>
-                              <div className={styles.stokSubtitles}>
-                                <label className={styles.subtitle}>Estoque Atacadista</label>
-                                <span className={styles.subtitleHelp}>
-                                  <FontAwesomeIcon icon="question-circle" />
-                                  <span>Estoque Atacadista é relativo à venda de produtos em grandes quantidades e será utilizado na Vita&apos;s para Empresas</span>
-                                </span>
-                                <hr className={styles.line} />
-                              </div>
-
-                              <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                                <div className={styles.columnMiniSubtitles}>
-                                  <div className={styles.miniSubtitles}>
-                                    <label htmlFor={`wholesalerMinStokVariation${index_}`} className={styles.inputLabel}>Estoque mínimo</label>
-
-                                    <span className={`${styles.subtitleHelp}`}>
-                                      <FontAwesomeIcon icon="question-circle" />
-                                      <span>Quando o estoque deste produto chegar ao valor informado, você receberá uma mensagem para reabastecê-lo</span>
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <Input
-                                  name={`wholesalerMinStokVariation${index_}`}
-                                  icon="boxes"
-                                  currencyInput
-                                  thousandSeparator="."
-                                  precision="0"
-                                  maxLength={[7, false]}
-                                  value={variation_.wholesalerMinStok}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerMinStok', e, maskedvalue, floatvalue)}
-                                />
-                              </div>
-
-                              <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                                <div className={styles.columnMiniSubtitles}>
-                                  <div className={styles.miniSubtitles}>
-                                    <label htmlFor={`wholesalerStokVariation${index_}`} className={styles.inputLabel}>Estoque</label>
-
-                                    <span className={`${styles.subtitleHelp}`}>
-                                      <FontAwesomeIcon icon="question-circle" />
-                                      <span>Aqui vai estoque atual deste produto</span>
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <Input
-                                  name={`wholesalerStokVariation${index_}`}
-                                  icon="boxes"
-                                  currencyInput
-                                  thousandSeparator="."
-                                  precision="0"
-                                  maxLength={[7, false]}
-                                  value={variation_.wholesalerStok}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'wholesalerStok', e, maskedvalue, floatvalue)}
-                                />
-                              </div>
-                            </div>
-
-                            <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
-                              <div className={styles.columnMiniSubtitles}>
-                                <div className={styles.miniSubtitles}>
-                                  <div className={styles.radioContainer} onChange={e => changeVariationOfVariation(index, index_, 'priceType', e.target.value)}>
-                                    <input type="radio" id={`uniquePrice${index}${index_}`} value="unique" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'unique'} readOnly />
-                                    <label htmlFor={`uniquePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço único</label>
-
-                                    <input type="radio" id={`perStorePrice${index}${index_}`} value="perStore" name={`priceTypeVariation${index}${index_}`} checked={variation_.priceType === 'perStore'} readOnly />
-                                    <label htmlFor={`perStorePrice${index}${index_}`} className={`${styles.inputLabel} ${styles.radioLabel}`}><span></span>Preço por loja</label>
-                                  </div>
-                                </div>
-                              </div>
-
-                              {variation_.priceType === 'unique'
-                                ? <Input
-                                  name={`priceVariation${index_}`}
-                                  prefix={['R$', 'left']}
-                                  currencyInput
-                                  decimalSeparator=","
-                                  thousandSeparator="."
-                                  maxLength={[10, false]}
-                                  value={variation_.price}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'price', e, maskedvalue, floatvalue)}
-                                />
-                                : <><Input
-                                  name={`vitasPriceVariation${index_}`}
-                                  prefix={['R$', 'left']}
-                                  currencyInput
-                                  decimalSeparator=","
-                                  thousandSeparator="."
-                                  maxLength={[10, false]}
-                                  image={['logos/vitas.ico', 'left']}
-                                  value={variation_.vitasPrice}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'vitasPrice', e, maskedvalue, floatvalue)}
-                                />
-                                <Input
-                                  name={`vitasB2BPriceVariation${index_}`}
-                                  prefix={['R$', 'left']}
-                                  currencyInput
-                                  decimalSeparator=","
-                                  thousandSeparator="."
-                                  maxLength={[10, false]}
-                                  image={['logos/vitas.ico', 'left']}
-                                  value={variation_.vitasB2BPrice}
-                                  onChangeEvent={(e, maskedvalue, floatvalue) => changeCurrencyOfVariation(index, index_, 'vitasB2BPrice', e, maskedvalue, floatvalue)}
-                                /></>
-                              }
-                            </div>
-
-                            <div className={`${styles.column} ${styles.fitContent} ${styles.biggerMargin}`}>
-                              {index_ !== 0 &&
-                                <Button
-                                  icon="minus"
-                                  borderedButton
-                                  submitButton
-                                  iconMarginNone
-                                  onClick={() => removeVariationOfVariation(index, index_)}
-                                />
-                              }
-                            </div>
-                          </div>
-                        ))}
+                          )
+                        })}
                       </div>
                     )
                   })}
@@ -1397,7 +1502,6 @@ function NewProductRegister () {
                         borderedButton
                         submitButton
                         onClick={() => addVariation()}
-                        disabled={variations.length >= variationsOptions.length}
                       />
                     </div>
                   </div>

@@ -117,7 +117,10 @@ function NewProductRegister () {
         vitasPrice: '0,00',
         vitasB2BPrice: '0,00',
         priceType: 'unique',
-        photos: [{}, {}, {}, {}]
+        photo1: {},
+        photo2: {},
+        photo3: {},
+        photo4: {}
       }]
     }
   ])
@@ -264,8 +267,13 @@ function NewProductRegister () {
           wholesalerMinStok: '0',
           wholesalerStok: '0',
           price: '0,00',
+          vitasPrice: '0,00',
+          vitasB2BPrice: '0,00',
           priceType: 'unique',
-          photos: [{}, {}, {}, {}]
+          photo1: {},
+          photo2: {},
+          photo3: {},
+          photo4: {}
         }]
       }
     ])
@@ -380,9 +388,15 @@ function NewProductRegister () {
               retailerMinStok: '0',
               retailerStok: '0',
               wholesalerMinStok: '0',
-              wholesalerstok: '0',
+              wholesalerStok: '0',
               price: '0,00',
-              priceType: 'unique'
+              vitasPrice: '0,00',
+              vitasB2BPrice: '0,00',
+              priceType: 'unique',
+              photo1: {},
+              photo2: {},
+              photo3: {},
+              photo4: {}
             }
           ]
         }
@@ -857,15 +871,6 @@ function NewProductRegister () {
                   <div className={`${styles.helpBlock} ${styles.error}`}>
                     {helpPhoto}
                   </div>
-
-                  <UploadModal
-                    show={show}
-                    setShow={setShow}
-                    photos={photos}
-                    setPhotos={setPhotos}
-                    currentPhoto={currentPhoto}
-                    setHelpPhoto={setHelpPhoto}
-                  />
                 </div>
 
                 <div className={styles.formGroup}>
@@ -1305,6 +1310,148 @@ function NewProductRegister () {
                               }
 
                               <div className={styles.row}>
+                                <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                  <label className={styles.inputLabel}>Foto 1</label>
+                                  {Object.keys(variation_.photo1).length !== 0 &&
+                                    <span
+                                      className={styles.removePhotoButton}
+                                      onClick={() => changeVariationOfVariation(index, index_, 'photo1', '')}
+                                    >
+                                      <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                                    </span>
+                                  }
+
+                                  <button
+                                    type="button"
+                                    className={styles.photoButton}
+                                    onClick={() => handleShowUploadModal([index, index_, 'photo1'])}
+                                  >
+                                    <div className={styles.prefix}>
+                                      {Object.keys(variation_.photo1).length === 0
+                                        ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                                        : <img
+                                          src={variation_.photo1.src}
+                                          alt={variation_.photo1[0].name}
+                                          className={styles.photo}
+                                        />
+                                      }
+                                    </div>
+                                    <div className={styles.content}>
+                                      {Object.keys(variation_.photo1).length === 0
+                                        ? 'Insira a foto do produto'
+                                        : variation_.photo1[0].name.length > 23 ? `${variation_.photo1[0].name.substr(0, 23)}...` : variation_.photo1[0].name
+                                      }
+                                    </div>
+                                  </button>
+                                </div>
+
+                                <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                  <label className={styles.inputLabel}>Foto 2</label>
+                                  {Object.keys(variation_.photo2).length !== 0 &&
+                                    <span
+                                      className={styles.removePhotoButton}
+                                      onClick={() => changeVariationOfVariation(index, index_, 'photo2', '')}
+                                    >
+                                      <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                                    </span>
+                                  }
+
+                                  <button
+                                    type="button"
+                                    className={styles.photoButton}
+                                    onClick={() => handleShowUploadModal([index, index_, 'photo2'])}
+                                  >
+                                    <div className={styles.prefix}>
+                                      {Object.keys(variation_.photo2).length === 0
+                                        ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                                        : <img
+                                          src={variation_.photo2.src}
+                                          alt={variation_.photo2[0].name}
+                                          className={styles.photo}
+                                        />
+                                      }
+                                    </div>
+                                    <div className={styles.content}>
+                                      {Object.keys(variation_.photo2).length === 0
+                                        ? 'Insira a foto do produto'
+                                        : variation_.photo2[0].name.length > 23 ? `${variation_.photo2[0].name.substr(0, 23)}...` : variation_.photo2[0].name
+                                      }
+                                    </div>
+                                  </button>
+                                </div>
+
+                                <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                  <label className={styles.inputLabel}>Foto 3</label>
+                                  {Object.keys(variation_.photo3).length !== 0 &&
+                                    <span
+                                      className={styles.removePhotoButton}
+                                      onClick={() => changeVariationOfVariation(index, index_, 'photo3', '')}
+                                    >
+                                      <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                                    </span>
+                                  }
+
+                                  <button
+                                    type="button"
+                                    className={styles.photoButton}
+                                    onClick={() => handleShowUploadModal([index, index_, 'photo3'])}
+                                  >
+                                    <div className={styles.prefix}>
+                                      {Object.keys(variation_.photo3).length === 0
+                                        ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                                        : <img
+                                          src={variation_.photo3.src}
+                                          alt={variation_.photo3[0].name}
+                                          className={styles.photo}
+                                        />
+                                      }
+                                    </div>
+                                    <div className={styles.content}>
+                                      {Object.keys(variation_.photo3).length === 0
+                                        ? 'Insira a foto do produto'
+                                        : variation_.photo3[0].name.length > 23 ? `${variation_.photo3[0].name.substr(0, 23)}...` : variation_.photo3[0].name
+                                      }
+                                    </div>
+                                  </button>
+                                </div>
+
+                                <div className={`${styles.bigColumn} ${dashboardStyles.flexColumn}`}>
+                                  <label className={styles.inputLabel}>Foto 4</label>
+                                  {Object.keys(variation_.photo4).length !== 0 &&
+                                    <span
+                                      className={styles.removePhotoButton}
+                                      onClick={() => changeVariationOfVariation(index, index_, 'photo4', '')}
+                                    >
+                                      <FontAwesomeIcon icon="times" className={styles.icon} /> Remover
+                                    </span>
+                                  }
+
+                                  <button
+                                    type="button"
+                                    className={styles.photoButton}
+                                    onClick={() => handleShowUploadModal([index, index_, 'photo4'])}
+                                  >
+                                    <div className={styles.prefix}>
+                                      {Object.keys(variation_.photo4).length === 0
+                                        ? <FontAwesomeIcon icon="camera" className={styles.icon} />
+                                        : <img
+                                          src={variation_.photo4.src}
+                                          alt={variation_.photo4[0].name}
+                                          className={styles.photo}
+                                        />
+                                      }
+                                    </div>
+                                    <div className={styles.content}>
+                                      {Object.keys(variation_.photo4).length === 0
+                                        ? 'Insira a foto do produto'
+                                        : variation_.photo4[0].name.length > 23 ? `${variation_.photo4[0].name.substr(0, 23)}...` : variation_.photo4[0].name
+                                      }
+                                    </div>
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div className={styles.row}>
                                 <div className={styles.biggerColumn}>
                                   <div className={styles.stokSubtitles}>
                                     <label className={styles.subtitle}>Estoque Varejista</label>
@@ -1524,6 +1671,17 @@ function NewProductRegister () {
           </div>
         </section>
       </main>
+
+      <UploadModal
+        show={show}
+        setShow={setShow}
+        photos={photos}
+        setPhotos={setPhotos}
+        currentPhoto={currentPhoto}
+        setHelpPhoto={setHelpPhoto}
+        changeVariationOfVariation={changeVariationOfVariation}
+        setHelpVariations={setHelpVariations}
+      />
 
       {loading && <Loading />}
 

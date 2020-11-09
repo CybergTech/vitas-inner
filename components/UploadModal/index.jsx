@@ -10,7 +10,16 @@ import Input from '../Input'
 
 import styles from './styles.module.css'
 
-function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto, setHelpPhoto }) {
+function UploadModal ({
+  show,
+  setShow,
+  photos,
+  setPhotos,
+  currentPhoto,
+  setHelpPhoto,
+  changeVariationOfVariation,
+  setHelpVariations
+}) {
   const [urlUploading, setUrlUploading] = useState(false)
   const [typedUrl, setTypedUrl] = useState('')
 
@@ -114,30 +123,42 @@ function UploadModal ({ show, setShow, photos, setPhotos, currentPhoto, setHelpP
   function sendPhoto () {
     closeUploadModal()
 
-    const updatedPhotos = photos.map((photo, index) => {
-      if (index === currentPhoto) {
-        if (files !== '') {
-          return {
-            ...files,
-            src: imgSrc
-          }
-        } else {
-          return {
-            0: {
-              name: imgSrc
-            },
-            fetchUrl: true,
-            src: imgSrc
-          }
-        }
+    let value = ''
+
+    if (files !== '') {
+      value = {
+        ...files,
+        src: imgSrc
       }
+    } else {
+      value = {
+        0: {
+          name: imgSrc
+        },
+        fetchUrl: true,
+        src: imgSrc
+      }
+    }
 
-      return photo
-    })
+    if (typeof currentPhoto === 'number') {
+      const updatedPhotos = photos.map((photo, index) => {
+        if (index === currentPhoto) {
+          return value
+        }
 
-    setPhotos(updatedPhotos)
+        return photo
+      })
+
+      setPhotos(updatedPhotos)
+      setHelpPhoto('')
+    } else {
+      changeVariationOfVariation(
+        currentPhoto[0], currentPhoto[1], currentPhoto[2], value
+      )
+      setHelpVariations('')
+    }
+
     setFiles('')
-    setHelpPhoto('')
   }
 
   function changeUrlUploading (to) {
